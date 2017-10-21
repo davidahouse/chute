@@ -5,6 +5,11 @@
 ## Build generated
 build/
 DerivedData/
+.DS_Store
+fastlane/xcov_report
+fastlane/.env
+ChuteExample/chute_output
+ChuteExample/xcov_report
 
 ## Various settings
 *.pbxuser
