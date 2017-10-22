@@ -29,3 +29,45 @@ struct ChuteTestAttachment: Encodable {
         attachmentFileName = filename
     }
 }
+
+extension ChuteTestAttachment {
+
+    static func findAttachments(testSummary: TestSummary) -> [ChuteTestAttachment] {
+
+        var results = [ChuteTestAttachment]()
+
+        for summary in testSummary.testableSummaries {
+            for test in summary.tests {
+                results += findAttachments(testDetails: test)
+            }
+        }
+
+        return results
+    }
+
+    private static func findAttachments(testDetails: TestDetails) -> [ChuteTestAttachment] {
+
+        var results = [ChuteTestAttachment]()
+
+        if let activities = testDetails.activitySummaries {
+            for activity in activities {
+                if let attachments = activity.attachments {
+                    for attachment in attachments {
+
+                        if let chuteAttachment = ChuteTestAttachment(testIdentifier: testDetails.testIdentifier ?? "", attachment: attachment) {
+                            results.append(chuteAttachment)
+                        }
+                    }
+                }
+            }
+        }
+
+        if let subtests = testDetails.subtests {
+
+            for subtest in subtests {
+                results += findAttachments(testDetails: subtest)
+            }
+        }
+        return results
+    }
+}

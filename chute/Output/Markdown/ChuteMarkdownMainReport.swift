@@ -26,14 +26,14 @@ class ChuteMarkdownMainReport: ChuteOutputRenderable {
         """
     }
 
-    func render(detail: ChuteOutputDetail) -> String {
+    func render(detail: ChuteDetail) -> String {
 
         let summary = ChuteMarkdownTestSummaryOutput()
 
         let parameters: [String: CustomStringConvertible] = [
-            "project": detail.detail.project,
-            "test_date": detail.detail.testDate,
-            "branch": detail.detail.branch ?? "",
+            "project": detail.project,
+            "test_date": detail.testDate,
+            "branch": detail.branch ?? "",
             "test_summary": summary.render(detail: detail)
         ]
         return Constants.Template.render(parameters: parameters)

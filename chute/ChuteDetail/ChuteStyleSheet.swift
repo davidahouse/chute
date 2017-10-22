@@ -36,3 +36,54 @@ struct ChuteStyleSheet: Codable {
     let fontName: String?
     let fontSize: CGFloat?
 }
+
+extension ChuteStyleSheet {
+
+    static func findStyleSheets(testSummary: TestSummary, rootPath: URL) -> [ChuteStyleSheet] {
+
+        var results = [ChuteStyleSheet]()
+        for summary in testSummary.testableSummaries {
+            for test in summary.tests {
+                results += findStyleSheets(testDetails: test, rootPath: rootPath)
+            }
+        }
+        return results
+    }
+    
+    private static func findStyleSheets(testDetails: TestDetails, rootPath: URL) -> [ChuteStyleSheet] {
+
+        var results = [ChuteStyleSheet]()
+
+        if let activities = testDetails.activitySummaries {
+            for activity in activities {
+                if let attachments = activity.attachments {
+                    for attachment in attachments.filter({ $0.uti == "chute.styleSheet" }) {
+
+                        let dataPath = rootPath.appendingPathComponent(attachment.filename!)
+                        do {
+                            let data = try Data(contentsOf: dataPath)
+
+                            let decoder = JSONDecoder()
+                            do {
+                                let styleSheet = try decoder.decode(Array<ChuteStyleSheet>.self, from: data)
+                                results += styleSheet
+                            } catch {
+                                print(error)
+                            }
+                        } catch {
+                            print("error loading attachment: \(error)")
+                        }
+                    }
+                }
+            }
+        }
+
+        if let subtests = testDetails.subtests {
+
+            for subtest in subtests {
+                results += findStyleSheets(testDetails: subtest, rootPath: rootPath)
+            }
+        }
+        return results
+    }
+}

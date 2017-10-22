@@ -37,17 +37,24 @@ print("TestSummary Folder: \(testExecution.folderURL)")
 // Gather all the test data
 let rootAttachmentPath = testExecution.folderURL.deletingLastPathComponent().appendingPathComponent("Attachments")
 
-let attachments = ChuteDetail.findAttachments(testSummary: testExecution.summary)
-let styleSheets = ChuteDetail.findStyleSheets(testSummary: testExecution.summary, rootPath: rootAttachmentPath)
+let testResults = ChuteTestResult.findResults(testSummary: testExecution.summary)
+let attachments = ChuteTestAttachment.findAttachments(testSummary: testExecution.summary)
+let styleSheets = ChuteStyleSheet.findStyleSheets(testSummary: testExecution.summary, rootPath: rootAttachmentPath)
+let codeCoverage = ChuteCodeCoverage.findCodeCoverage()
 
-let chuteTestDetail = ChuteDetail(project: project, branch: arguments.branch, pullRequestNumber: arguments.pullRequestNumber, testSummaryFolder: testExecution)
+let chuteTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch, pullRequestNumber: arguments.pullRequestNumber, testResults: testResults, codeCoverage: codeCoverage, attachments: attachments, styleSheets: styleSheets)
 
-// Generate chute report from gathered data
-// TODO: Command line parameters should tell us which output to generate
-let outputDetail = ChuteOutputDetail(rootPath: rootAttachmentPath, detail: chuteTestDetail, attachments: attachments, styleSheets: styleSheets)
-let output = ChuteOutput()
-output.renderMarkdownOutput(detail: outputDetail)
-output.renderHTMLOutput(detail: outputDetail)
+// Create the output folder
+let outputFolder = ChuteOutputFolder()
+outputFolder.empty()
+outputFolder.saveAttachments(rootPath: rootAttachmentPath, attachments: attachments)
+outputFolder.saveSourceFile(from: testExecution.summaryFileURL, to: "TestSummaries.plist")
+outputFolder.saveSourceFile(from: ChuteCodeCoverage.codeCoverageURL, to: "report.json")
+
+// Generate chute reports from gathered data
+let output = ChuteOutput(into: outputFolder)
+output.renderMarkdownOutput(detail: chuteTestDetail)
+output.renderHTMLOutput(detail: chuteTestDetail)
 
 // If compareFolder set, load & compare current test with existing data
 

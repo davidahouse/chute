@@ -13,3 +13,27 @@ struct ChuteCodeCoverage: Encodable {
     let file: String
     let coverage: Double
 }
+
+extension ChuteCodeCoverage {
+
+    static var codeCoverageURL: URL {
+        return URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponents(["xcov_report", "report.json"])
+    }
+
+    static func findCodeCoverage() -> [ChuteCodeCoverage] {
+        // TODO: We should run xcov ourselves here instead of assuming
+        // it was run for us.
+        // xcov --workspace nbc-portal-tv.xcworkspace --scheme nbc-dev-portal-tv --json_report
+        var codeCoverage = [ChuteCodeCoverage]()
+        let codeCoveragePath = codeCoverageURL
+        if let coverage = CodeCoverage.fromFile(file: codeCoveragePath) {
+
+            for target in coverage.targets {
+                for file in target.files {
+                    codeCoverage.append(ChuteCodeCoverage(target: target.name, file: file.name, coverage: file.coverage))
+                }
+            }
+        }
+        return codeCoverage
+    }
+}
