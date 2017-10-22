@@ -86,7 +86,7 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
         """
     }
 
-    func render(detail: ChuteOutputDetail) -> String {
+    func render(detail: ChuteDetail) -> String {
 
         let parameters: [String: CustomStringConvertible] = [
             "title": "Chute Report",
@@ -95,7 +95,7 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
         return ChuteHTMLOutputTemplateConstants.Template.render(parameters: parameters)
     }
 
-    private func reportContents(detail: ChuteOutputDetail) -> String {
+    private func reportContents(detail: ChuteDetail) -> String {
 
         let parameters: [String: CustomStringConvertible] = [
             "header": reportHeader(detail: detail),
@@ -106,22 +106,22 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
         return Constants.Template.render(parameters: parameters)
     }
 
-    private func reportHeader(detail: ChuteOutputDetail) -> String {
+    private func reportHeader(detail: ChuteDetail) -> String {
 
         let parameters: [String: CustomStringConvertible] = [
-            "project": detail.detail.project,
-            "test_date": detail.detail.testDate,
-            "branch": detail.detail.branch ?? ""
+            "project": detail.project,
+            "test_date": detail.testDate,
+            "branch": detail.branch ?? ""
         ]
         return Constants.HeaderTemplate.render(parameters: parameters)
     }
 
-    private func reportTestSummary(detail: ChuteOutputDetail) -> String {
+    private func reportTestSummary(detail: ChuteDetail) -> String {
 
         var totalTests = 0
         var successTests = 0
         var failedTests = 0
-        for result in detail.detail.testResults {
+        for result in detail.testResults {
             if result.testStatus == "Success" {
                 successTests += 1
             } else {
@@ -138,13 +138,13 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
         return Constants.TestSummaryTemplate.render(parameters: parameters)
     }
 
-    private func reportCodeCoverage(detail: ChuteOutputDetail) -> String {
+    private func reportCodeCoverage(detail: ChuteDetail) -> String {
 
-        if detail.detail.codeCoverage.count > 0 {
-            let coverage = detail.detail.codeCoverage.map { $0.coverage }
+        if detail.codeCoverage.count > 0 {
+            let coverage = detail.codeCoverage.map { $0.coverage }
             let average = Double(coverage.reduce(0, +))/Double(coverage.count)
-            let totalAbove90 = detail.detail.codeCoverage.filter { $0.coverage >= 0.90 }.count
-            let totalAt0 = detail.detail.codeCoverage.filter { $0.coverage == 0.0 }.count
+            let totalAbove90 = detail.codeCoverage.filter { $0.coverage >= 0.90 }.count
+            let totalAt0 = detail.codeCoverage.filter { $0.coverage == 0.0 }.count
 
             let parameters: [String: CustomStringConvertible] = [
                 "average_coverage": Int(round(average * 100)),
@@ -157,7 +157,7 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
         }
     }
 
-    private func reportStyleSheet(detail: ChuteOutputDetail) -> String {
+    private func reportStyleSheet(detail: ChuteDetail) -> String {
 
         let parameters: [String: CustomStringConvertible] = [:]
         return Constants.StyleSheetTemplate.render(parameters: parameters)

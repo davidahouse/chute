@@ -16,7 +16,7 @@ class ChuteMarkdownTestDetailReport: ChuteOutputRenderable {
         """
     }
 
-    func render(detail: ChuteOutputDetail) -> String {
+    func render(detail: ChuteDetail) -> String {
         return Constants.Template.render(parameters: [:])
     }
 }

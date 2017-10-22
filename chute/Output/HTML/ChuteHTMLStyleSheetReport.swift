@@ -56,7 +56,7 @@ class ChuteHTMLStyleSheetReport: ChuteOutputRenderable {
         """
     }
     
-    func render(detail: ChuteOutputDetail) -> String {
+    func render(detail: ChuteDetail) -> String {
 
         let parameters: [String: CustomStringConvertible] = [
             "title": "Chute Report",
@@ -65,7 +65,7 @@ class ChuteHTMLStyleSheetReport: ChuteOutputRenderable {
         return ChuteHTMLOutputTemplateConstants.Template.render(parameters: parameters)
     }
 
-    private func reportContents(detail: ChuteOutputDetail) -> String {
+    private func reportContents(detail: ChuteDetail) -> String {
 
         let parameters: [String: CustomStringConvertible] = [
             "colors": reportColors(detail: detail),
@@ -74,7 +74,7 @@ class ChuteHTMLStyleSheetReport: ChuteOutputRenderable {
         return Constants.Template.render(parameters: parameters)
     }
 
-    private func reportColors(detail: ChuteOutputDetail) -> String {
+    private func reportColors(detail: ChuteDetail) -> String {
 
         var output = ""
 
@@ -98,7 +98,7 @@ class ChuteHTMLStyleSheetReport: ChuteOutputRenderable {
         return output
     }
 
-    private func reportFonts(detail: ChuteOutputDetail) -> String {
+    private func reportFonts(detail: ChuteDetail) -> String {
 
         var output = ""
 

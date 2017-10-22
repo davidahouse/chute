@@ -51,6 +51,7 @@
 		DC4ADE3D1F9B5AB4007C36C1 /* Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46C4891F9AA34A008B17CD /* Render.swift */; };
 		DC4ADE3F1F9B6067007C36C1 /* ChuteCommandLineParametersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4ADE3E1F9B6067007C36C1 /* ChuteCommandLineParametersTests.swift */; };
 		DC8019D01F9ABB600013CD20 /* ChuteOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8019CF1F9ABB600013CD20 /* ChuteOutput.swift */; };
+		DCDC1B3A1F9D06FF0068170F /* ChuteOutputFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC1B391F9D06FF0068170F /* ChuteOutputFolder.swift */; };
 		DCE21A551F6A11C900E36E88 /* CodeCoverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE21A541F6A11C900E36E88 /* CodeCoverage.swift */; };
 		DCF555311F6610DB001567A5 /* ChuteCommandLineParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF555301F6610DB001567A5 /* ChuteCommandLineParameters.swift */; };
 /* End PBXBuildFile section */
@@ -94,6 +95,7 @@
 		DC4ADE271F9ADFBC007C36C1 /* ChuteHTMLMainReportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteHTMLMainReportTests.swift; sourceTree = "<group>"; };
 		DC4ADE3E1F9B6067007C36C1 /* ChuteCommandLineParametersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteCommandLineParametersTests.swift; sourceTree = "<group>"; };
 		DC8019CF1F9ABB600013CD20 /* ChuteOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteOutput.swift; sourceTree = "<group>"; };
+		DCDC1B391F9D06FF0068170F /* ChuteOutputFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteOutputFolder.swift; sourceTree = "<group>"; };
 		DCE21A541F6A11C900E36E88 /* CodeCoverage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeCoverage.swift; sourceTree = "<group>"; };
 		DCF555301F6610DB001567A5 /* ChuteCommandLineParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteCommandLineParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				DC46C4881F9AA337008B17CD /* Common */,
-				DC26B5A91F99835A002541C6 /* Dependencies */,
 				DC5F53E31F94D4B900844C98 /* ChuteDetail */,
 				DC42CF2C1F926E1700279110 /* Extensions */,
 				DC42CF2A1F926D4F00279110 /* Input */,
@@ -171,19 +172,13 @@
 			path = Markdown;
 			sourceTree = "<group>";
 		};
-		DC26B5A91F99835A002541C6 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
 		DC42CF251F922F7700279110 /* Output */ = {
 			isa = PBXGroup;
 			children = (
 				DC26B5A61F998029002541C6 /* Markdown */,
 				DC42CF261F922F7E00279110 /* HTML */,
 				DC8019CF1F9ABB600013CD20 /* ChuteOutput.swift */,
+				DCDC1B391F9D06FF0068170F /* ChuteOutputFolder.swift */,
 			);
 			path = Output;
 			sourceTree = "<group>";
@@ -397,6 +392,7 @@
 				DC4ADE241F9ADA90007C36C1 /* ChuteHTMLStyleSheetReport.swift in Sources */,
 				DC26B5A81F998044002541C6 /* ChuteMarkdownMainReport.swift in Sources */,
 				DC8019D01F9ABB600013CD20 /* ChuteOutput.swift in Sources */,
+				DCDC1B3A1F9D06FF0068170F /* ChuteOutputFolder.swift in Sources */,
 				DC0E13A01F5CE59500525E5B /* DerivedData.swift in Sources */,
 				DC4ADE1C1F9AC697007C36C1 /* ChuteHTMLOutputTemplate.swift in Sources */,
 				DC4ADE1E1F9AC792007C36C1 /* ChuteHTMLMainReport.swift in Sources */,

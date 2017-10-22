@@ -24,3 +24,37 @@ struct ChuteTestResult: Encodable {
         self.testStatus = testStatus
     }
 }
+
+extension ChuteTestResult {
+
+    static func findResults(testSummary: TestSummary) -> [ChuteTestResult] {
+
+        var results = [ChuteTestResult]()
+
+        for summary in testSummary.testableSummaries {
+            for test in summary.tests {
+                results += findTestableSummaries(testDetails: test)
+            }
+        }
+
+        return results
+    }
+
+    private static func findTestableSummaries(testDetails: TestDetails) -> [ChuteTestResult] {
+
+        var results = [ChuteTestResult]()
+
+        if let result = ChuteTestResult(detail: testDetails) {
+            results += [result]
+        }
+
+        if let subtests = testDetails.subtests {
+
+            for subtest in subtests {
+                results += findTestableSummaries(testDetails: subtest)
+            }
+        }
+
+        return results
+    }
+}

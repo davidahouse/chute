@@ -99,6 +99,7 @@ struct TestSummary: Decodable {
 struct TestSummaryFolder {
     let createDate: Date
     let folderURL: URL
+    let summaryFileURL: URL
     let summary: TestSummary
 }
 
@@ -119,7 +120,7 @@ extension TestSummary {
 
                         if let createDate = createDate?.creationDate {
                             let foundFolderURL = testsFolder.appendingPathComponent(path.lastPathComponent)
-                            let foundFolder = TestSummaryFolder(createDate: createDate, folderURL: foundFolderURL, summary: summary)
+                            let foundFolder = TestSummaryFolder(createDate: createDate, folderURL: foundFolderURL, summaryFileURL: testsFolder.appendingPathComponent(path.lastPathComponent), summary: summary)
                             found.append(foundFolder)
                         }
                     }
