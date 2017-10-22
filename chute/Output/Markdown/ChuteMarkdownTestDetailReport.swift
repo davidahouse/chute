@@ -10,7 +10,6 @@ import Foundation
 
 class ChuteMarkdownTestDetailReport: ChuteOutputRenderable {
 
-
     enum Constants {
         static let Template = """
         #  Chute Test Report
@@ -37,7 +36,7 @@ class ChuteMarkdownTestDetailReport: ChuteOutputRenderable {
         """
     }
 
-    func render(detail: ChuteOutputDetail) -> String {
+    func render(detail: ChuteDetail) -> String {
 
         let parameters: [String: CustomStringConvertible] = [
             "details": reportDetails(detail: detail)
@@ -45,10 +44,10 @@ class ChuteMarkdownTestDetailReport: ChuteOutputRenderable {
         return Constants.Template.render(parameters: parameters)
     }
 
-    private func reportDetails(detail: ChuteOutputDetail) -> String {
+    private func reportDetails(detail: ChuteDetail) -> String {
 
         var testClasses: [String] = []
-        for result in detail.detail.testResults {
+        for result in detail.testResults {
             let parts = result.testIdentifier.components(separatedBy: "/")
             if !testClasses.contains(parts[0]) {
                 testClasses.append(parts[0])
@@ -67,10 +66,10 @@ class ChuteMarkdownTestDetailReport: ChuteOutputRenderable {
         return output
     }
 
-    private func reportTestDetails(detail: ChuteOutputDetail, testClass: String) -> String {
+    private func reportTestDetails(detail: ChuteDetail, testClass: String) -> String {
 
         var output = ""
-        for result in detail.detail.testResults {
+        for result in detail.testResults {
             if result.testIdentifier.starts(with: testClass) {
                 let parts = result.testIdentifier.components(separatedBy: "/")
                 let identifier = parts[1].replacingOccurrences(of: "()", with: "")
@@ -86,7 +85,7 @@ class ChuteMarkdownTestDetailReport: ChuteOutputRenderable {
         return output
     }
 
-    private func reportAttachment(detail: ChuteOutputDetail, result: ChuteTestResult) -> String {
+    private func reportAttachment(detail: ChuteDetail, result: ChuteTestResult) -> String {
 
         var output = ""
         for attachment in detail.attachments.filter({ $0.testIdentifier == result.testIdentifier }) {

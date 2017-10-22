@@ -24,7 +24,7 @@ class ChuteMarkdownCodeCoverageReport: ChuteOutputRenderable {
         """
     }
 
-    func render(detail: ChuteOutputDetail) -> String {
+    func render(detail: ChuteDetail) -> String {
 
         let parameters: [String: CustomStringConvertible] = [
             "details": reportDetails(detail: detail)
@@ -32,10 +32,10 @@ class ChuteMarkdownCodeCoverageReport: ChuteOutputRenderable {
         return Constants.Template.render(parameters: parameters)
     }
 
-    private func reportDetails(detail: ChuteOutputDetail) -> String {
+    private func reportDetails(detail: ChuteDetail) -> String {
 
         var output = ""
-        for coverage in detail.detail.codeCoverage {
+        for coverage in detail.codeCoverage {
             let trClass: String = {
                 if coverage.coverage <= 0.70 {
                     return "danger"

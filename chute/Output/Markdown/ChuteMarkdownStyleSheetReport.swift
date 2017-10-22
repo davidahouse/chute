@@ -38,7 +38,7 @@ class ChuteMarkdownStyleSheetReport: ChuteOutputRenderable {
         """
     }
 
-    func render(detail: ChuteOutputDetail) -> String {
+    func render(detail: ChuteDetail) -> String {
 
         let parameters: [String: CustomStringConvertible] = [
             "colors": reportColors(detail: detail),
@@ -47,7 +47,7 @@ class ChuteMarkdownStyleSheetReport: ChuteOutputRenderable {
         return Constants.Template.render(parameters: parameters)
     }
 
-    private func reportColors(detail: ChuteOutputDetail) -> String {
+    private func reportColors(detail: ChuteDetail) -> String {
 
         var output = ""
 
@@ -71,7 +71,7 @@ class ChuteMarkdownStyleSheetReport: ChuteOutputRenderable {
         return output
     }
 
-    private func reportFonts(detail: ChuteOutputDetail) -> String {
+    private func reportFonts(detail: ChuteDetail) -> String {
 
         var output = ""
 
