@@ -8,7 +8,8 @@
 
 import Foundation
 
-print(CommandLine.arguments)
+print("chute: 1.0.0")
+
 let arguments = ChuteCommandLineParameters()
 
 // Required parameters
