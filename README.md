@@ -34,14 +34,14 @@ Use `chuteCaptureViewController(viewController:title:)` to capture the screensho
 
 # Roadmap
 
-- Basic chute implementation that generates HTML reports
-- Finish markdown report output
-- Implement saving of chute data capture for use in compares
-- Implement comparison between saved capture and current capture
-- Allow chute to update Pull Request with capture summary & link for full reports
-- Brew formula to make install easier
-- Fastlane action for executing chute easier
-- Danger.systems plugin for updating Pull Request with summary
+- [X] Basic chute implementation that generates HTML reports
+- [ ] Finish markdown report output
+- [ ] Implement saving of chute data capture for use in compares
+- [ ] Implement comparison between saved capture and current capture
+- [ ] Allow chute to update Pull Request with capture summary & link for full reports
+- [ ] Brew formula to make install easier
+- [ ] Fastlane action for executing chute easier
+- [ ] Danger.systems plugin for updating Pull Request with summary
 
 ## License
 
