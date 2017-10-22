@@ -12,7 +12,7 @@ Chute also generates a style sheet from the captured views (using a XCTestCase e
 
 Saving the chute reports and comparing them later is a perfect addition to your CI process for pull requests. Now the pull request can display a list of all the test differences, code coverage changes as well as screenshots that have changed or style sheet changes.
 
-[View An Example Report](./sample_report/chute.html)
+[View An Example Report](http://davidahouse.com/chute/sample_report/chute.html)
 
 # Getting started
 
