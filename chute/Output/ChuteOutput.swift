@@ -35,7 +35,9 @@ class ChuteOutput {
 
         let reports: [String: ChuteOutputRenderable] = [
             "chute.md": ChuteMarkdownMainReport(),
-            "chuteTestDetail.md": ChuteMarkdownTestDetailReport()
+            "test_details.md": ChuteMarkdownTestDetailReport(),
+            "code_coverage.md": ChuteMarkdownCodeCoverageReport(),
+            "style_sheet.md": ChuteMarkdownStyleSheetReport()
         ]
         render(reports, with: detail)
     }
