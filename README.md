@@ -1,5 +1,17 @@
 # About chute
-Chute is a tool for creating detailed reports from data generated during XCTest execution. After a test execution run from `Xcode` or `xcodebuild`, chute can capture and report on the following kinds of data:
+
+Unit test visualization in Xcode is functional, but can be improved. Chute was created to augment this functionality in the following ways:
+
+- HTML & Markdown report of test status and code coverage details
+- Inline visualization of test attachments (screen shots, strings, etc)
+- Comparison between test execution runs (particularly for comparing pull request changes)
+- Capture and visualization of colors and fonts used in the application
+
+The ultimate goal of `chute` is to provide a tool that can be executed by CI against pull requests to report on what impact a code change has made on the unit tests, code coverage, screenshots and styles. Imagine knowing exactly which screens were changed by a PR and what the screens look like, without having to run the application!
+
+Chute uses new capabilities in Xcode 9, in particular `XCTestAttachment` to collect screenshots and style information.
+
+Chute is designed to run after you have executed your test suite in `Xcode` or `xcodebuild`. Chute then gathers the following information and creates reports from them:
 
 - Test status
 - Code coverage
