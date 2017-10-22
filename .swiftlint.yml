@@ -1,0 +1,114 @@
+# Welcome to an opinionated shared set of SwiftLint rules that you
+# can use as a starting point for your projects.
+
+# All rules are whitelisted in. No more differing warnings between project
+# members based on their version of SwiftLint. We will update these
+# periodically based on new versions of SwiftLint.
+
+# How this works is if you feel some rule needs to change (added / removed / etc)
+# then create a PR on this repo with the change and your reasoning. Please put
+# the reasoning in this file as a comment above the rule in question. This way
+# the file itself will be our documentation. If we find rules that some like
+# and some don't then we will comment it out with a description above about the
+# pros and cons, so that individual projects can decide to include or not. We
+# should default to NOT including rules that have no majority consensus.
+whitelist_rules:
+  # Default Enabled rules from the SwiftLint website:
+  # https://github.com/realm/SwiftLint/blob/master/Rules.md
+  #
+  #
+  - block_based_kvo
+  - class_delegate_protocol
+  - closing_brace
+  - closure_parameter_position
+  - colon
+  - comma
+  - compiler_protocol_init
+  - control_statement
+  - custom_rules
+  - cyclomatic_complexity
+  - discarded_notification_center_observer
+  - discouraged_direct_init
+  - dynamic_inline
+  - empty_enum_arguments
+  - empty_parameters
+  - empty_parentheses_with_trailing_closure
+  - fallthrough
+  # Will add back file_length once we decide what a reasonable amount is.
+  # - file_length
+  - for_where
+  - force_cast
+  - force_try
+  # Will add back function_body_length once we decide what a reasonable amount is
+  # - function_body_length
+  # This one seems overzealous. I mean you do have structs with many params,
+  # so I'm not sure what a reasonable limit should be.
+  # - function_parameter_count
+  - generic_type_name
+  - identifier_name
+  - implicit_getter
+  - is_disjoint
+  - large_tuple
+  - leading_whitespace
+  - legacy_cggeometry_functions
+  - legacy_constant
+  - legacy_constructor
+  - legacy_nsgeometry_functions
+  # Again, what is a good amount here?
+  # - line_length
+  - mark
+  - multiple_closures_with_trailing_closure
+  - nesting
+  - notification_center_detachment
+  - opening_brace
+  - operator_whitespace
+  - private_over_fileprivate
+  - private_unit_test
+  - protocol_property_accessors_order
+  - redundant_discardable_let
+  - redundant_optional_initialization
+  - redundant_string_enum_value
+  - redundant_void_return
+  - return_arrow_whitespace
+  - shorthand_operator
+  - statement_position
+  - superfluous_disable_command
+  - switch_case_alignment
+  - syntactic_sugar
+  - todo
+  - trailing_comma
+  - trailing_newline
+  - trailing_semicolon
+  - trailing_whitespace
+  # What is the default here?
+  #- type_body_length
+  - type_name
+  - unneeded_break_in_switch
+  - unused_closure_parameter
+  - unused_enumerated
+  - unused_optional_binding
+  - valid_ibinspectable
+  - vertical_parameter_alignment
+  - vertical_whitespace
+  - void_return
+  - weak_delegate
+  - xctfail_message
+
+  # Default disabled rules from the SwiftLint website that we have
+  # enabled.
+  #
+  # Exposing IBOutlets to code outside of a class is not good form and instead
+  # the class should provide some kind of configure method that will set
+  # the properties on the IBOutlets.
+  - private_outlet
+
+
+# This section is reserved for configuration of the above rules.
+#
+# This one gets annoying for empty lines, so this setting ignores them
+trailing_whitespace:
+  ignores_empty_lines: true
+
+# Project specific rules go below!
+# Some examples are the excluded: set of folders to ignore. Or possibly
+# configuration for the included rules above.
