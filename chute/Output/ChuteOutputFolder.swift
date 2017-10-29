@@ -44,10 +44,13 @@ class ChuteOutputFolder {
         guard let outputData = contents.data(using: .utf8) else {
             return
         }
+        saveOutputFile(fileName: fileName, data: outputData)
+    }
 
+    func saveOutputFile(fileName: String, data: Data) {
         let outputFileURL = outputFolderURL.appendingPathComponent(fileName)
         do {
-            try outputData.write(to: outputFileURL)
+            try data.write(to: outputFileURL)
         } catch {
             print("Error writing output \(error)")
         }
@@ -79,6 +82,15 @@ class ChuteOutputFolder {
             try data.write(to: outputURL)
         } catch {
             print("Error saving source file: \(error)")
+        }
+    }
+
+    func saveSourceFile(fileName: String, data: Data) {
+        let outputFileURL = sourceFolderURL.appendingPathComponent(fileName)
+        do {
+            try data.write(to: outputFileURL)
+        } catch {
+            print("Error writing output \(error)")
         }
     }
 }

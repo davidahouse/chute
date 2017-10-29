@@ -19,11 +19,8 @@ class DerivedData {
 
             for path in paths {
                 let url = rootURL.appendingPathComponent(path).appendingPathComponent("info.plist")
-                print("plist \(url)")
                 if let plist = InfoPlist.from(file: url) {
-                    print("plist.workspacePath = \(plist.workspacePath)")
                     if plist.workspacePath == project {
-                        print(path)
                         return rootURL.appendingPathComponent(path)
                     }
                 }

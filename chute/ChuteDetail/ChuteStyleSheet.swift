@@ -71,7 +71,7 @@ extension ChuteStyleSheet {
                                 print(error)
                             }
                         } catch {
-                            print("error loading attachment: \(error)")
+                            print("error loading stylesheet: \(error)")
                         }
                     }
                 }
@@ -85,5 +85,28 @@ extension ChuteStyleSheet {
             }
         }
         return results
+    }
+
+    static func encodedStyleSheets(from: [ChuteStyleSheet]) -> Data? {
+
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(from) {
+            return data
+        } else {
+            return nil
+        }
+    }
+
+    static func decodedStyleSheets(path: URL) -> [ChuteStyleSheet] {
+
+        let decoder = JSONDecoder()
+        do {
+            let data = try Data(contentsOf: path)
+            let styleSheets = try decoder.decode(Array<ChuteStyleSheet>.self, from: data)
+            return styleSheets
+        } catch {
+            print(error)
+            return []
+        }
     }
 }
