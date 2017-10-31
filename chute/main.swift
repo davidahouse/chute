@@ -81,7 +81,6 @@ print("---")
 
 // Generate chute reports from gathered data
 let output = ChuteOutput(into: outputFolder)
-output.renderMarkdownOutput(detail: chuteTestDetail)
 output.renderHTMLOutput(detail: chuteTestDetail)
 
 // If compareFolder set, load & compare current test with existing data

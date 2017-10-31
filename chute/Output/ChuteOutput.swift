@@ -35,17 +35,6 @@ class ChuteOutput {
         render(reports, with: detail)
     }
 
-    func renderMarkdownOutput(detail: ChuteDetail) {
-
-        let reports: [String: ChuteOutputRenderable] = [
-            "chute.md": ChuteMarkdownMainReport(),
-            "test_details.md": ChuteMarkdownTestDetailReport(),
-            "code_coverage.md": ChuteMarkdownCodeCoverageReport(),
-            "style_sheet.md": ChuteMarkdownStyleSheetReport()
-        ]
-        render(reports, with: detail)
-    }
-
     func renderHTMLDifferenceOutput(difference: ChuteDetailDifference) {
 
         let reports: [String: ChuteOutputDifferenceRenderable] = [
