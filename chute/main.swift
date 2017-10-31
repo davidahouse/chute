@@ -26,7 +26,6 @@ print("--- Searching for DerivedData folder for this project")
 print("---")
 
 // Find derived data folder for this project
-//let projectFolder = DerivedData.pathFor(project: "/Users/davidhouse/Projects/davidahouse/EmojiCal/EmojiCal.xcodeproj")
 guard let projectFolder = DerivedData.pathFor(project: fullProjectPath.path) else {
     print("Unable to determine project folder, exiting!")
     exit(1)
@@ -54,9 +53,13 @@ let rootAttachmentPath = testExecution.folderURL.deletingLastPathComponent().app
 let testResults = ChuteTestResult.findResults(testSummary: testExecution.summary)
 let attachments = ChuteTestAttachment.findAttachments(testSummary: testExecution.summary)
 let styleSheets = ChuteStyleSheet.findStyleSheets(testSummary: testExecution.summary, rootPath: rootAttachmentPath)
-let codeCoverage = ChuteCodeCoverage.findCodeCoverage()
+let codeCoverage = ChuteCodeCoverage.findCodeCoverage(path: ChuteCodeCoverage.codeCoverageURL)
 
-let chuteTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch, pullRequestNumber: arguments.pullRequestNumber, testResults: testResults, codeCoverage: codeCoverage, attachments: attachments, styleSheets: styleSheets)
+let chuteTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch,
+                                  pullRequestNumber: arguments.pullRequestNumber, testResults: testResults,
+                                  codeCoverage: codeCoverage,
+                                  codeCoverageSummary: ChuteCodeCoverageSummary(coverages: codeCoverage),
+                                  attachments: attachments, styleSheets: styleSheets)
 
 print("---")
 print("--- Saving source data to output folder")
@@ -103,9 +106,13 @@ if let compareFolder = arguments.compareFolder {
     let beforeTestResults = ChuteTestResult.findResults(testSummary: beforeTestSummary)
     let beforeAttachments = ChuteTestAttachment.findAttachments(testSummary: beforeTestSummary)
     let beforeStyleSheets = ChuteStyleSheet.decodedStyleSheets(path: URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "stylesheets.data"]))
-    let beforeCodeCoverage = ChuteCodeCoverage.findCodeCoverage()
+    let beforeCodeCoverage = ChuteCodeCoverage.findCodeCoverage(path: URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "report.json"]))
 
-    let beforeTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch, pullRequestNumber: arguments.pullRequestNumber, testResults: beforeTestResults, codeCoverage: beforeCodeCoverage, attachments: beforeAttachments, styleSheets: beforeStyleSheets)
+    let beforeTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch,
+                                       pullRequestNumber: arguments.pullRequestNumber, testResults: beforeTestResults,
+                                       codeCoverage: beforeCodeCoverage,
+                                       codeCoverageSummary: ChuteCodeCoverageSummary(coverages: beforeCodeCoverage),
+                                       attachments: beforeAttachments, styleSheets: beforeStyleSheets)
 
     if beforeTestDetail.project != chuteTestDetail.project {
         print("Unable to compare test results from different projects. \(beforeTestDetail.project) != \(chuteTestDetail.project)")

@@ -56,15 +56,15 @@ class ChuteHTMLDifferenceMainReport: ChuteOutputDifferenceRenderable {
         <table class="table table-striped">
         <tbody>
         <tr>
-        <td class="info">Average Coverage: {{average_coverage}}%</td>
-        <td class="info">Total Files Above 90%: {{total_above_90}}</td>
-        <td class="info">Total Files With No Coverage: {{total_no_coverage}}</td>
+        <td class="info">Average Coverage: {{average_coverage}}% <span class="badge {{average_coverage_change_badge}}">{{average_coverage_change}}%</span></td>
+        <td class="info">Total Files Above 90%: {{total_above_90}} <span class="badge {{total_above_90_change_badge}}">{{total_above_90_change}}%</span></td>
+        <td class="info">Total Files With No Coverage: {{total_no_coverage}} <span class="badge {{total_no_coverage_change_badge}}">{{total_no_coverage_change}}%</span></td>
         </tr>
         </tbody>
         </table>
         </div>
         <div>
-        <a href="code_coverage.html">Code Coverage Details</a>
+        <a href="code_coverage_difference.html">Code Coverage Details</a>
         </div>
         </div>
         """
@@ -128,22 +128,51 @@ class ChuteHTMLDifferenceMainReport: ChuteOutputDifferenceRenderable {
 
     private func reportCodeCoverage(difference: ChuteDetailDifference) -> String {
 
-//        if detail.codeCoverage.count > 0 {
-//            let coverage = detail.codeCoverage.map { $0.coverage }
-//            let average = Double(coverage.reduce(0, +))/Double(coverage.count)
-//            let totalAbove90 = detail.codeCoverage.filter { $0.coverage >= 0.90 }.count
-//            let totalAt0 = detail.codeCoverage.filter { $0.coverage == 0.0 }.count
-//
-//            let parameters: [String: CustomStringConvertible] = [
-//                "average_coverage": Int(round(average * 100)),
-//                "total_above_90": totalAbove90,
-//                "total_no_coverage": totalAt0
-//            ]
-//            return Constants.CodeCoverageTemplate.render(parameters: parameters)
-//        } else {
-//            return Constants.NoCodeCoverageTemplate.render(parameters: [:])
-//        }
-        return ""
+        if difference.comparedTo.codeCoverage.count > 0 {
+
+            let average_coverage_change = difference.comparedTo.codeCoverageSummary.averageCoverage - difference.detail.codeCoverageSummary.averageCoverage
+            let total_above_90_change = difference.comparedTo.codeCoverageSummary.filesAdequatelyCovered - difference.detail.codeCoverageSummary.filesAdequatelyCovered
+            let total_no_coverage_change = difference.comparedTo.codeCoverageSummary.filesWithNoCoverage - difference.detail.codeCoverageSummary.filesWithNoCoverage
+
+            let average_coverage_change_badge: String = {
+                if average_coverage_change < 0.0 {
+                    return "badge-danger"
+                } else {
+                    return "badge-success"
+                }
+            }()
+
+            let total_above_90_change_badge: String = {
+                if total_above_90_change < 0 {
+                    return "badge-danger"
+                } else {
+                    return "badge-success"
+                }
+            }()
+
+            let total_no_coverage_change_badge: String = {
+                if total_no_coverage_change < 0 {
+                    return "badge-danger"
+                } else {
+                    return "badge-success"
+                }
+            }()
+
+            let parameters: [String: CustomStringConvertible] = [
+                "average_coverage": Int(round(difference.comparedTo.codeCoverageSummary.averageCoverage * 100)),
+                "average_coverage_change": Int(round(average_coverage_change * 100)),
+                "average_coverage_change_badge": average_coverage_change_badge,
+                "total_above_90": difference.comparedTo.codeCoverageSummary.filesAdequatelyCovered,
+                "total_above_90_change": total_above_90_change,
+                "total_above_90_change_badge": total_above_90_change_badge,
+                "total_no_coverage": difference.comparedTo.codeCoverageSummary.filesWithNoCoverage,
+                "total_no_coverage_change": total_no_coverage_change,
+                "total_no_coverage_change_badge": total_no_coverage_change_badge
+            ]
+            return Constants.CodeCoverageTemplate.render(parameters: parameters)
+        } else {
+            return Constants.NoCodeCoverageTemplate.render(parameters: [:])
+        }
     }
 
     private func reportStyleSheet(difference: ChuteDetailDifference) -> String {

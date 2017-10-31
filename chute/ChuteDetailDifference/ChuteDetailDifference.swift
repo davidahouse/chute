@@ -17,14 +17,7 @@ struct ChuteDetailDifference {
     let comparedBranch: String?
 
     let testResultDifference: ChuteTestResultDifference
-
-    let newCodeCoverage: [ChuteCodeCoverage]
-    let deletedCodeCoverage: [ChuteCodeCoverage]
-    let changedCodeCoverage: [(ChuteCodeCoverage, ChuteCodeCoverage)]
-
-    let newStyleSheets: [ChuteStyleSheet]
-    let deletedStyleSheets: [ChuteStyleSheet]
-    let changedStyleSheets: [(ChuteStyleSheet, ChuteStyleSheet)]
+    let codeCoverageDifference: ChuteCodeCoverageDifference
 
     init(detail: ChuteDetail, comparedTo: ChuteDetail, detailAttachmentURL: URL, comparedToAttachmentURL: URL) {
 
@@ -35,13 +28,6 @@ struct ChuteDetailDifference {
         comparedBranch = comparedTo.branch
 
         testResultDifference = ChuteTestResultDifference(detail: detail, comparedTo: comparedTo, detailAttachmentURL: detailAttachmentURL, comparedToAttachmentURL: comparedToAttachmentURL)
-
-        newCodeCoverage = []
-        deletedCodeCoverage = []
-        changedCodeCoverage = []
-
-        newStyleSheets = []
-        deletedStyleSheets = []
-        changedStyleSheets = []
+        codeCoverageDifference = ChuteCodeCoverageDifference(detail: detail, comparedTo: comparedTo)
     }
 }

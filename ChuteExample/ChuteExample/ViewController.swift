@@ -60,4 +60,10 @@ class ViewController: UIViewController {
             moreDetailLabel.text = ""
         }
     }
+
+    // This method just gives us a path that will not be executed so we can report
+    // on code coverage differences.
+    func untestedMethod() {
+        self.view.backgroundColor = .black
+    }
 }

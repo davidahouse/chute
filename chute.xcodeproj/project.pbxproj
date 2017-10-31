@@ -50,9 +50,12 @@
 		DC4ADE3F1F9B6067007C36C1 /* ChuteCommandLineParametersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4ADE3E1F9B6067007C36C1 /* ChuteCommandLineParametersTests.swift */; };
 		DC777CB01F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC777CAF1F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift */; };
 		DC8019D01F9ABB600013CD20 /* ChuteOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8019CF1F9ABB600013CD20 /* ChuteOutput.swift */; };
+		DC86EF7E1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86EF7D1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift */; };
+		DC86EF801FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86EF7F1FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift */; };
 		DCACC6BE1FA6483600697691 /* ChuteTestResultDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACC6BD1FA6483600697691 /* ChuteTestResultDifference.swift */; };
 		DCACC6C01FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACC6BF1FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift */; };
 		DCBB92A91F9EC19E00EE1C68 /* ChuteDetailDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB92A81F9EC19E00EE1C68 /* ChuteDetailDifference.swift */; };
+		DCBB99C01FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB99BF1FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift */; };
 		DCDC1B3A1F9D06FF0068170F /* ChuteOutputFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC1B391F9D06FF0068170F /* ChuteOutputFolder.swift */; };
 		DCDC1B3C1F9D3ADB0068170F /* ChuteMarkdownCodeCoverageReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC1B3B1F9D3ADB0068170F /* ChuteMarkdownCodeCoverageReport.swift */; };
 		DCDC1B3E1F9D3BBC0068170F /* ChuteMarkdownStyleSheetReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC1B3D1F9D3BBC0068170F /* ChuteMarkdownStyleSheetReport.swift */; };
@@ -103,9 +106,12 @@
 		DC4ADE3E1F9B6067007C36C1 /* ChuteCommandLineParametersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteCommandLineParametersTests.swift; sourceTree = "<group>"; };
 		DC777CAF1F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteHTMLDifferenceMainReport.swift; sourceTree = "<group>"; };
 		DC8019CF1F9ABB600013CD20 /* ChuteOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteOutput.swift; sourceTree = "<group>"; };
+		DC86EF7D1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteCodeCoverageDifference.swift; sourceTree = "<group>"; };
+		DC86EF7F1FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteCodeCoverageSummary.swift; sourceTree = "<group>"; };
 		DCACC6BD1FA6483600697691 /* ChuteTestResultDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteTestResultDifference.swift; sourceTree = "<group>"; };
 		DCACC6BF1FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteHTMLDifferenceTestDetailReport.swift; sourceTree = "<group>"; };
 		DCBB92A81F9EC19E00EE1C68 /* ChuteDetailDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteDetailDifference.swift; sourceTree = "<group>"; };
+		DCBB99BF1FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteHTMLCodeCoverageDifferenceReport.swift; sourceTree = "<group>"; };
 		DCDC1B391F9D06FF0068170F /* ChuteOutputFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteOutputFolder.swift; sourceTree = "<group>"; };
 		DCDC1B3B1F9D3ADB0068170F /* ChuteMarkdownCodeCoverageReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteMarkdownCodeCoverageReport.swift; sourceTree = "<group>"; };
 		DCDC1B3D1F9D3BBC0068170F /* ChuteMarkdownStyleSheetReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteMarkdownStyleSheetReport.swift; sourceTree = "<group>"; };
@@ -278,6 +284,7 @@
 				DC42CF2F1F92A25D00279110 /* ChuteTestResult.swift */,
 				DC42CF311F92A27B00279110 /* ChuteTestAttachment.swift */,
 				DC42CF331F92A29C00279110 /* ChuteCodeCoverage.swift */,
+				DC86EF7F1FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift */,
 				DC42CF351F92A43700279110 /* ChuteStyleSheet.swift */,
 			);
 			path = ChuteDetail;
@@ -288,6 +295,7 @@
 			children = (
 				DC777CAF1F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift */,
 				DCACC6BF1FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift */,
+				DCBB99BF1FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift */,
 			);
 			path = Difference;
 			sourceTree = "<group>";
@@ -297,6 +305,7 @@
 			children = (
 				DCBB92A81F9EC19E00EE1C68 /* ChuteDetailDifference.swift */,
 				DCACC6BD1FA6483600697691 /* ChuteTestResultDifference.swift */,
+				DC86EF7D1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift */,
 			);
 			path = ChuteDetailDifference;
 			sourceTree = "<group>";
@@ -426,7 +435,9 @@
 				DC4ADE201F9AD0E8007C36C1 /* ChuteHTMLTestDetailReport.swift in Sources */,
 				DCDC1B3C1F9D3ADB0068170F /* ChuteMarkdownCodeCoverageReport.swift in Sources */,
 				DCACC6C01FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift in Sources */,
+				DC86EF801FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift in Sources */,
 				DC4ADE221F9AD80B007C36C1 /* ChuteHTMLCodeCoverageReport.swift in Sources */,
+				DC86EF7E1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift in Sources */,
 				DC46C48A1F9AA34A008B17CD /* Render.swift in Sources */,
 				DC4ADE181F9AC314007C36C1 /* ChuteMarkdownTestDetailReport.swift in Sources */,
 				DC42CF321F92A27B00279110 /* ChuteTestAttachment.swift in Sources */,
@@ -439,6 +450,7 @@
 				DC4ADE241F9ADA90007C36C1 /* ChuteHTMLStyleSheetReport.swift in Sources */,
 				DC777CB01F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift in Sources */,
 				DCDC1B3E1F9D3BBC0068170F /* ChuteMarkdownStyleSheetReport.swift in Sources */,
+				DCBB99C01FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift in Sources */,
 				DC26B5A81F998044002541C6 /* ChuteMarkdownMainReport.swift in Sources */,
 				DC8019D01F9ABB600013CD20 /* ChuteOutput.swift in Sources */,
 				DCDC1B3A1F9D06FF0068170F /* ChuteOutputFolder.swift in Sources */,

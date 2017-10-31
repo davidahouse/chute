@@ -50,7 +50,8 @@ class ChuteOutput {
 
         let reports: [String: ChuteOutputDifferenceRenderable] = [
             "chute_difference.html": ChuteHTMLDifferenceMainReport(),
-            "test_details_difference.html": ChuteHTMLDifferenceTestDetailReport()
+            "test_details_difference.html": ChuteHTMLDifferenceTestDetailReport(),
+            "code_coverage_difference.html": ChuteHTMLCodeCoverageDifferenceReport()
         ]
         render(reports, with: difference)
     }
