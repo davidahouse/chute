@@ -80,7 +80,19 @@ class ChuteHTMLDifferenceMainReport: ChuteOutputDifferenceRenderable {
         <div class="jumbotron">
         <h3>Style Sheet</h3>
         <div>
-        <a href="style_sheet.html">Style Sheet Details</a>
+        <div class="table-responsive">
+        <table class="table table-striped">
+        <tbody>
+        <tr>
+        <td class="info">Colors Added: {{new_colors}}</td>
+        <td class="info">Colors Removed: {{removed_colors}}</td>
+        <td class="info">Fonts Added: {{new_fonts}}</td>
+        <td class="info">Fonts Removed: {{removed_fonts}}</td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        <a href="style_sheet_difference.html">Style Sheet Details</a>
         </div>
         </div>
         """
@@ -177,7 +189,12 @@ class ChuteHTMLDifferenceMainReport: ChuteOutputDifferenceRenderable {
 
     private func reportStyleSheet(difference: ChuteDetailDifference) -> String {
 
-        let parameters: [String: CustomStringConvertible] = [:]
+        let parameters: [String: CustomStringConvertible] = [
+            "new_colors": difference.styleSheetDifference.newColors.count,
+            "removed_colors": difference.styleSheetDifference.removedColors.count,
+            "new_fonts": difference.styleSheetDifference.newFonts.count,
+            "removed_fonts": difference.styleSheetDifference.removedFonts.count
+        ]
         return Constants.StyleSheetTemplate.render(parameters: parameters)
     }
 }

@@ -18,6 +18,7 @@ struct ChuteDetailDifference {
 
     let testResultDifference: ChuteTestResultDifference
     let codeCoverageDifference: ChuteCodeCoverageDifference
+    let styleSheetDifference: ChuteStyleSheetDifference
 
     init(detail: ChuteDetail, comparedTo: ChuteDetail, detailAttachmentURL: URL, comparedToAttachmentURL: URL) {
 
@@ -29,5 +30,6 @@ struct ChuteDetailDifference {
 
         testResultDifference = ChuteTestResultDifference(detail: detail, comparedTo: comparedTo, detailAttachmentURL: detailAttachmentURL, comparedToAttachmentURL: comparedToAttachmentURL)
         codeCoverageDifference = ChuteCodeCoverageDifference(detail: detail, comparedTo: comparedTo)
+        styleSheetDifference = ChuteStyleSheetDifference(detail: detail, comparedTo: comparedTo)
     }
 }

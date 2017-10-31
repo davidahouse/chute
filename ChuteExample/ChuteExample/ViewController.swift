@@ -50,7 +50,9 @@ class ViewController: UIViewController {
 
             } else if details.count == 1 {
                 detailLabel.text = details[0]
-                detailLabel.textColor = UIColor.red
+                // Changing this color to green so we can detect a new color in our difference report.
+//                detailLabel.textColor = UIColor.red
+                detailLabel.textColor = UIColor.green
                 subDetailLabel.text = ""
                 moreDetailLabel.text = ""
             }

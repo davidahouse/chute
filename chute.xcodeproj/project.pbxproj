@@ -56,6 +56,8 @@
 		DCACC6C01FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACC6BF1FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift */; };
 		DCBB92A91F9EC19E00EE1C68 /* ChuteDetailDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB92A81F9EC19E00EE1C68 /* ChuteDetailDifference.swift */; };
 		DCBB99C01FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB99BF1FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift */; };
+		DCBB99C21FA8BA02007198BB /* ChuteStyleSheetDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB99C11FA8BA02007198BB /* ChuteStyleSheetDifference.swift */; };
+		DCBB99C41FA901D5007198BB /* ChuteHTMLStyleSheetDifferenceReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB99C31FA901D5007198BB /* ChuteHTMLStyleSheetDifferenceReport.swift */; };
 		DCDC1B3A1F9D06FF0068170F /* ChuteOutputFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC1B391F9D06FF0068170F /* ChuteOutputFolder.swift */; };
 		DCDC1B3C1F9D3ADB0068170F /* ChuteMarkdownCodeCoverageReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC1B3B1F9D3ADB0068170F /* ChuteMarkdownCodeCoverageReport.swift */; };
 		DCDC1B3E1F9D3BBC0068170F /* ChuteMarkdownStyleSheetReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC1B3D1F9D3BBC0068170F /* ChuteMarkdownStyleSheetReport.swift */; };
@@ -112,6 +114,8 @@
 		DCACC6BF1FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteHTMLDifferenceTestDetailReport.swift; sourceTree = "<group>"; };
 		DCBB92A81F9EC19E00EE1C68 /* ChuteDetailDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteDetailDifference.swift; sourceTree = "<group>"; };
 		DCBB99BF1FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteHTMLCodeCoverageDifferenceReport.swift; sourceTree = "<group>"; };
+		DCBB99C11FA8BA02007198BB /* ChuteStyleSheetDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteStyleSheetDifference.swift; sourceTree = "<group>"; };
+		DCBB99C31FA901D5007198BB /* ChuteHTMLStyleSheetDifferenceReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteHTMLStyleSheetDifferenceReport.swift; sourceTree = "<group>"; };
 		DCDC1B391F9D06FF0068170F /* ChuteOutputFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteOutputFolder.swift; sourceTree = "<group>"; };
 		DCDC1B3B1F9D3ADB0068170F /* ChuteMarkdownCodeCoverageReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteMarkdownCodeCoverageReport.swift; sourceTree = "<group>"; };
 		DCDC1B3D1F9D3BBC0068170F /* ChuteMarkdownStyleSheetReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteMarkdownStyleSheetReport.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 				DC777CAF1F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift */,
 				DCACC6BF1FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift */,
 				DCBB99BF1FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift */,
+				DCBB99C31FA901D5007198BB /* ChuteHTMLStyleSheetDifferenceReport.swift */,
 			);
 			path = Difference;
 			sourceTree = "<group>";
@@ -306,6 +311,7 @@
 				DCBB92A81F9EC19E00EE1C68 /* ChuteDetailDifference.swift */,
 				DCACC6BD1FA6483600697691 /* ChuteTestResultDifference.swift */,
 				DC86EF7D1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift */,
+				DCBB99C11FA8BA02007198BB /* ChuteStyleSheetDifference.swift */,
 			);
 			path = ChuteDetailDifference;
 			sourceTree = "<group>";
@@ -434,6 +440,7 @@
 				DC42CF301F92A25D00279110 /* ChuteTestResult.swift in Sources */,
 				DC4ADE201F9AD0E8007C36C1 /* ChuteHTMLTestDetailReport.swift in Sources */,
 				DCDC1B3C1F9D3ADB0068170F /* ChuteMarkdownCodeCoverageReport.swift in Sources */,
+				DCBB99C21FA8BA02007198BB /* ChuteStyleSheetDifference.swift in Sources */,
 				DCACC6C01FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift in Sources */,
 				DC86EF801FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift in Sources */,
 				DC4ADE221F9AD80B007C36C1 /* ChuteHTMLCodeCoverageReport.swift in Sources */,
@@ -450,6 +457,7 @@
 				DC4ADE241F9ADA90007C36C1 /* ChuteHTMLStyleSheetReport.swift in Sources */,
 				DC777CB01F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift in Sources */,
 				DCDC1B3E1F9D3BBC0068170F /* ChuteMarkdownStyleSheetReport.swift in Sources */,
+				DCBB99C41FA901D5007198BB /* ChuteHTMLStyleSheetDifferenceReport.swift in Sources */,
 				DCBB99C01FA89D15007198BB /* ChuteHTMLCodeCoverageDifferenceReport.swift in Sources */,
 				DC26B5A81F998044002541C6 /* ChuteMarkdownMainReport.swift in Sources */,
 				DC8019D01F9ABB600013CD20 /* ChuteOutput.swift in Sources */,
