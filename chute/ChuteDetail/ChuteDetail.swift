@@ -16,6 +16,7 @@ struct ChuteDetail: Encodable {
     let pullRequestNumber: String?
     let testResults: [ChuteTestResult]
     let codeCoverage: [ChuteCodeCoverage]
+    let codeCoverageSummary: ChuteCodeCoverageSummary
     let attachments: [ChuteTestAttachment]
     let styleSheets: [ChuteStyleSheet]
 }

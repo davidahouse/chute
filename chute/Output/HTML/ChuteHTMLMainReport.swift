@@ -141,15 +141,10 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
     private func reportCodeCoverage(detail: ChuteDetail) -> String {
 
         if detail.codeCoverage.count > 0 {
-            let coverage = detail.codeCoverage.map { $0.coverage }
-            let average = Double(coverage.reduce(0, +))/Double(coverage.count)
-            let totalAbove90 = detail.codeCoverage.filter { $0.coverage >= 0.90 }.count
-            let totalAt0 = detail.codeCoverage.filter { $0.coverage == 0.0 }.count
-
             let parameters: [String: CustomStringConvertible] = [
-                "average_coverage": Int(round(average * 100)),
-                "total_above_90": totalAbove90,
-                "total_no_coverage": totalAt0
+                "average_coverage": Int(round(detail.codeCoverageSummary.averageCoverage * 100)),
+                "total_above_90": detail.codeCoverageSummary.filesAdequatelyCovered,
+                "total_no_coverage": detail.codeCoverageSummary.filesWithNoCoverage
             ]
             return Constants.CodeCoverageTemplate.render(parameters: parameters)
         } else {

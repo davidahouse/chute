@@ -50,7 +50,9 @@ class ViewController: UIViewController {
 
             } else if details.count == 1 {
                 detailLabel.text = details[0]
-                detailLabel.textColor = UIColor.red
+                // Changing this color to green so we can detect a new color in our difference report.
+//                detailLabel.textColor = UIColor.red
+                detailLabel.textColor = UIColor.green
                 subDetailLabel.text = ""
                 moreDetailLabel.text = ""
             }
@@ -59,5 +61,11 @@ class ViewController: UIViewController {
             subDetailLabel.text = ""
             moreDetailLabel.text = ""
         }
+    }
+
+    // This method just gives us a path that will not be executed so we can report
+    // on code coverage differences.
+    func untestedMethod() {
+        self.view.backgroundColor = .black
     }
 }

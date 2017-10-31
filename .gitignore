@@ -9,6 +9,7 @@ DerivedData/
 fastlane/xcov_report
 fastlane/.env
 ChuteExample/chute_output
+ChuteExample/chute_output_saved
 ChuteExample/xcov_report
 *.profraw
 
