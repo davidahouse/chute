@@ -32,9 +32,9 @@ Saving the chute reports and comparing them later is a perfect addition to your 
 
 Clone this repository and compile `chute`. Place the resulting binary in `/usr/local/bin`. In the future we will add a `brew` formula to make this step easier.
 
-Execute your test suite and in the same folder as the Xcode project, execute the basic chute command: `chute --project <project>`. You will find the report outputs in a folder named `chute_output`. `chute.html` contains the summary of the test execution and links to the more detailed reports captured.
+Execute your test suite and in the same folder as the Xcode project, execute the basic chute command: `chute -project <project>`. You will find the report outputs in a folder named `chute_output`. `chute.html` contains the summary of the test execution and links to the more detailed reports captured.
 
-Note that currently `chute` needs the result of `xcov` to capture the code coverage report for your tests. Just execute the following command to create the json output needed before running the above `chute` command: `xcov --project <project> --scheme <scheme> --json_report`.
+Note that currently `chute` needs the result of `xcov` to capture the code coverage report for your tests. Just execute the following command to create the json output needed before running the above `chute` command: `xcov -project <project> -scheme <scheme> --json_report`.
 
 # Creating a difference report
 
