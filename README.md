@@ -2,7 +2,7 @@
 
 Unit test visualization in Xcode is functional, but can be improved. Chute was created to augment this functionality in the following ways:
 
-- HTML & Markdown report of test status and code coverage details
+- HTML report of test status and code coverage details
 - Inline visualization of test attachments (screen shots, strings, etc)
 - Comparison between test execution runs (particularly for comparing pull request changes)
 - Capture and visualization of colors and fonts used in the application
@@ -18,7 +18,7 @@ Chute is designed to run after you have executed your test suite in `Xcode` or `
 - Attachments (XCTAttachment ftw!)
 - Style sheet
 
-Chute reports are available in HTML and Markdown, and can also be saved for later review or for use in comparing test executions. Chute captures Attachments and presents them alongside the test status, making review of captured screenshots easy and quick. Other attachments can also be reviewed inline including strings and other custom data.
+Chute reports are available in HTML, and can also be saved for later review or for use in comparing test executions. Chute captures Attachments and presents them alongside the test status, making review of captured screenshots easy and quick. Other attachments can also be reviewed inline including strings and other custom data.
 
 Chute also generates a style sheet from the captured views (using a XCTestCase extension you need to use in your tests) and will give you a list of all the colors & fonts that your application is using. This data is also available for comparison.
 
@@ -49,13 +49,14 @@ Use `chuteCaptureViewController(viewController:title:)` to capture the screensho
 # Roadmap
 
 - [X] Basic chute implementation that generates HTML reports
-- [ ] Finish markdown report output
-- [ ] Implement saving of chute data capture for use in compares
-- [ ] Implement comparison between saved capture and current capture
-- [ ] Allow chute to update Pull Request with capture summary & link for full reports
-- [ ] Brew formula to make install easier
+- [X] Implement saving of chute data capture for use in compares
+- [X] Implement comparison between saved capture and current capture
 - [ ] Fastlane action for executing chute easier
 - [ ] Danger.systems plugin for updating Pull Request with summary
+- [ ] Allow chute to update Pull Request with capture summary & link for full reports
+- [ ] Automate or remove `xcov` dependency for code coverage stats
+- [ ] Brew formula to make install easier
+- [ ] New report types
 
 ## License
 
