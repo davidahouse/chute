@@ -11,9 +11,13 @@
 //  chute
 //      -project                The Xcode project to use when creating the Chute report
 //      -branch                 The branch that resprents the captured test results
-//      -pullRequestNumber      The pull request number (optional)
 //      -compareFolder          The folder to compare the results with
 //      -saveFolder             The folder to save the test input data into
+
+//      To post a summary and optional link to full report in a github pull request, the following are needed:
+//      -githubRepository       The repository to use when posting a comment to github (format of <owner>/<repo>)
+//      -githubToken            The token to use for posting a comment to github
+//      -pullRequestNumber      The pull request number (optional)
 
 import Foundation
 
@@ -21,12 +25,19 @@ struct ChuteCommandLineParameters {
 
     let project: String?
     let branch: String?
-    let pullRequestNumber: String?
     let compareFolder: String?
     let saveFolder: String?
 
+    let githubRepository: String?
+    let githubToken: String?
+    let pullRequestNumber: String?
+
     var hasRequiredParameters: Bool {
         return project != nil
+    }
+
+    var hasParametersForGithubNotification: Bool {
+        return githubRepository != nil && githubToken != nil && pullRequestNumber != nil
     }
 
     init(arguments: [String] = CommandLine.arguments) {
@@ -42,12 +53,22 @@ struct ChuteCommandLineParameters {
 
         project = foundArguments["project"]
         branch = foundArguments["branch"]
-        pullRequestNumber = foundArguments["pullRequestNumber"]
         compareFolder = foundArguments["compareFolder"]
         saveFolder = foundArguments["saveFolder"]
+
+        githubRepository = foundArguments["githubRepository"]
+        githubToken = foundArguments["githubToken"]
+        pullRequestNumber = foundArguments["pullRequestNumber"]
     }
 
     func printInstructions() {
-        print("Usage: chute -project <project> [-branch <branch>] [-pullRequestNumber <pullRequestNumber> [-compareFolder <compareFolder>] [-saveFolder <saveFolder>]")
+        var instructions = "Usage: chute -project <project>"
+        instructions += " [-branch <branch>]"
+        instructions += " [-compareFolder <compareFolder>]"
+        instructions += " [-saveFolder <saveFolder>]"
+        instructions += " [-githubRepository <githubRepository>]"
+        instructions += " [-githubToken <githubToken>]"
+        instructions += " [-pullRequestNumber <pullRequestNumber>]"
+        print(instructions)
     }
 }

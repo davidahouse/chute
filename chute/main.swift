@@ -123,6 +123,25 @@ if let compareFolder = arguments.compareFolder {
 
     let compareDetails = ChuteDetailDifference(detail: beforeTestDetail, comparedTo: chuteTestDetail, detailAttachmentURL: beforeAttachmentsURL, comparedToAttachmentURL: rootAttachmentPath)
     output.renderHTMLDifferenceOutput(difference: compareDetails)
+
+    print("---")
+    print("--- Generating notifications")
+    print("---")
+
+    if arguments.hasParametersForGithubNotification {
+        let notifier = GithubNotifier()
+        notifier.notify(difference: compareDetails, using: arguments)
+    }
+} else {
+
+    print("---")
+    print("--- Generating notifications")
+    print("---")
+
+    if arguments.hasParametersForGithubNotification {
+        let notifier = GithubNotifier()
+        notifier.notify(detail: chuteTestDetail, using: arguments)
+    }
 }
 
 // If save set, save the gathered data
