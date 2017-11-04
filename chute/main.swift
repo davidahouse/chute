@@ -132,6 +132,11 @@ if let compareFolder = arguments.compareFolder {
         let notifier = GithubNotifier()
         notifier.notify(difference: compareDetails, using: arguments)
     }
+
+    if arguments.hasParametersForSlackNotification {
+        let notifier = SlackNotifier()
+        notifier.notify(difference: compareDetails, using: arguments)
+    }
 } else {
 
     print("---")
@@ -140,6 +145,11 @@ if let compareFolder = arguments.compareFolder {
 
     if arguments.hasParametersForGithubNotification {
         let notifier = GithubNotifier()
+        notifier.notify(detail: chuteTestDetail, using: arguments)
+    }
+
+    if arguments.hasParametersForSlackNotification {
+        let notifier = SlackNotifier()
         notifier.notify(detail: chuteTestDetail, using: arguments)
     }
 }

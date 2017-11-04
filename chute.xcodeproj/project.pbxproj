@@ -48,6 +48,9 @@
 		DC777CB01F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC777CAF1F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift */; };
 		DC8019D01F9ABB600013CD20 /* ChuteOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8019CF1F9ABB600013CD20 /* ChuteOutput.swift */; };
 		DC83CD741FAD4E870026092B /* GithubDetailComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CD731FAD4E870026092B /* GithubDetailComment.swift */; };
+		DC83CD761FAD52C20026092B /* SlackNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CD751FAD52C20026092B /* SlackNotifier.swift */; };
+		DC83CD781FAD56CC0026092B /* SlackDetailMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CD771FAD56CC0026092B /* SlackDetailMessage.swift */; };
+		DC83CD7A1FADF4A50026092B /* SlackDetailDifferenceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CD791FADF4A50026092B /* SlackDetailDifferenceMessage.swift */; };
 		DC86EF7E1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86EF7D1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift */; };
 		DC86EF801FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86EF7F1FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift */; };
 		DC8BA6431FAA04BF00031B89 /* GithubDetailDifferenceComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BA6421FAA04BF00031B89 /* GithubDetailDifferenceComment.swift */; };
@@ -103,6 +106,9 @@
 		DC777CAF1F9ED6830015FF62 /* ChuteHTMLDifferenceMainReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteHTMLDifferenceMainReport.swift; sourceTree = "<group>"; };
 		DC8019CF1F9ABB600013CD20 /* ChuteOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteOutput.swift; sourceTree = "<group>"; };
 		DC83CD731FAD4E870026092B /* GithubDetailComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDetailComment.swift; sourceTree = "<group>"; };
+		DC83CD751FAD52C20026092B /* SlackNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackNotifier.swift; sourceTree = "<group>"; };
+		DC83CD771FAD56CC0026092B /* SlackDetailMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackDetailMessage.swift; sourceTree = "<group>"; };
+		DC83CD791FADF4A50026092B /* SlackDetailDifferenceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackDetailDifferenceMessage.swift; sourceTree = "<group>"; };
 		DC86EF7D1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteCodeCoverageDifference.swift; sourceTree = "<group>"; };
 		DC86EF7F1FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteCodeCoverageSummary.swift; sourceTree = "<group>"; };
 		DC8BA6421FAA04BF00031B89 /* GithubDetailDifferenceComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDetailDifferenceComment.swift; sourceTree = "<group>"; };
@@ -189,6 +195,9 @@
 				DC3062951FA9EFD6002332F6 /* GithubNotifier.swift */,
 				DC8BA6421FAA04BF00031B89 /* GithubDetailDifferenceComment.swift */,
 				DC83CD731FAD4E870026092B /* GithubDetailComment.swift */,
+				DC83CD751FAD52C20026092B /* SlackNotifier.swift */,
+				DC83CD771FAD56CC0026092B /* SlackDetailMessage.swift */,
+				DC83CD791FADF4A50026092B /* SlackDetailDifferenceMessage.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -430,6 +439,7 @@
 				DC0E13A21F5CE89300525E5B /* InfoPlist.swift in Sources */,
 				DC0E13991F5CE25E00525E5B /* main.swift in Sources */,
 				DC42CF361F92A43700279110 /* ChuteStyleSheet.swift in Sources */,
+				DC83CD781FAD56CC0026092B /* SlackDetailMessage.swift in Sources */,
 				DCF555311F6610DB001567A5 /* ChuteCommandLineParameters.swift in Sources */,
 				DC42CF301F92A25D00279110 /* ChuteTestResult.swift in Sources */,
 				DC4ADE201F9AD0E8007C36C1 /* ChuteHTMLTestDetailReport.swift in Sources */,
@@ -437,9 +447,11 @@
 				DCACC6C01FA64CB400697691 /* ChuteHTMLDifferenceTestDetailReport.swift in Sources */,
 				DC86EF801FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift in Sources */,
 				DC4ADE221F9AD80B007C36C1 /* ChuteHTMLCodeCoverageReport.swift in Sources */,
+				DC83CD7A1FADF4A50026092B /* SlackDetailDifferenceMessage.swift in Sources */,
 				DC86EF7E1FA678D500F9DB5A /* ChuteCodeCoverageDifference.swift in Sources */,
 				DC46C48A1F9AA34A008B17CD /* Render.swift in Sources */,
 				DC42CF321F92A27B00279110 /* ChuteTestAttachment.swift in Sources */,
+				DC83CD761FAD52C20026092B /* SlackNotifier.swift in Sources */,
 				DC42CF341F92A29C00279110 /* ChuteCodeCoverage.swift in Sources */,
 				DCACC6BE1FA6483600697691 /* ChuteTestResultDifference.swift in Sources */,
 				DC42CF2E1F926E3A00279110 /* URL+Extensions.swift in Sources */,

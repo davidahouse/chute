@@ -32,12 +32,18 @@ struct ChuteCommandLineParameters {
     let githubToken: String?
     let pullRequestNumber: String?
 
+    let slackWebhook: String?
+
     var hasRequiredParameters: Bool {
         return project != nil
     }
 
     var hasParametersForGithubNotification: Bool {
         return githubRepository != nil && githubToken != nil && pullRequestNumber != nil
+    }
+
+    var hasParametersForSlackNotification: Bool {
+        return slackWebhook != nil
     }
 
     init(arguments: [String] = CommandLine.arguments) {
@@ -59,6 +65,8 @@ struct ChuteCommandLineParameters {
         githubRepository = foundArguments["githubRepository"]
         githubToken = foundArguments["githubToken"]
         pullRequestNumber = foundArguments["pullRequestNumber"]
+
+        slackWebhook = foundArguments["slackWebhook"]
     }
 
     func printInstructions() {
@@ -69,6 +77,7 @@ struct ChuteCommandLineParameters {
         instructions += " [-githubRepository <githubRepository>]"
         instructions += " [-githubToken <githubToken>]"
         instructions += " [-pullRequestNumber <pullRequestNumber>]"
+        instructions += " [-slackWebhook <slackWebhook>]"
         print(instructions)
     }
 }
