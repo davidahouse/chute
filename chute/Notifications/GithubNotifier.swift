@@ -11,12 +11,20 @@ import Foundation
 class GithubNotifier {
 
     func notify(detail: ChuteDetail, using arguments: ChuteCommandLineParameters) {
-        send(comment: "# Chute Details", to: arguments.githubRepository!, for: arguments.pullRequestNumber!, using: arguments.githubToken!)
+
+        if let repository = arguments.githubRepository, let pullRequestNumber = arguments.pullRequestNumber, let token = arguments.githubToken {
+            let comment = GithubDetailComment(detail: detail)
+            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
+        }
     }
 
     func notify(difference: ChuteDetailDifference, using arguments: ChuteCommandLineParameters) {
-        let comment = GithubDetailDifferenceComment(difference: difference)
-        send(comment: comment.comment, to: arguments.githubRepository!, for: arguments.pullRequestNumber!, using: arguments.githubToken!)
+
+        if let repository = arguments.githubRepository, let pullRequestNumber = arguments.pullRequestNumber, let token = arguments.githubToken {
+
+            let comment = GithubDetailDifferenceComment(difference: difference)
+            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
+        }
     }
 
     private func send(comment: String, to repository: String, for pullRequest: String, using token: String) {
