@@ -26,7 +26,6 @@ struct ChuteCommandLineParameters {
     let project: String?
     let branch: String?
     let compareFolder: String?
-    let saveFolder: String?
 
     let githubRepository: String?
     let githubToken: String?
@@ -58,22 +57,20 @@ struct ChuteCommandLineParameters {
         }
 
         project = foundArguments["project"]
-        branch = foundArguments["branch"]
-        compareFolder = foundArguments["compareFolder"]
-        saveFolder = foundArguments["saveFolder"]
+        branch = foundArguments["branch"] != nil ? foundArguments["branch"] : ProcessInfo.processInfo.environment["CHUTE_BRANCH"]
+        compareFolder = foundArguments["compareFolder"] != nil ? foundArguments["compareFolder"] : ProcessInfo.processInfo.environment["CHUTE_COMPARE_FOLDER"]
 
-        githubRepository = foundArguments["githubRepository"]
-        githubToken = foundArguments["githubToken"]
-        pullRequestNumber = foundArguments["pullRequestNumber"]
+        githubRepository = foundArguments["githubRepository"] != nil ? foundArguments["githubRepository"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_REPOSITORY"]
+        githubToken = foundArguments["githubToken"] != nil ? foundArguments["githubToken"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_TOKEN"]
+        pullRequestNumber = foundArguments["pullRequestNumber"] != nil ? foundArguments["pullRequestNumber"] : ProcessInfo.processInfo.environment["CHUTE_PULL_REQUEST_NUMBER"]
 
-        slackWebhook = foundArguments["slackWebhook"]
+        slackWebhook = foundArguments["slackWebhook"] != nil ? foundArguments["slackWebhook"] : ProcessInfo.processInfo.environment["CHUTE_SLACK_WEBHOOK"]
     }
 
     func printInstructions() {
         var instructions = "Usage: chute -project <project>"
         instructions += " [-branch <branch>]"
         instructions += " [-compareFolder <compareFolder>]"
-        instructions += " [-saveFolder <saveFolder>]"
         instructions += " [-githubRepository <githubRepository>]"
         instructions += " [-githubToken <githubToken>]"
         instructions += " [-pullRequestNumber <pullRequestNumber>]"
