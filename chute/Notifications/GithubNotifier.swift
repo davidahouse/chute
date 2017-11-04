@@ -54,7 +54,6 @@ class GithubNotifier {
         let semaphore = DispatchSemaphore(value: 0)
         let dataTask = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: request) { (data, _, error) in
 
-            print("data task completed!")
             if let error = error {
                 print("--- Error posting comment to github: \(error.localizedDescription)")
             }
