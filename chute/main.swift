@@ -42,6 +42,7 @@ guard let testExecution = DerivedData.recentTestSummary(projectFolder: projectFo
     exit(1)
 }
 print("--- TestSummary Folder: \(testExecution.folderURL)")
+print("--- TestSummary Plist: \(testExecution.summaryFileURL)")
 
 print("---")
 print("--- Gathering test data")
@@ -53,7 +54,7 @@ let rootAttachmentPath = testExecution.folderURL.deletingLastPathComponent().app
 let testResults = ChuteTestResult.findResults(testSummary: testExecution.summary)
 let attachments = ChuteTestAttachment.findAttachments(testSummary: testExecution.summary)
 let styleSheets = ChuteStyleSheet.findStyleSheets(testSummary: testExecution.summary, rootPath: rootAttachmentPath)
-let codeCoverage = ChuteCodeCoverage.findCodeCoverage(path: ChuteCodeCoverage.codeCoverageURL)
+let codeCoverage = ChuteCodeCoverage.findCodeCoverage(testSummaryURL: testExecution.summaryFileURL)
 
 let chuteTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch,
                                   pullRequestNumber: arguments.pullRequestNumber, testResults: testResults,
@@ -70,7 +71,7 @@ let outputFolder = ChuteOutputFolder()
 outputFolder.empty()
 outputFolder.saveAttachments(rootPath: rootAttachmentPath, attachments: attachments)
 outputFolder.saveSourceFile(from: testExecution.summaryFileURL, to: "TestSummaries.plist")
-outputFolder.saveSourceFile(from: ChuteCodeCoverage.codeCoverageURL, to: "report.json")
+outputFolder.saveSourceFile(from: ChuteCodeCoverage.codeCoverageURL(testSummaryURL: testExecution.summaryFileURL), to: "codeCoverage.xccoverage")
 if let styleSheetData = ChuteStyleSheet.encodedStyleSheets(from: styleSheets) {
     outputFolder.saveSourceFile(fileName: "stylesheets.data", data: styleSheetData)
 }
@@ -105,7 +106,7 @@ if let compareFolder = arguments.compareFolder {
     let beforeTestResults = ChuteTestResult.findResults(testSummary: beforeTestSummary)
     let beforeAttachments = ChuteTestAttachment.findAttachments(testSummary: beforeTestSummary)
     let beforeStyleSheets = ChuteStyleSheet.decodedStyleSheets(path: URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "stylesheets.data"]))
-    let beforeCodeCoverage = ChuteCodeCoverage.findCodeCoverage(path: URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "report.json"]))
+    let beforeCodeCoverage = ChuteCodeCoverage.findCodeCoverage(testSummaryURL: URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "codeCoverage.xccoverage"]))
 
     let beforeTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch,
                                        pullRequestNumber: arguments.pullRequestNumber, testResults: beforeTestResults,
