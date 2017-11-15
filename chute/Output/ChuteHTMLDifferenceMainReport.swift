@@ -14,6 +14,7 @@ class ChuteHTMLDifferenceMainReport: ChuteOutputDifferenceRenderable {
         static let Template = """
         {{header}}
         {{test_summary}}
+        {{view}}
         {{code_coverage}}
         {{style_sheet}}
         """
@@ -45,6 +46,25 @@ class ChuteHTMLDifferenceMainReport: ChuteOutputDifferenceRenderable {
         </div>
         <div>
         <a href="test_details_difference.html">Test Difference Details</a>
+        </div>
+        </div>
+        """
+        
+        static let ViewSummaryTemplate = """
+        <div class="jumbotron">
+        <h3>Views</h3>
+        <div class="table-responsive">
+        <table class="table table-striped">
+        <tbody>
+        <tr>
+        <td class="info">New Views: {{new_views}}</td>
+        <td class="info">Changed Views: {{changed_views}}</td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        <div>
+        <a href="view_difference.html">View Details</a>
         </div>
         </div>
         """
@@ -112,6 +132,7 @@ class ChuteHTMLDifferenceMainReport: ChuteOutputDifferenceRenderable {
         let parameters: [String: CustomStringConvertible] = [
             "header": reportHeader(difference: difference),
             "test_summary": reportTestSummary(difference: difference),
+            "view": reportViewSummary(difference: difference),
             "code_coverage": reportCodeCoverage(difference: difference),
             "style_sheet": reportStyleSheet(difference: difference)
         ]
@@ -138,6 +159,15 @@ class ChuteHTMLDifferenceMainReport: ChuteOutputDifferenceRenderable {
         return Constants.TestSummaryTemplate.render(parameters: parameters)
     }
 
+    private func reportViewSummary(difference: ChuteDetailDifference) -> String {
+        
+        let parameters: [String: CustomStringConvertible] = [
+            "new_views": difference.viewDifference.newViews.count,
+            "changed_views": difference.viewDifference.changedViews.count
+        ]
+        return Constants.ViewSummaryTemplate.render(parameters: parameters)
+    }
+    
     private func reportCodeCoverage(difference: ChuteDetailDifference) -> String {
 
         if difference.comparedTo.codeCoverage.count > 0 {

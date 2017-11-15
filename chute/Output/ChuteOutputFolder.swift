@@ -73,6 +73,24 @@ class ChuteOutputFolder {
             }
         }
     }
+    
+    func saveChangedAttachments(rootPath: URL, attachments: [ChuteTestAttachment]) {
+        
+        for attachment in attachments {
+            
+            let filePath = rootPath.appendingPathComponent(attachment.attachmentFileName)
+            guard let imageData = try? Data(contentsOf: filePath) else {
+                preconditionFailure("Unable to load image data from \(filePath)")
+            }
+            
+            let outputPath = attachmentFolderURL.appendingPathComponent("before_" + attachment.attachmentFileName)
+            do {
+                try imageData.write(to: outputPath)
+            } catch {
+                print("error writing attachment: \(error)")
+            }
+        }
+    }
 
     func saveSourceFile(from: URL, to fileName: String) {
 
