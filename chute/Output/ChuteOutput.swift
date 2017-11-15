@@ -30,7 +30,8 @@ class ChuteOutput {
             "chute.html": ChuteHTMLMainReport(),
             "test_details.html": ChuteHTMLTestDetailReport(),
             "code_coverage.html": ChuteHTMLCodeCoverageReport(),
-            "style_sheet.html": ChuteHTMLStyleSheetReport()
+            "style_sheet.html": ChuteHTMLStyleSheetReport(),
+            "screenshots.html": ChuteScreenshotReport()
         ]
         render(reports, with: detail)
     }
@@ -41,7 +42,8 @@ class ChuteOutput {
             "chute_difference.html": ChuteHTMLDifferenceMainReport(),
             "test_details_difference.html": ChuteHTMLDifferenceTestDetailReport(),
             "code_coverage_difference.html": ChuteHTMLCodeCoverageDifferenceReport(),
-            "style_sheet_difference.html": ChuteHTMLStyleSheetDifferenceReport()
+            "style_sheet_difference.html": ChuteHTMLStyleSheetDifferenceReport(),
+            "view_difference.html": ChuteViewDifferenceReport()
         ]
         render(reports, with: difference)
     }

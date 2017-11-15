@@ -14,6 +14,7 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
         static let Template = """
         {{header}}
         {{test_summary}}
+        {{screenshots}}
         {{code_coverage}}
         {{style_sheet}}
         """
@@ -49,6 +50,24 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
         </div>
         """
 
+        static let ScreenShotTemplate = """
+        <div class="jumbotron">
+        <h3>Screenshots</h3>
+        <div class="table-responsive">
+        <table class="table table-striped">
+        <tbody>
+        <tr>
+        <td class="info">Total Screenshots: {{total_screenshots}}</td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        <div>
+        <a href="screenshots.html">Screenshot Details</a>
+        </div>
+        </div>
+        """
+        
         static let CodeCoverageTemplate = """
         <div class="jumbotron">
         <h3>Code Coverage</h3>
@@ -100,6 +119,7 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
         let parameters: [String: CustomStringConvertible] = [
             "header": reportHeader(detail: detail),
             "test_summary": reportTestSummary(detail: detail),
+            "screenshots": reportScreenshots(detail: detail),
             "code_coverage": reportCodeCoverage(detail: detail),
             "style_sheet": reportStyleSheet(detail: detail)
         ]
@@ -136,6 +156,14 @@ class ChuteHTMLMainReport: ChuteOutputRenderable {
             "failed_tests": failedTests
         ]
         return Constants.TestSummaryTemplate.render(parameters: parameters)
+    }
+    
+    private func reportScreenshots(detail: ChuteDetail) -> String {
+
+        let parameters: [String: CustomStringConvertible] = [
+            "total_screenshots": detail.attachments.count
+        ]
+        return Constants.ScreenShotTemplate.render(parameters: parameters)
     }
 
     private func reportCodeCoverage(detail: ChuteDetail) -> String {

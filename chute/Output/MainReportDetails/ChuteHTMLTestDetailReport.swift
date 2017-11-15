@@ -34,11 +34,6 @@ class ChuteHTMLTestDetailReport: ChuteOutputRenderable {
 
         static let TestDetailTemplate = """
         <tr class="{{row_class}}"><td>{{identifier}}</td></tr>
-        {{test_attachments}}
-        """
-
-        static let TestAttachmentTemplate = """
-        <tr><td><img src="attachments/{{attachment_file_name}}" style="max-width:100%;max-height=100%;" title="{{attachment_name}}"></td></tr>
         """
     }
 
@@ -88,28 +83,13 @@ class ChuteHTMLTestDetailReport: ChuteOutputRenderable {
             if result.testIdentifier.starts(with: testClass) {
                 let parts = result.testIdentifier.components(separatedBy: "/")
                 let identifier = parts[1].replacingOccurrences(of: "()", with: "")
-                let trClass = result.testStatus == "Success" ? "success" : "danger"
+                let trClass = result.testStatus == "Success" ? "table-success" : "table-danger"
                 let parameters: [String: CustomStringConvertible] = [
                     "row_class": trClass,
-                    "identifier": identifier,
-                    "test_attachments": reportAttachment(detail: detail, result: result)
+                    "identifier": identifier
                 ]
                 output += Constants.TestDetailTemplate.render(parameters: parameters)
             }
-        }
-        return output
-    }
-
-    private func reportAttachment(detail: ChuteDetail, result: ChuteTestResult) -> String {
-
-        var output = ""
-        for attachment in detail.attachments.filter({ $0.testIdentifier == result.testIdentifier }) {
-
-            let parameters: [String: CustomStringConvertible] = [
-                "attachment_name": attachment.attachmentName,
-                "attachment_file_name": attachment.attachmentFileName
-            ]
-            output += Constants.TestAttachmentTemplate.render(parameters: parameters)
         }
         return output
     }

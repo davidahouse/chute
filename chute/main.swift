@@ -117,7 +117,7 @@ if let compareFolder = arguments.compareFolder {
     if beforeTestDetail.project != chuteTestDetail.project {
         print("Unable to compare test results from different projects. \(beforeTestDetail.project) != \(chuteTestDetail.project)")
     }
-
+    
     print("---")
     print("--- Creating difference reports")
     print("---")
@@ -125,6 +125,12 @@ if let compareFolder = arguments.compareFolder {
     let compareDetails = ChuteDetailDifference(detail: beforeTestDetail, comparedTo: chuteTestDetail, detailAttachmentURL: beforeAttachmentsURL, comparedToAttachmentURL: rootAttachmentPath)
     output.renderHTMLDifferenceOutput(difference: compareDetails)
 
+    print("---")
+    print("--- Saving changed views")
+    print("---")
+    
+    outputFolder.saveChangedAttachments(rootPath: beforeAttachmentsURL, attachments: compareDetails.viewDifference.changedViews.map { $0.1 })
+    
     print("---")
     print("--- Generating notifications")
     print("---")

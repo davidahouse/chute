@@ -65,11 +65,11 @@ class ChuteHTMLCodeCoverageReport: ChuteOutputRenderable {
         for coverage in detail.codeCoverage {
             let trClass: String = {
                 if coverage.coverage <= 0.70 {
-                    return "danger"
+                    return "table-danger"
                 } else if coverage.coverage >= 0.90 {
-                    return "success"
+                    return "table-success"
                 } else {
-                    return "warning"
+                    return "table-warning"
                 }
             }()
 
