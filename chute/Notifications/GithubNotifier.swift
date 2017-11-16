@@ -10,22 +10,27 @@ import Foundation
 
 class GithubNotifier {
 
-    func notify(detail: ChuteDetail, using arguments: ChuteCommandLineParameters) {
-
-        if let repository = arguments.githubRepository, let pullRequestNumber = arguments.pullRequestNumber, let token = arguments.githubToken {
-            let comment = GithubDetailComment(detail: detail)
-            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
-        }
+    func notify(using environment: Environment, including dataCapture: DataCapture, and difference: DataCaptureDifference?) {
+        
     }
-
-    func notify(difference: ChuteDetailDifference, using arguments: ChuteCommandLineParameters) {
-
-        if let repository = arguments.githubRepository, let pullRequestNumber = arguments.pullRequestNumber, let token = arguments.githubToken {
-
-            let comment = GithubDetailDifferenceComment(difference: difference)
-            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
-        }
-    }
+    
+    
+//    func notify(detail: ChuteDetail, using arguments: CommandLineArguments) {
+//
+//        if let repository = arguments.githubRepository, let pullRequestNumber = arguments.pullRequestNumber, let token = arguments.githubToken {
+//            let comment = GithubDetailComment(detail: detail)
+//            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
+//        }
+//    }
+//
+//    func notify(difference: ChuteDetailDifference, using arguments: CommandLineArguments) {
+//
+//        if let repository = arguments.githubRepository, let pullRequestNumber = arguments.pullRequestNumber, let token = arguments.githubToken {
+//
+//            let comment = GithubDetailDifferenceComment(difference: difference)
+//            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
+//        }
+//    }
 
     private func send(comment: String, to repository: String, for pullRequest: String, using token: String) {
 

@@ -38,13 +38,13 @@ class SlackDetailDifferenceMessage {
         """
     }
 
-    var difference: ChuteDetailDifference
+    var difference: DataCaptureDifference
 
     lazy var message: String = {
         self.generateMessage()
     }()
 
-    init(difference: ChuteDetailDifference) {
+    init(difference: DataCaptureDifference) {
         self.difference = difference
     }
 
@@ -54,19 +54,20 @@ class SlackDetailDifferenceMessage {
         let total_no_coverage_change = difference.comparedTo.codeCoverageSummary.filesWithNoCoverage - difference.detail.codeCoverageSummary.filesWithNoCoverage
 
         let parameters: [String: CustomStringConvertible] = [
-            "new_tests": difference.testResultDifference.newTestResults.count,
-            "changed_tests": difference.testResultDifference.changedTestResults.count,
-            "removed_tests": difference.testResultDifference.removedTestResults.count,
-            "average_coverage": Int(round(difference.comparedTo.codeCoverageSummary.averageCoverage * 100)),
-            "average_coverage_change": Int(round(average_coverage_change * 100)),
-            "total_above_90": difference.codeCoverageDifference.comparedToSummary.filesAdequatelyCovered,
-            "total_above_90_change": total_above_90_change > 0 ? total_above_90_change : "",
-            "total_no_coverage": difference.codeCoverageDifference.comparedToSummary.filesWithNoCoverage,
-            "total_no_coverage_change": total_no_coverage_change > 0 ? total_no_coverage_change : "",
-            "new_colors": difference.styleSheetDifference.newColors.count,
-            "removed_colors": difference.styleSheetDifference.removedColors.count,
-            "new_fonts": difference.styleSheetDifference.newFonts.count,
-            "removed_fonts": difference.styleSheetDifference.removedFonts.count
+        :
+//            "new_tests": difference.testResultDifference.newTestResults.count,
+//            "changed_tests": difference.testResultDifference.changedTestResults.count,
+//            "removed_tests": difference.testResultDifference.removedTestResults.count,
+//            "average_coverage": Int(round(difference.comparedTo.codeCoverageSummary.averageCoverage * 100)),
+//            "average_coverage_change": Int(round(average_coverage_change * 100)),
+//            "total_above_90": difference.codeCoverageDifference.comparedToSummary.filesAdequatelyCovered,
+//            "total_above_90_change": total_above_90_change > 0 ? total_above_90_change : "",
+//            "total_no_coverage": difference.codeCoverageDifference.comparedToSummary.filesWithNoCoverage,
+//            "total_no_coverage_change": total_no_coverage_change > 0 ? total_no_coverage_change : "",
+//            "new_colors": difference.styleSheetDifference.newColors.count,
+//            "removed_colors": difference.styleSheetDifference.removedColors.count,
+//            "new_fonts": difference.styleSheetDifference.newFonts.count,
+//            "removed_fonts": difference.styleSheetDifference.removedFonts.count
         ]
         return Constants.MessageTemplate.render(parameters: parameters)
     }

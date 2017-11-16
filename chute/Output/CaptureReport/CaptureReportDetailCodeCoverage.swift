@@ -1,38 +1,35 @@
 //
-//  ChuteHTMLCodeCoverageReport.swift
+//  CaptureReportDetailCodeCoverage.swift
 //  chute
 //
-//  Created by David House on 10/20/17.
+//  Created by David House on 11/16/17.
 //  Copyright © 2017 David House. All rights reserved.
 //
 
 import Foundation
 
-class ChuteHTMLCodeCoverageReport: ChuteOutputRenderable {
-
+struct CaptureReportDetailCodeCoverage: ChuteOutputRenderable {
+    
     enum Constants {
+        
         static let Template = """
-            <div class="jumbotron">
-            <h1>Chute Code Coverage Report</h1>
-            </div>
-
-            <div class="jumbotron">
-            <h3>Code Coverage Details</h3>
-            <div class="table-responsive">
-            <table class="table">
-            <thead>
-            <th>Target</th>
-            <th>File</th>
-            <th>Coverage</th>
-            </thead>
-            <tbody>
-            {{details}}
-            </tbody>
-            </table>
-            </div>
-            </div>
+        <div class="jumbotron">
+        <h3>Code Coverage Details</h3>
+        <div class="table-responsive">
+        <table class="table">
+        <thead>
+        <th>Target</th>
+        <th>File</th>
+        <th>Coverage</th>
+        </thead>
+        <tbody>
+        {{details}}
+        </tbody>
+        </table>
+        </div>
+        </div>
         """
-
+        
         static let CoverageTemplate = """
             <tr class="{{row_class}}">
             <td>{{target}}</td>
@@ -41,28 +38,18 @@ class ChuteHTMLCodeCoverageReport: ChuteOutputRenderable {
             </tr>
         """
     }
-
-    func render(detail: ChuteDetail) -> String {
-
+    
+    func render(dataCapture: DataCapture) -> String {
+        
         let parameters: [String: CustomStringConvertible] = [
-            "title": "Chute Report",
-            "report": reportContents(detail: detail)
-        ]
-        return ChuteHTMLOutputTemplateConstants.Template.render(parameters: parameters)
-    }
-
-    private func reportContents(detail: ChuteDetail) -> String {
-
-        let parameters: [String: CustomStringConvertible] = [
-            "details": reportDetails(detail: detail)
+            "details": reportDetails(dataCapture: dataCapture)
         ]
         return Constants.Template.render(parameters: parameters)
     }
-
-    private func reportDetails(detail: ChuteDetail) -> String {
-
+    
+    func reportDetails(dataCapture: DataCapture) -> String {
         var output = ""
-        for coverage in detail.codeCoverage {
+        for coverage in dataCapture.codeCoverage {
             let trClass: String = {
                 if coverage.coverage <= 0.70 {
                     return "table-danger"

@@ -1,15 +1,15 @@
 //
-//  ChuteHTMLStyleSheetDifferenceReport.swift
+//  DifferenceReportDetailStyleSheet.swift
 //  chute
 //
-//  Created by David House on 10/31/17.
+//  Created by David House on 11/16/17.
 //  Copyright © 2017 David House. All rights reserved.
 //
 
 import Foundation
 
-class ChuteHTMLStyleSheetDifferenceReport: ChuteOutputDifferenceRenderable {
-
+struct DifferenceReportDetailStyleSheet: ChuteOutputDifferenceRenderable {
+    
     enum Constants {
         static let Template = """
             <div class="jumbotron">
@@ -77,18 +77,9 @@ class ChuteHTMLStyleSheetDifferenceReport: ChuteOutputDifferenceRenderable {
             <tr><td>{{font}}</td><td>{{size}}</td></tr>
         """
     }
-
-    func render(difference: ChuteDetailDifference) -> String {
-
-        let parameters: [String: CustomStringConvertible] = [
-            "title": "Chute Report",
-            "report": reportContents(difference: difference)
-        ]
-        return ChuteHTMLOutputTemplateConstants.Template.render(parameters: parameters)
-    }
-
-    private func reportContents(difference: ChuteDetailDifference) -> String {
-
+    
+    func render(difference: DataCaptureDifference) -> String {
+        
         let parameters: [String: CustomStringConvertible] = [
             "colors_added": reportColors(colors: difference.styleSheetDifference.newColors),
             "colors_removed": reportColors(colors: difference.styleSheetDifference.removedColors),

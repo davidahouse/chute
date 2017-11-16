@@ -26,13 +26,13 @@ class GithubDetailComment {
         """
     }
 
-    var detail: ChuteDetail
+    var detail: DataCapture
 
     lazy var comment: String = {
         self.generateComment()
     }()
 
-    init(detail: ChuteDetail) {
+    init(detail: DataCapture) {
         self.detail = detail
     }
 

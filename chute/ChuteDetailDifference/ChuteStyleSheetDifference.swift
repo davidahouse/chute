@@ -15,7 +15,7 @@ struct ChuteStyleSheetDifference {
     let newFonts: [String]
     let removedFonts: [String]
 
-    init(detail: ChuteDetail, comparedTo: ChuteDetail) {
+    init(detail: DataCapture, comparedTo: DataCapture) {
 
         var detailColors = Set<String>()
         for style in detail.styleSheets {

@@ -152,7 +152,7 @@ extension ChuteCodeCoverage {
             return codeCoverage
         }
         
-        print("--- Code Coverage File: \(path)")
+        print("Capturing code coverage data from: \(path)")
         
         for target in rawData.codeCoverageTargets {
             
