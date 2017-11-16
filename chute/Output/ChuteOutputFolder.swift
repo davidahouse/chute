@@ -39,6 +39,25 @@ class ChuteOutputFolder {
             print("Erorr creating directory \(error)")
         }
     }
+    
+    func populate(using environment: Environment, including dataCapture: DataCapture, and difference: DataCaptureDifference?) {
+        
+        guard let testExecutionFolder = environment.derivedData?.mostRecentTestSummary else {
+            return
+        }
+        
+        saveAttachments(rootPath: testExecutionFolder.attachmentRootURL, attachments: dataCapture.attachments)
+        saveSourceFile(from: testExecutionFolder.summaryFileURL, to: "TestSummaries.plist")
+        saveSourceFile(from: ChuteCodeCoverage.codeCoverageURL(testSummaryURL: testExecutionFolder.summaryFileURL), to: "codeCoverage.xccoverage")
+        if let styleSheetData = ChuteStyleSheet.encodedStyleSheets(from: dataCapture.styleSheets) {
+            saveSourceFile(fileName: "stylesheets.data", data: styleSheetData)
+        }
+        
+        // TODO: Save changed attachments here too!
+        if let viewDifference = difference?.viewDifference, let attachmentRootURL = difference?.detail.attachmentRootURL {
+            saveChangedAttachments(rootPath: attachmentRootURL, attachments: viewDifference.changedViews.map { $0.1 })
+        }
+    }
 
     func saveOutputFile(fileName: String, contents: String) {
         guard let outputData = contents.data(using: .utf8) else {

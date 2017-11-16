@@ -13,7 +13,7 @@ struct ViewDifference {
     let newViews: [ChuteTestAttachment]
     let changedViews: [(ChuteTestAttachment, ChuteTestAttachment)]
     
-    init(detail: ChuteDetail, comparedTo: ChuteDetail, detailAttachmentURL: URL, comparedToAttachmentURL: URL) {
+    init(detail: DataCapture, comparedTo: DataCapture, detailAttachmentURL: URL, comparedToAttachmentURL: URL) {
  
         var newViews = [ChuteTestAttachment]()
         var changedViews = [(ChuteTestAttachment, ChuteTestAttachment)]()

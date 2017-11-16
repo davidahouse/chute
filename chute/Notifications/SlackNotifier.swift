@@ -9,22 +9,26 @@
 import Foundation
 
 class SlackNotifier {
-
-    func notify(detail: ChuteDetail, using arguments: ChuteCommandLineParameters) {
-
-        if let slackWebhook = arguments.slackWebhook {
-            let message = SlackDetailMessage(detail: detail)
-            send(message: message.message, webhook: slackWebhook)
-        }
+    
+    func notify(using environment: Environment, including dataCapture: DataCapture, and difference: DataCaptureDifference?) {
+        
     }
 
-    func notify(difference: ChuteDetailDifference, using arguments: ChuteCommandLineParameters) {
-
-        if let slackWebhook = arguments.slackWebhook {
-            let message = SlackDetailDifferenceMessage(difference: difference)
-            send(message: message.message, webhook: slackWebhook)
-        }
-    }
+//    func notify(detail: ChuteDetail, using arguments: CommandLineArguments) {
+//
+//        if let slackWebhook = arguments.slackWebhook {
+//            let message = SlackDetailMessage(detail: detail)
+//            send(message: message.message, webhook: slackWebhook)
+//        }
+//    }
+//
+//    func notify(difference: ChuteDetailDifference, using arguments: CommandLineArguments) {
+//
+//        if let slackWebhook = arguments.slackWebhook {
+//            let message = SlackDetailDifferenceMessage(difference: difference)
+//            send(message: message.message, webhook: slackWebhook)
+//        }
+//    }
 
     private func send(message: String, webhook: String) {
 

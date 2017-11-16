@@ -1,5 +1,5 @@
 //
-//  ChuteCommandLine.swift
+//  CommandLine.swift
 //  chute
 //
 //  Created by David House on 9/10/17.
@@ -21,7 +21,7 @@
 
 import Foundation
 
-struct ChuteCommandLineParameters {
+struct CommandLineArguments {
 
     let project: String?
     let branch: String?
@@ -76,5 +76,18 @@ struct ChuteCommandLineParameters {
         instructions += " [-pullRequestNumber <pullRequestNumber>]"
         instructions += " [-slackWebhook <slackWebhook>]"
         print(instructions)
+    }
+}
+
+extension CommandLineArguments: Printable {
+
+    func printOut() {
+        print("Project: \(project ?? "")")
+        print("Branch: \(branch ?? "")")
+        print("Compare Folder: \(compareFolder ?? "")")
+        print("Github Repository: \(githubRepository ?? "")")
+        print("Github Token: \(githubToken ?? "")")
+        print("PR Number: \(pullRequestNumber ?? "")")
+        print("Slack Webhook: \(slackWebhook ?? "")")
     }
 }

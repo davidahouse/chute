@@ -8,158 +8,158 @@
 
 import Foundation
 
-print("---")
-print("--- chute: 1.0.0")
-print("---")
+func printOut(_ message: String, with: Printable? = nil) {
+    print("---")
+    print(message)
+    with?.printOut()
+    print("---")
+    print("")
+}
 
-let arguments = ChuteCommandLineParameters()
+printOut("chute: 1.0.0")
+
+let arguments = CommandLineArguments()
+printOut("Arguments:", with: arguments)
 
 // Required parameters
 guard arguments.hasRequiredParameters, let project = arguments.project else {
     arguments.printInstructions()
     exit(1)
 }
-let fullProjectPath = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(project)
 
-print("---")
-print("--- Searching for DerivedData folder for this project")
-print("---")
-
-// Find derived data folder for this project
-guard let projectFolder = DerivedData.pathFor(project: fullProjectPath.path) else {
-    print("Unable to determine project folder, exiting!")
+// Environment
+let environment = Environment(arguments: arguments)
+printOut("Environment:", with: environment)
+guard environment.hasValidEnvironment else {
     exit(1)
 }
-print("--- DerivedData Folder: \(projectFolder.path)")
 
-print("---")
-print("--- Searching for most recent test execution")
-print("---")
-
-// Find the most recent test run
-guard let testExecution = DerivedData.recentTestSummary(projectFolder: projectFolder) else {
-    print("No recent test execution found for this project")
+// Capture data using the environment
+printOut("Capturing data")
+guard let dataCapture = DataCapture(using: environment) else {
+    print("Error capturing data")
     exit(1)
 }
-print("--- TestSummary Folder: \(testExecution.folderURL)")
-print("--- TestSummary Plist: \(testExecution.summaryFileURL)")
 
-print("---")
-print("--- Gathering test data")
-print("---")
+// Capture saved data from compareTo folder (if specified)
+let comparedToDataCapture = DataCapture(using: environment, from: arguments.compareFolder)
+var difference: DataCaptureDifference?
+if let comparedTo = comparedToDataCapture {
+    printOut("Comparing data captures")
+    difference = DataCaptureDifference(detail: comparedTo, comparedTo: dataCapture)
+}
 
-// Gather all the test data
-let rootAttachmentPath = testExecution.folderURL.deletingLastPathComponent().appendingPathComponent("Attachments")
-
-let testResults = ChuteTestResult.findResults(testSummary: testExecution.summary)
-let attachments = ChuteTestAttachment.findAttachments(testSummary: testExecution.summary)
-let styleSheets = ChuteStyleSheet.findStyleSheets(testSummary: testExecution.summary, rootPath: rootAttachmentPath)
-let codeCoverage = ChuteCodeCoverage.findCodeCoverage(testSummaryURL: testExecution.summaryFileURL)
-
-let chuteTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch,
-                                  pullRequestNumber: arguments.pullRequestNumber, testResults: testResults,
-                                  codeCoverage: codeCoverage,
-                                  codeCoverageSummary: ChuteCodeCoverageSummary(coverages: codeCoverage),
-                                  attachments: attachments, styleSheets: styleSheets)
-
-print("---")
-print("--- Saving source data to output folder")
-print("---")
-
-// Create the output folder
+// Prepare the output folder
+printOut("Saving source data to output folder")
 let outputFolder = ChuteOutputFolder()
 outputFolder.empty()
-outputFolder.saveAttachments(rootPath: rootAttachmentPath, attachments: attachments)
-outputFolder.saveSourceFile(from: testExecution.summaryFileURL, to: "TestSummaries.plist")
-outputFolder.saveSourceFile(from: ChuteCodeCoverage.codeCoverageURL(testSummaryURL: testExecution.summaryFileURL), to: "codeCoverage.xccoverage")
-if let styleSheetData = ChuteStyleSheet.encodedStyleSheets(from: styleSheets) {
-    outputFolder.saveSourceFile(fileName: "stylesheets.data", data: styleSheetData)
-}
+outputFolder.populate(using: environment, including: dataCapture, and: difference)
 
-print("---")
-print("--- Creating chute reports")
-print("---")
-
-// Generate chute reports from gathered data
+// Create reports
+printOut("Creating reports")
 let output = ChuteOutput(into: outputFolder)
-output.renderHTMLOutput(detail: chuteTestDetail)
+output.createReports(with: dataCapture, and: difference)
 
-// If compareFolder set, load & compare current test with existing data
-if let compareFolder = arguments.compareFolder {
-
-    print("---")
-    print("--- Loading saved data from compare folder")
-    print("---")
-
-    let beforeAttachmentsURL = URL(fileURLWithPath: compareFolder).appendingPathComponent("attachments")
-    let beforeTestSummaryURL = URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "TestSummaries.plist"])
-    guard let beforeTestSummary = TestSummary.from(file: beforeTestSummaryURL) else {
-        print("Error comparing results, unabled to find TestSummary.plist in compareFolder of \(compareFolder)")
-        exit(1)
-    }
-
-    print("---")
-    print("--- Calculating difference between test executions")
-    print("---")
-
-    // Perform a diff between the old and new test summaries
-    let beforeTestResults = ChuteTestResult.findResults(testSummary: beforeTestSummary)
-    let beforeAttachments = ChuteTestAttachment.findAttachments(testSummary: beforeTestSummary)
-    let beforeStyleSheets = ChuteStyleSheet.decodedStyleSheets(path: URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "stylesheets.data"]))
-    let beforeCodeCoverage = ChuteCodeCoverage.findCodeCoverage(testSummaryURL: URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "codeCoverage.xccoverage"]))
-
-    let beforeTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch,
-                                       pullRequestNumber: arguments.pullRequestNumber, testResults: beforeTestResults,
-                                       codeCoverage: beforeCodeCoverage,
-                                       codeCoverageSummary: ChuteCodeCoverageSummary(coverages: beforeCodeCoverage),
-                                       attachments: beforeAttachments, styleSheets: beforeStyleSheets)
-
-    if beforeTestDetail.project != chuteTestDetail.project {
-        print("Unable to compare test results from different projects. \(beforeTestDetail.project) != \(chuteTestDetail.project)")
-    }
-    
-    print("---")
-    print("--- Creating difference reports")
-    print("---")
-
-    let compareDetails = ChuteDetailDifference(detail: beforeTestDetail, comparedTo: chuteTestDetail, detailAttachmentURL: beforeAttachmentsURL, comparedToAttachmentURL: rootAttachmentPath)
-    output.renderHTMLDifferenceOutput(difference: compareDetails)
-
-    print("---")
-    print("--- Saving changed views")
-    print("---")
-    
-    outputFolder.saveChangedAttachments(rootPath: beforeAttachmentsURL, attachments: compareDetails.viewDifference.changedViews.map { $0.1 })
-    
-    print("---")
-    print("--- Generating notifications")
-    print("---")
-
-    if arguments.hasParametersForGithubNotification {
-        let notifier = GithubNotifier()
-        notifier.notify(difference: compareDetails, using: arguments)
-    }
-
-    if arguments.hasParametersForSlackNotification {
-        let notifier = SlackNotifier()
-        notifier.notify(difference: compareDetails, using: arguments)
-    }
-} else {
-
-    print("---")
-    print("--- Generating notifications")
-    print("---")
-
-    if arguments.hasParametersForGithubNotification {
-        let notifier = GithubNotifier()
-        notifier.notify(detail: chuteTestDetail, using: arguments)
-    }
-
-    if arguments.hasParametersForSlackNotification {
-        let notifier = SlackNotifier()
-        notifier.notify(detail: chuteTestDetail, using: arguments)
-    }
+// Send notifications
+printOut("Sending notifications")
+if arguments.hasParametersForGithubNotification {
+    let notifier = GithubNotifier()
+    notifier.notify(using: environment, including: dataCapture, and: difference)
 }
+
+if arguments.hasParametersForSlackNotification {
+    let notifier = SlackNotifier()
+    notifier.notify(using: environment, including: dataCapture, and: difference)
+}
+
+
+//
+//print("---")
+//print("--- Creating chute reports")
+//print("---")
+//
+//// Generate chute reports from gathered data
+//let output = ChuteOutput(into: outputFolder)
+//output.renderHTMLOutput(detail: chuteTestDetail)
+//
+//// If compareFolder set, load & compare current test with existing data
+//if let compareFolder = arguments.compareFolder {
+//
+//    print("---")
+//    print("--- Loading saved data from compare folder")
+//    print("---")
+//
+//    let beforeAttachmentsURL = URL(fileURLWithPath: compareFolder).appendingPathComponent("attachments")
+//    let beforeTestSummaryURL = URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "TestSummaries.plist"])
+//    guard let beforeTestSummary = TestSummary.from(file: beforeTestSummaryURL) else {
+//        print("Error comparing results, unabled to find TestSummary.plist in compareFolder of \(compareFolder)")
+//        exit(1)
+//    }
+//
+//    print("---")
+//    print("--- Calculating difference between test executions")
+//    print("---")
+//
+//    // Perform a diff between the old and new test summaries
+//    let beforeTestResults = ChuteTestResult.findResults(testSummary: beforeTestSummary)
+//    let beforeAttachments = ChuteTestAttachment.findAttachments(testSummary: beforeTestSummary)
+//    let beforeStyleSheets = ChuteStyleSheet.decodedStyleSheets(path: URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "stylesheets.data"]))
+//    let beforeCodeCoverage = ChuteCodeCoverage.findCodeCoverage(testSummaryURL: URL(fileURLWithPath: compareFolder).appendingPathComponents(["source", "codeCoverage.xccoverage"]))
+//
+//    let beforeTestDetail = ChuteDetail(project: project, testDate: Date(), branch: arguments.branch,
+//                                       pullRequestNumber: arguments.pullRequestNumber, testResults: beforeTestResults,
+//                                       codeCoverage: beforeCodeCoverage,
+//                                       codeCoverageSummary: ChuteCodeCoverageSummary(coverages: beforeCodeCoverage),
+//                                       attachments: beforeAttachments, styleSheets: beforeStyleSheets)
+//
+//    if beforeTestDetail.project != chuteTestDetail.project {
+//        print("Unable to compare test results from different projects. \(beforeTestDetail.project) != \(chuteTestDetail.project)")
+//    }
+//
+//    print("---")
+//    print("--- Creating difference reports")
+//    print("---")
+//
+//    let compareDetails = ChuteDetailDifference(detail: beforeTestDetail, comparedTo: chuteTestDetail, detailAttachmentURL: beforeAttachmentsURL, comparedToAttachmentURL: rootAttachmentPath)
+//    output.renderHTMLDifferenceOutput(difference: compareDetails)
+//
+//    print("---")
+//    print("--- Saving changed views")
+//    print("---")
+//
+//    outputFolder.saveChangedAttachments(rootPath: beforeAttachmentsURL, attachments: compareDetails.viewDifference.changedViews.map { $0.1 })
+//
+//    print("---")
+//    print("--- Generating notifications")
+//    print("---")
+//
+//    if arguments.hasParametersForGithubNotification {
+//        let notifier = GithubNotifier()
+//        notifier.notify(difference: compareDetails, using: arguments)
+//    }
+//
+//    if arguments.hasParametersForSlackNotification {
+//        let notifier = SlackNotifier()
+//        notifier.notify(difference: compareDetails, using: arguments)
+//    }
+//} else {
+//
+//    print("---")
+//    print("--- Generating notifications")
+//    print("---")
+//
+//    if arguments.hasParametersForGithubNotification {
+//        let notifier = GithubNotifier()
+//        notifier.notify(detail: chuteTestDetail, using: arguments)
+//    }
+//
+//    if arguments.hasParametersForSlackNotification {
+//        let notifier = SlackNotifier()
+//        notifier.notify(detail: chuteTestDetail, using: arguments)
+//    }
+//}
 
 // If save set, save the gathered data
-print("--- Chute finished.")
+printOut("Chute finished.")
+
+

@@ -8,12 +8,17 @@
 
 import Foundation
 
+protocol HTMLRenderable {
+    func renderSummary() -> String
+    func renderDetail() -> String
+}
+
 protocol ChuteOutputRenderable {
-    func render(detail: ChuteDetail) -> String
+    func render(dataCapture: DataCapture) -> String
 }
 
 protocol ChuteOutputDifferenceRenderable {
-    func render(difference: ChuteDetailDifference) -> String
+    func render(difference: DataCaptureDifference) -> String
 }
 
 class ChuteOutput {
@@ -24,43 +29,16 @@ class ChuteOutput {
         self.outputFolder = outputFolder
     }
 
-    func renderHTMLOutput(detail: ChuteDetail) {
-
-        let reports: [String: ChuteOutputRenderable] = [
-            "chute.html": ChuteHTMLMainReport(),
-            "test_details.html": ChuteHTMLTestDetailReport(),
-            "code_coverage.html": ChuteHTMLCodeCoverageReport(),
-            "style_sheet.html": ChuteHTMLStyleSheetReport(),
-            "screenshots.html": ChuteScreenshotReport()
-        ]
-        render(reports, with: detail)
-    }
-
-    func renderHTMLDifferenceOutput(difference: ChuteDetailDifference) {
-
-        let reports: [String: ChuteOutputDifferenceRenderable] = [
-            "chute_difference.html": ChuteHTMLDifferenceMainReport(),
-            "test_details_difference.html": ChuteHTMLDifferenceTestDetailReport(),
-            "code_coverage_difference.html": ChuteHTMLCodeCoverageDifferenceReport(),
-            "style_sheet_difference.html": ChuteHTMLStyleSheetDifferenceReport(),
-            "view_difference.html": ChuteViewDifferenceReport()
-        ]
-        render(reports, with: difference)
-    }
-
-    private func render(_ reports: [String: ChuteOutputRenderable], with detail: ChuteDetail) {
-
-        reports.forEach {
-            let output = $0.value.render(detail: detail)
-            outputFolder.saveOutputFile(fileName: $0.key, contents: output)
-        }
-    }
-
-    private func render(_ reports: [String: ChuteOutputDifferenceRenderable], with difference: ChuteDetailDifference) {
-
-        reports.forEach {
-            let output = $0.value.render(difference: difference)
-            outputFolder.saveOutputFile(fileName: $0.key, contents: output)
+    func createReports(with dataCapture: DataCapture, and difference: DataCaptureDifference?) {
+        
+        let mainReport = CaptureReport()
+        print("Creating chute.html")
+        outputFolder.saveOutputFile(fileName: "chute.html", contents: mainReport.render(dataCapture: dataCapture))
+        
+        if let difference = difference {
+            let differenceReport = DifferenceReport()
+            print("Creating chute_difference.html")
+            outputFolder.saveOutputFile(fileName: "chute_difference.html", contents: differenceReport.render(difference: difference))
         }
     }
 }

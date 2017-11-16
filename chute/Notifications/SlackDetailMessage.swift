@@ -32,13 +32,13 @@ class SlackDetailMessage {
         """
     }
 
-    var detail: ChuteDetail
+    var detail: DataCapture
 
     lazy var message: String = {
         self.generateMessage()
     }()
 
-    init(detail: ChuteDetail) {
+    init(detail: DataCapture) {
         self.detail = detail
     }
 

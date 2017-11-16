@@ -101,6 +101,16 @@ struct TestSummaryFolder {
     let folderURL: URL
     let summaryFileURL: URL
     let summary: TestSummary
+    let attachmentRootURL: URL
+}
+
+extension TestSummaryFolder: Printable {
+    
+    func printOut() {
+        print("CreateDate: \(createDate)")
+        print("FolderURL: \(folderURL)")
+        print("SummaryFileURL: \(summaryFileURL)")
+    }
 }
 
 extension TestSummary {
@@ -120,7 +130,8 @@ extension TestSummary {
 
                         if let createDate = createDate?.creationDate {
                             let foundFolderURL = testsFolder.appendingPathComponent(path.lastPathComponent)
-                            let foundFolder = TestSummaryFolder(createDate: createDate, folderURL: foundFolderURL, summaryFileURL: testsFolder.appendingPathComponent(path.lastPathComponent), summary: summary)
+                            let attachmentRootURL = foundFolderURL.deletingLastPathComponent().appendingPathComponent("Attachments")
+                            let foundFolder = TestSummaryFolder(createDate: createDate, folderURL: foundFolderURL, summaryFileURL: testsFolder.appendingPathComponent(path.lastPathComponent), summary: summary, attachmentRootURL: attachmentRootURL)
                             found.append(foundFolder)
                         }
                     }

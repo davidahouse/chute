@@ -1,21 +1,17 @@
 //
-//  ChuteHTMLCodeCoverageDifferenceReport.swift
+//  DifferenceReportDetailCodeCoverage.swift
 //  chute
 //
-//  Created by David House on 10/31/17.
+//  Created by David House on 11/16/17.
 //  Copyright © 2017 David House. All rights reserved.
 //
 
 import Foundation
 
-class ChuteHTMLCodeCoverageDifferenceReport: ChuteOutputDifferenceRenderable {
-
+struct DifferenceReportDetailCodeCoverage: ChuteOutputDifferenceRenderable {
+    
     enum Constants {
         static let Template = """
-            <div class="jumbotron">
-            <h1>Chute Code Coverage Report</h1>
-            </div>
-
             <div class="jumbotron">
             <h3>Code Coverage Details</h3>
             <div class="table-responsive">
@@ -41,35 +37,26 @@ class ChuteHTMLCodeCoverageDifferenceReport: ChuteOutputDifferenceRenderable {
             </tr>
         """
     }
-
-    func render(difference: ChuteDetailDifference) -> String {
-
-        let parameters: [String: CustomStringConvertible] = [
-            "title": "Chute Report",
-            "report": reportContents(difference: difference)
-        ]
-        return ChuteHTMLOutputTemplateConstants.Template.render(parameters: parameters)
-    }
-
-    private func reportContents(difference: ChuteDetailDifference) -> String {
-
+    
+    func render(difference: DataCaptureDifference) -> String {
+        
         let parameters: [String: CustomStringConvertible] = [
             "details": reportDetails(difference: difference)
         ]
         return Constants.Template.render(parameters: parameters)
     }
 
-    private func reportDetails(difference: ChuteDetailDifference) -> String {
+    private func reportDetails(difference: DataCaptureDifference) -> String {
 
         var output = ""
         for coverage in difference.codeCoverageDifference.codeCoverageChanges {
             let trClass: String = {
                 if coverage.0.coverage <= 0.70 {
-                    return "danger"
+                    return "table-danger"
                 } else if coverage.0.coverage >= 0.90 {
-                    return "success"
+                    return "table-success"
                 } else {
-                    return "warning"
+                    return "table-warning"
                 }
             }()
 

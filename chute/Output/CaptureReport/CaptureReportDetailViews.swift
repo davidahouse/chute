@@ -1,14 +1,14 @@
 //
-//  ChuteScreenshotReport.swift
+//  CaptureReportDetailViews.swift
 //  chute
 //
-//  Created by David House on 11/11/17.
+//  Created by David House on 11/16/17.
 //  Copyright © 2017 David House. All rights reserved.
 //
 
 import Foundation
 
-class ChuteScreenshotReport: ChuteOutputRenderable {
+struct CaptureReportDetailViews: ChuteOutputRenderable {
     
     enum Constants {
         static let Template = """
@@ -44,13 +44,13 @@ class ChuteScreenshotReport: ChuteOutputRenderable {
         }
         </style>
         <div class="jumbotron">
-        <h1>Chute Screenshot Details</h1>
-        </div>
+        <h3>View Captures</h3>
         <div class="gallery">
         {{screenshots}}
         </div>
+        </div>
         """
-        
+
         static let TestAttachmentTemplate = """
         <div class="gallery-image">
             <h5>{{attachment_name}}</h5>
@@ -60,26 +60,17 @@ class ChuteScreenshotReport: ChuteOutputRenderable {
         """
     }
     
-    func render(detail: ChuteDetail) -> String {
-        
-        let parameters: [String: CustomStringConvertible] = [
-            "title": "Chute Report",
-            "report": reportContents(detail: detail)
-        ]
-        return ChuteHTMLOutputTemplateConstants.Template.render(parameters: parameters)
-    }
-    
-    private func reportContents(detail: ChuteDetail) -> String {
+    func render(dataCapture: DataCapture) -> String {
         
         var screenshots = ""
-        for attachment in detail.attachments {
+        for attachment in dataCapture.attachments {
             let attachmentParameters: [String: CustomStringConvertible] = [
                 "attachment_name": attachment.attachmentName,
                 "attachment_file_name": attachment.attachmentFileName
-            ]            
+            ]
             screenshots += Constants.TestAttachmentTemplate.render(parameters: attachmentParameters)
         }
-        
+
         let parameters: [String: CustomStringConvertible] = [
             "screenshots": screenshots
         ]

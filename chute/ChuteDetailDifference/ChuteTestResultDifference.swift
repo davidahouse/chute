@@ -15,7 +15,7 @@ struct ChuteTestResultDifference {
     let removedTestResults: [ChuteTestResult]
     let attachments: [ChuteTestAttachment]
 
-    init(detail: ChuteDetail, comparedTo: ChuteDetail, detailAttachmentURL: URL, comparedToAttachmentURL: URL) {
+    init(detail: DataCapture, comparedTo: DataCapture, detailAttachmentURL: URL, comparedToAttachmentURL: URL) {
 
         var newResults = [ChuteTestResult]()
         var changedResults = [(ChuteTestResult, ChuteTestResult)]()

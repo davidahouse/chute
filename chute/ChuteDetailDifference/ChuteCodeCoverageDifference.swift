@@ -14,7 +14,7 @@ struct ChuteCodeCoverageDifference {
     let comparedToSummary: ChuteCodeCoverageSummary
     let codeCoverageChanges: [(ChuteCodeCoverage, Double)]
 
-    init(detail: ChuteDetail, comparedTo: ChuteDetail) {
+    init(detail: DataCapture, comparedTo: DataCapture) {
 
         originSummary = detail.codeCoverageSummary
         comparedToSummary = comparedTo.codeCoverageSummary
