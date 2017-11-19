@@ -12,11 +12,17 @@ struct DifferenceReportSummaryViews: ChuteOutputDifferenceRenderable {
     
     enum Constants {
         static let Template = """
-        <tr>
-        <td>Views:</td>
-        <td class="info">New Views: {{new_views}}</td>
-        <td class="info">Changed Views: {{changed_views}}</td>
-        </tr>
+        <div class="summary-2-column">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{new_views}}</h1></div>
+                <div class="summary-item-text"><h3>New Views Captured</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{changed_views}}</h1></div>
+                <div class="summary-item-text"><h3>Changed Views</h3></div>
+            </div>
+        </div>
         """
     }
     

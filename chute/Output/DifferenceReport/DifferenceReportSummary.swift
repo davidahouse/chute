@@ -14,15 +14,11 @@ struct DifferenceReportSummary: ChuteOutputDifferenceRenderable {
         static let Template = """
         <div class="jumbotron">
         <h3>Summary</h3>
-        <div class="table-responsive">
-        <table class="table table-striped">
-        <tbody>
+        <div>
         {{test_summary_row}}
         {{code_coverage_summary_row}}
         {{views_summary_row}}
         {{stylesheet_summary_row}}
-        </tbody>
-        </table>
         </div>
         </div>
         """
