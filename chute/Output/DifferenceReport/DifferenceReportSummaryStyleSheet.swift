@@ -12,13 +12,29 @@ struct DifferenceReportSummaryStyleSheet: ChuteOutputDifferenceRenderable {
     
     enum Constants {
         static let Template = """
-        <tr>
-        <td>StyleSheet:</td>
-        <td class="info">Colors Added: {{new_colors}}</td>
-        <td class="info">Colors Removed: {{removed_colors}}</td>
-        <td class="info">Fonts Added: {{new_fonts}}</td>
-        <td class="info">Fonts Removed: {{removed_fonts}}</td>
-        </tr>
+        <div class="summary-2-column">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{new_colors}}</h1></div>
+                <div class="summary-item-text"><h3>New Colors</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-success">
+                <div class="summary-item-text"><h1>{{removed_colors}}</h1></div>
+                <div class="summary-item-text"><h3>Removed Colors</h3></div>
+            </div>
+        </div>
+
+        <div class="summary-2-column">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{new_fonts}}</h1></div>
+                <div class="summary-item-text"><h3>New Fonts</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-success">
+                <div class="summary-item-text"><h1>{{removed_fonts}}</h1></div>
+                <div class="summary-item-text"><h3>Removed Fonts</h3></div>
+            </div>
+        </div>
         """
     }
     

@@ -12,19 +12,31 @@ struct DifferenceReportSummaryCodeCoverage: ChuteOutputDifferenceRenderable {
     
     enum Constants {
         static let Template = """
-        <tr>
-        <td>Code Coverage:</td>
-        <td class="info">Average Coverage: {{average_coverage}}% <span class="badge {{average_coverage_change_badge}}">{{average_coverage_change}}%</span></td>
-        <td class="info">Total Files Above 90%: {{total_above_90}} <span class="badge {{total_above_90_change_badge}}">{{total_above_90_change}}%</span></td>
-        <td class="info">Total Files With No Coverage: {{total_no_coverage}} <span class="badge {{total_no_coverage_change_badge}}">{{total_no_coverage_change}}%</span></td>
-        </tr>
+         <div class="summary">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{average_coverage}} %</h1><span class="badge {{average_coverage_change_badge}}">{{average_coverage_change}}%</span></div>
+                <div class="summary-item-text"><h3>Avg Coverage</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{total_above_90}}</h1><span class="badge {{total_above_90_change_badge}}">{{total_above_90_change}}</span></div>
+                <div class="summary-item-text"><h3>Above 90% Coverage</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{total_no_coverage}}</h1><span class="badge {{total_no_coverage_change_badge}}">{{total_no_coverage_change}}</span></div>
+                <div class="summary-item-text"><h3>No Coverage</h3></div>
+            </div>
+        </div>
         """
         
         static let NoCodeCoverageTemplate = """
-        <tr>
-        <td>Code Coverage:</td>
-        <td>No code coverage found</td>
-        </tr>
+        <div class="summary">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{average_coverage}} %</h1></div>
+                <div class="summary-item-text"><h3>No coverage found</h3></div>
+            </div>
+        </div>
         """
     }
     

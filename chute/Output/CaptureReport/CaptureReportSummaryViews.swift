@@ -12,10 +12,12 @@ struct CaptureReportSummaryViews: ChuteOutputRenderable {
     
     enum Constants {
         static let ViewSummaryRowTemplate = """
-        <tr>
-        <td>Views:</td>
-        <td>Views Captured: {{total_views}}</td>
-        </tr>
+        <div class="summary-1-column">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{total_views}}</h1></div>
+                <div class="summary-item-text"><h3>Views Captured</h3></div>
+            </div>
+        </div>
         """
     }
     

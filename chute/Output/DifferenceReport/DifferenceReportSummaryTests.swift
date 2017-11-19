@@ -12,12 +12,22 @@ struct DifferenceReportSummaryTests: ChuteOutputDifferenceRenderable {
     
     enum Constants {
         static let Template = """
-        <tr>
-        <td>Unit Tests:</td>
-        <td class="info">New Tests: {{new_tests}}</td>
-        <td class="success">Changed Tests: {{changed_tests}}</td>
-        <td class="danger">Removed Tests: {{removed_tests}}</td>
-        </tr>
+        <div class="summary">
+            <div class="summary-item alert alert-success">
+                <div class="summary-item-text"><h1>{{new_tests}}</h1></div>
+                <div class="summary-item-text"><h3>New Tests</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{changed_tests}}</h1></div>
+                <div class="summary-item-text"><h3>Changed Tests</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-danger">
+                <div class="summary-item-text"><h1>{{removed_tests}}</h1></div>
+                <div class="summary-item-text"><h3>Removed Tests</h3></div>
+            </div>
+        </div>
         """
     }
     
