@@ -12,11 +12,17 @@ struct CaptureReportSummaryStyleSheet: ChuteOutputRenderable {
     
     enum Constants {
         static let StyleSheetSummaryRowTemplate = """
-        <tr>
-        <td>StyleSheet:</td>
-        <td>Colors Found: {{total_colors}}</td>
-        <td>Fonts Found: {{total_fonts}}</td>
-        </tr>
+        <div class="summary-2-column">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{total_colors}}</h1></div>
+                <div class="summary-item-text"><h3>Colors Found</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-success">
+                <div class="summary-item-text"><h1>{{total_fonts}}</h1></div>
+                <div class="summary-item-text"><h3>Fonts Found</h3></div>
+            </div>
+        </div>
         """
     }
     

@@ -12,13 +12,23 @@ struct CaptureReportSummaryTests: ChuteOutputRenderable {
     
     enum Constants {
         static let TestSummaryRowTemplate = """
-            <tr>
-            <td>Unit Tests:</td>
-            <td class="info">Total: {{total_tests}}</td>
-            <td class="success">Success: {{success_tests}}</td>
-            <td class="danger">Failed: {{failed_tests}}</td>
-            </tr>
-            """
+        <div class="summary">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{total_tests}}</h1></div>
+                <div class="summary-item-text"><h3>Total Tests</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-success">
+                <div class="summary-item-text"><h1>{{success_tests}}</h1></div>
+                <div class="summary-item-text"><h3>Success Tests</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-danger">
+                <div class="summary-item-text"><h1>{{failed_tests}}</h1></div>
+                <div class="summary-item-text"><h3>Failed Tests</h3></div>
+            </div>
+        </div>
+        """
     }
     
     func render(dataCapture: DataCapture) -> String {

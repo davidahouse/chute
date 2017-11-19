@@ -13,19 +13,31 @@ struct CaptureReportSummaryCodeCoverage: ChuteOutputRenderable {
     enum Constants {
         
         static let CodeCoverageSummaryRowTemplate = """
-        <tr>
-        <td>Code Coverage:</td>
-        <td class="info">Average Coverage: {{average_coverage}}%</td>
-        <td class="info">Total Files Above 90%: {{total_above_90}}</td>
-        <td class="info">Total Files With No Coverage: {{total_no_coverage}}</td>
-        </tr>
+        <div class="summary">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{average_coverage}} %</h1></div>
+                <div class="summary-item-text"><h3>Avg Coverage</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{total_above_90}}</h1></div>
+                <div class="summary-item-text"><h3>Above 90% Coverage</h3></div>
+            </div>
+
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{total_no_coverage}}</h1></div>
+                <div class="summary-item-text"><h3>No Coverage</h3></div>
+            </div>
+        </div>
         """
         
         static let NoCodeCoverageTemplate = """
-        <tr>
-        <td>Code Coverage:</td>
-        <td>No code coverage found</td>
-        </tr>
+        <div class="summary">
+            <div class="summary-item alert alert-info">
+                <div class="summary-item-text"><h1>{{average_coverage}} %</h1></div>
+                <div class="summary-item-text"><h3>No coverage found</h3></div>
+            </div>
+        </div>
         """
     }
     
