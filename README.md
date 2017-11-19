@@ -68,9 +68,10 @@ The github comment contains a summary of the chute execution.
 - [X] Implement saving of chute data capture for use in compares
 - [X] Implement comparison between saved capture and current capture
 - [X] Remove `xcov` dependency for code coverage stats
-- [ ] Separate screenshots into their own report and show screens in a more easily digested format
+- [X] Separate screenshots into their own report and show screens in a more easily digested format
 - [ ] Allow chute to update Pull Request with capture summary & link for full reports using github pages
 - [ ] Allow chute to use github pages saved data as source of comparison
+- [ ] Support Android testing and view capture
 - [ ] Make chute more generic by creating a plugin system that allows others to easily create new report types
 - [ ] Capture non-test related data such as lines of code, project settings, etc.
 - [ ] Brew formula to make install easier
