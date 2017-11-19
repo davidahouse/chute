@@ -70,7 +70,12 @@ struct DifferenceReportDetailStyleSheet: ChuteOutputDifferenceRenderable {
         static let ColorTemplate = """
             <tr><td>
             <div class="color-swatch" style="background-color:#{{color}};float: left;width: 60px;height: 60px;margin: 0 5px;border-radius: 3px">
-            </div></td><td>#{{color}}</td></tr>
+            </div></td><td>#{{color}}</td>
+            </tr>
+            <tr><td colspan="2">
+            {{changed_in}}
+            </td>
+            </tr>
         """
 
         static let FontTemplate = """
@@ -81,21 +86,29 @@ struct DifferenceReportDetailStyleSheet: ChuteOutputDifferenceRenderable {
     func render(difference: DataCaptureDifference) -> String {
         
         let parameters: [String: CustomStringConvertible] = [
-            "colors_added": reportColors(colors: difference.styleSheetDifference.newColors),
-            "colors_removed": reportColors(colors: difference.styleSheetDifference.removedColors),
+            "colors_added": reportColors(colors: difference.styleSheetDifference.newColors, changedIn: difference.styleSheetDifference.newColorsIn),
+            "colors_removed": reportColors(colors: difference.styleSheetDifference.removedColors, changedIn: difference.styleSheetDifference.removedColorsFrom),
             "fonts_added": reportFonts(fonts: difference.styleSheetDifference.newFonts),
             "fonts_removed": reportFonts(fonts: difference.styleSheetDifference.removedFonts)
         ]
         return Constants.Template.render(parameters: parameters)
     }
 
-    private func reportColors(colors: [String]) -> String {
+    private func reportColors(colors: [String], changedIn: [String: String]? = nil) -> String {
 
         var output = ""
 
         for color in colors.sorted() {
+            let changedInViews: String = {
+                guard let changedIn = changedIn else {
+                    return ""
+                }
+                
+                return changedIn[color] ?? ""
+            }()
             let parameters: [String: CustomStringConvertible] = [
-                "color": color
+                "color": color,
+                "changed_in": changedInViews
             ]
             output += Constants.ColorTemplate.render(parameters: parameters)
         }

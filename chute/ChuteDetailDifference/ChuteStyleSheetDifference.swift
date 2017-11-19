@@ -11,7 +11,9 @@ import Foundation
 struct ChuteStyleSheetDifference {
 
     let newColors: [String]
+    let newColorsIn: [String: String]
     let removedColors: [String]
+    let removedColorsFrom: [String: String]
     let newFonts: [String]
     let removedFonts: [String]
 
@@ -40,8 +42,20 @@ struct ChuteStyleSheetDifference {
         }
 
         newColors = Array(comparedToColors.subtracting(detailColors))
+        var newColorsIn: [String: String] = [:]
+        for color in newColors {
+            let viewPaths = comparedTo.styleSheets.filter { $0.backgroundColor?.hexString == color || $0.textColor?.hexString == color}.map { $0.viewPath }
+            newColorsIn[color] = viewPaths.joined(separator: ",")
+        }
+        self.newColorsIn = newColorsIn
         removedColors = Array(detailColors.subtracting(comparedToColors))
-
+        var removedColorsFrom: [String: String] = [:]
+        for color in removedColors {
+            let viewPaths = detail.styleSheets.filter { $0.backgroundColor?.hexString == color || $0.textColor?.hexString == color}.map { $0.viewPath }
+            removedColorsFrom[color] = viewPaths.joined(separator: ",")
+        }
+        self.removedColorsFrom = removedColorsFrom
+        
         var detailFonts = Set<String>()
         for style in detail.styleSheets {
             if let fontName = style.fontName, let fontSize = style.fontSize {

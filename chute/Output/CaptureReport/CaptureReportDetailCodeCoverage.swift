@@ -31,11 +31,11 @@ struct CaptureReportDetailCodeCoverage: ChuteOutputRenderable {
         """
         
         static let CoverageTemplate = """
-            <tr class="{{row_class}}">
-            <td>{{target}}</td>
-            <td>{{file}}</td>
-            <td>{{coverage}}%</td>
-            </tr>
+        <tr class="{{row_class}}">
+        <td>{{target}}</td>
+        <td>{{file}}</td>
+        <td>{{coverage}}%</td>
+        </tr>
         """
     }
     
@@ -49,7 +49,7 @@ struct CaptureReportDetailCodeCoverage: ChuteOutputRenderable {
     
     func reportDetails(dataCapture: DataCapture) -> String {
         var output = ""
-        for coverage in dataCapture.codeCoverage {
+        for coverage in dataCapture.codeCoverage.sorted(by: { $0.coverage < $1.coverage }) {
             let trClass: String = {
                 if coverage.coverage <= 0.70 {
                     return "table-danger"
