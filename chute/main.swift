@@ -60,18 +60,15 @@ printOut("Creating reports")
 let output = ChuteOutput(into: outputFolder)
 output.createReports(with: dataCapture, and: difference)
 
+// Publish reports
+printOut("Publishing reports")
+let publisher = Publisher(environment: environment, outputFolder: outputFolder, testExecutionDate: dataCapture.testExecutionDate)
+publisher.publish()
+
 // Send notifications
 printOut("Sending notifications")
-if arguments.hasParametersForGithubNotification {
-    let notifier = GithubNotifier()
-    notifier.notify(using: environment, including: dataCapture, and: difference)
-}
-
-if arguments.hasParametersForSlackNotification {
-    let notifier = SlackNotifier()
-    notifier.notify(using: environment, including: dataCapture, and: difference)
-}
-
+let notifier = Notifier(environment: environment, dataCapture: dataCapture, difference: difference)
+notifier.notify()
 
 //
 //print("---")
