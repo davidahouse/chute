@@ -10,27 +10,23 @@ import Foundation
 
 class GithubNotifier {
 
-    func notify(using environment: Environment, including dataCapture: DataCapture, and difference: DataCaptureDifference?) {
-        
+    func notify(using environment: Environment, including dataCapture: DataCapture, publishedURL: String?) {
+    
+        if let repository = environment.arguments.githubRepository, let pullRequestNumber = environment.arguments.pullRequestNumber, let token = environment.arguments.githubToken {
+            
+            let comment = GithubDetailComment(dataCapture: dataCapture, publishedURL: publishedURL)
+            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
+        }
     }
-    
-    
-//    func notify(detail: ChuteDetail, using arguments: CommandLineArguments) {
-//
-//        if let repository = arguments.githubRepository, let pullRequestNumber = arguments.pullRequestNumber, let token = arguments.githubToken {
-//            let comment = GithubDetailComment(detail: detail)
-//            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
-//        }
-//    }
-//
-//    func notify(difference: ChuteDetailDifference, using arguments: CommandLineArguments) {
-//
-//        if let repository = arguments.githubRepository, let pullRequestNumber = arguments.pullRequestNumber, let token = arguments.githubToken {
-//
-//            let comment = GithubDetailDifferenceComment(difference: difference)
-//            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
-//        }
-//    }
+
+    func notify(using environment: Environment, including difference: DataCaptureDifference, publishedURL: String?) {
+
+        if let repository = environment.arguments.githubRepository, let pullRequestNumber = environment.arguments.pullRequestNumber, let token = environment.arguments.githubToken {
+            
+            let comment = GithubDetailDifferenceComment(difference: difference, publishedURL: publishedURL)
+            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
+        }
+    }
 
     private func send(comment: String, to repository: String, for pullRequest: String, using token: String) {
 

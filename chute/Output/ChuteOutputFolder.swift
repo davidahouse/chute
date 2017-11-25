@@ -10,7 +10,7 @@ import Foundation
 
 class ChuteOutputFolder {
 
-    private var outputFolderURL: URL {
+    var outputFolderURL: URL {
         let currentFolderURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
         return currentFolderURL.appendingPathComponent("chute_output")
     }
