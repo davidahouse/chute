@@ -18,6 +18,9 @@
 //      -githubRepository       The repository to use when posting a comment to github (format of <owner>/<repo>)
 //      -githubToken            The token to use for posting a comment to github
 //      -pullRequestNumber      The pull request number (optional)
+//      -githubPagesFolder      The root folder in Github Pages branch for publishing to
+//
+//      -publishRootURL         The root http url where the published files will be found
 
 import Foundation
 
@@ -30,9 +33,12 @@ struct CommandLineArguments {
     let githubRepository: String?
     let githubToken: String?
     let pullRequestNumber: String?
+    let githubPagesFolder: String?
 
     let slackWebhook: String?
 
+    let publishRootURL: String?
+    
     var hasRequiredParameters: Bool {
         return project != nil
     }
@@ -43,6 +49,10 @@ struct CommandLineArguments {
 
     var hasParametersForSlackNotification: Bool {
         return slackWebhook != nil
+    }
+    
+    var hasParametersForGithubPagesPublish: Bool {
+        return githubRepository != nil && githubToken != nil && githubPagesFolder != nil
     }
 
     init(arguments: [String] = CommandLine.arguments) {
@@ -63,8 +73,11 @@ struct CommandLineArguments {
         githubRepository = foundArguments["githubRepository"] != nil ? foundArguments["githubRepository"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_REPOSITORY"]
         githubToken = foundArguments["githubToken"] != nil ? foundArguments["githubToken"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_TOKEN"]
         pullRequestNumber = foundArguments["pullRequestNumber"] != nil ? foundArguments["pullRequestNumber"] : ProcessInfo.processInfo.environment["CHUTE_PULL_REQUEST_NUMBER"]
+        githubPagesFolder = foundArguments["githubPagesFolder"] != nil ? foundArguments["githubPagesFolder"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_PAGES_FOLDER"]
 
         slackWebhook = foundArguments["slackWebhook"] != nil ? foundArguments["slackWebhook"] : ProcessInfo.processInfo.environment["CHUTE_SLACK_WEBHOOK"]
+        
+        publishRootURL = foundArguments["publishRootURL"] != nil ? foundArguments["publishRootURL"] : ProcessInfo.processInfo.environment["CHUTE_PUBLISH_ROOT_URL"]
     }
 
     func printInstructions() {
@@ -74,7 +87,9 @@ struct CommandLineArguments {
         instructions += " [-githubRepository <githubRepository>]"
         instructions += " [-githubToken <githubToken>]"
         instructions += " [-pullRequestNumber <pullRequestNumber>]"
+        instructions += " [-githubPagesFolder <githubPagesFolder>]"
         instructions += " [-slackWebhook <slackWebhook>]"
+        instructions += " [-publishRootURL <publishRootURL>]"
         print(instructions)
     }
 }
@@ -88,6 +103,8 @@ extension CommandLineArguments: Printable {
         print("Github Repository: \(githubRepository ?? "")")
         print("Github Token: \(githubToken ?? "")")
         print("PR Number: \(pullRequestNumber ?? "")")
+        print("Github Pages Folder: \(githubPagesFolder ?? "")")
         print("Slack Webhook: \(slackWebhook ?? "")")
+        print("Publish Root URL: \(publishRootURL ?? "")")
     }
 }

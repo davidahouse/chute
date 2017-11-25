@@ -19,12 +19,14 @@ class SlackDetailMessage {
                     "color": "#36a64f",
                     "pretext": "Chute Detail",
                     "title": "Test Summary",
+                    "title_link": "{{report_link}}",
                     "text": "Total Tests: {{total_tests}}\nSuccess Tests: {{success_tests}}\nFailed Tests: {{failed_tests}}"
                 },
                 {
                     "fallback": "Code Coverage. Avg Coverage: {{average_coverage}}% Total Above 90%: {{total_above_90}} Total No Coverage: {{total_no_coverage}}",
                     "color": "#36a64f",
                     "title": "Code Coverage",
+                    "title_link": "{{report_link}}",
                     "text": "Avg Coverage: {{average_coverage}}\nTotal Above 90%: {{total_above_90}}\nTotal No Coverage: {{total_no_coverage}}"
                 }
             ]
@@ -32,21 +34,23 @@ class SlackDetailMessage {
         """
     }
 
-    var detail: DataCapture
-
+    var dataCapture: DataCapture
+    var publishedURL: String?
+    
     lazy var message: String = {
         self.generateMessage()
     }()
 
-    init(detail: DataCapture) {
-        self.detail = detail
+    init(dataCapture: DataCapture, publishedURL: String?) {
+        self.dataCapture = dataCapture
+        self.publishedURL = publishedURL
     }
 
     private func generateMessage() -> String {
         var totalTests = 0
         var successTests = 0
         var failedTests = 0
-        for result in detail.testResults {
+        for result in dataCapture.testResults {
             if result.testStatus == "Success" {
                 successTests += 1
             } else {
@@ -55,13 +59,21 @@ class SlackDetailMessage {
             totalTests += 1
         }
 
+        let reportLink: String = {
+            guard let publishedURL = publishedURL else {
+                return ""
+            }
+            return publishedURL
+        }()
+        
         let parameters: [String: CustomStringConvertible] = [
             "total_tests": totalTests,
             "success_tests": successTests,
             "failed_tests": failedTests,
-            "average_coverage": Int(round(detail.codeCoverageSummary.averageCoverage * 100)),
-            "total_above_90": detail.codeCoverageSummary.filesAdequatelyCovered,
-            "total_no_coverage": detail.codeCoverageSummary.filesWithNoCoverage
+            "average_coverage": Int(round(dataCapture.codeCoverageSummary.averageCoverage * 100)),
+            "total_above_90": dataCapture.codeCoverageSummary.filesAdequatelyCovered,
+            "total_no_coverage": dataCapture.codeCoverageSummary.filesWithNoCoverage,
+            "report_link": reportLink
         ]
         return Constants.MessageTemplate.render(parameters: parameters)
     }

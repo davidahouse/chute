@@ -19,18 +19,21 @@ class SlackDetailDifferenceMessage {
                     "color": "#36a64f",
                     "pretext": "Chute Difference",
                     "title": "Test Summary",
+                    "title_link": "{{report_link}}",
                     "text": "New Tests: {{new_tests}}\nChanged Tests: {{changed_tests}}\nRemoved Tests: {{removed_tests}}"
                 },
                 {
                     "fallback": "Code Coverage. Avg Coverage: {{average_coverage}}% ({{average_coverage_change}}%) ( Total Above 90%: {{total_above_90}} ({{total_above_90_change}}) Total No Coverage: {{total_no_coverage}} ({{total_no_coverage_change}})",
                     "color": "#36a64f",
                     "title": "Code Coverage",
+                    "title_link": "{{report_link}}",
                     "text": "Avg Coverage: {{average_coverage}}% ({{average_coverage_change}}%)\nTotal Above 90%: {{total_above_90}} ({{total_above_90_change}})\nTotal No Coverage: {{total_no_coverage}} ({{total_no_coverage_change}})"
                 },
                 {
                     "fallback": "Stylesheet. New Colors: {{new_colors}} Removed Colors: {{removed_colors}} New Fonts: {{new_fonts}} Removed Fonts: {{removed_fonts}}",
                     "color": "#36a64f",
                     "title": "Styles",
+                    "title_link": "{{report_link}}",
                     "text": "New Colors: {{new_colors}}\nRemoved Colors: {{removed_colors}}\nNew Fonts: {{new_fonts}}\nRemoved Fonts: {{removed_fonts}}"
                 }
             ]
@@ -39,13 +42,15 @@ class SlackDetailDifferenceMessage {
     }
 
     var difference: DataCaptureDifference
+    var publishedURL: String?
 
     lazy var message: String = {
         self.generateMessage()
     }()
 
-    init(difference: DataCaptureDifference) {
+    init(difference: DataCaptureDifference, publishedURL: String?) {
         self.difference = difference
+        self.publishedURL = publishedURL
     }
 
     private func generateMessage() -> String {
@@ -53,21 +58,28 @@ class SlackDetailDifferenceMessage {
         let total_above_90_change = difference.comparedTo.codeCoverageSummary.filesAdequatelyCovered - difference.detail.codeCoverageSummary.filesAdequatelyCovered
         let total_no_coverage_change = difference.comparedTo.codeCoverageSummary.filesWithNoCoverage - difference.detail.codeCoverageSummary.filesWithNoCoverage
 
+        let reportLink: String = {
+            guard let publishedURL = publishedURL else {
+                return ""
+            }
+            return publishedURL
+        }()
+        
         let parameters: [String: CustomStringConvertible] = [
-        :
-//            "new_tests": difference.testResultDifference.newTestResults.count,
-//            "changed_tests": difference.testResultDifference.changedTestResults.count,
-//            "removed_tests": difference.testResultDifference.removedTestResults.count,
-//            "average_coverage": Int(round(difference.comparedTo.codeCoverageSummary.averageCoverage * 100)),
-//            "average_coverage_change": Int(round(average_coverage_change * 100)),
-//            "total_above_90": difference.codeCoverageDifference.comparedToSummary.filesAdequatelyCovered,
-//            "total_above_90_change": total_above_90_change > 0 ? total_above_90_change : "",
-//            "total_no_coverage": difference.codeCoverageDifference.comparedToSummary.filesWithNoCoverage,
-//            "total_no_coverage_change": total_no_coverage_change > 0 ? total_no_coverage_change : "",
-//            "new_colors": difference.styleSheetDifference.newColors.count,
-//            "removed_colors": difference.styleSheetDifference.removedColors.count,
-//            "new_fonts": difference.styleSheetDifference.newFonts.count,
-//            "removed_fonts": difference.styleSheetDifference.removedFonts.count
+            "new_tests": difference.testResultDifference.newTestResults.count,
+            "changed_tests": difference.testResultDifference.changedTestResults.count,
+            "removed_tests": difference.testResultDifference.removedTestResults.count,
+            "average_coverage": Int(round(difference.comparedTo.codeCoverageSummary.averageCoverage * 100)),
+            "average_coverage_change": Int(round(average_coverage_change * 100)),
+            "total_above_90": difference.codeCoverageDifference.comparedToSummary.filesAdequatelyCovered,
+            "total_above_90_change": total_above_90_change > 0 ? total_above_90_change : "",
+            "total_no_coverage": difference.codeCoverageDifference.comparedToSummary.filesWithNoCoverage,
+            "total_no_coverage_change": total_no_coverage_change > 0 ? total_no_coverage_change : "",
+            "new_colors": difference.styleSheetDifference.newColors.count,
+            "removed_colors": difference.styleSheetDifference.removedColors.count,
+            "new_fonts": difference.styleSheetDifference.newFonts.count,
+            "removed_fonts": difference.styleSheetDifference.removedFonts.count,
+            "report_link": reportLink
         ]
         return Constants.MessageTemplate.render(parameters: parameters)
     }
