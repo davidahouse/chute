@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Chute Report</title>
+        <title>Chute Difference Report</title>
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -17,9 +17,65 @@
         <![endif]-->
         </head>
         <body>
+        <style>
+            .summary {
+                 -webkit-column-count: 3; /* Chrome, Safari, Opera */
+                 -moz-column-count: 3; /* Firefox */
+                 column-count: 3;
+            }
+            .summary-2-column {
+                 -webkit-column-count: 2; /* Chrome, Safari, Opera */
+                 -moz-column-count: 2; /* Firefox */
+                 column-count: 2;
+            }
+            .summary-1-column {
+                 -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                 -moz-column-count: 1; /* Firefox */
+                 column-count: 1;
+            }
+            .summary-iten {
+                 -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                 -moz-column-count: 1; /* Firefox */
+                 column-count: 1;
+                text-align: center;
+                padding: 7px 7px;
+            }
+            .summary-item-text {
+                text-align: center;
+            }
+            .gallery {
+                 -webkit-column-count: 3; /* Chrome, Safari, Opera */
+                 -moz-column-count: 3; /* Firefox */
+                 column-count: 3;
+            }
+            .gallery img{ width: 100%; padding: 7px 0; margin-bottom: 7px; }
+            @media (max-width: 500px) {
+                .gallery {
+                    -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                    -moz-column-count: 1; /* Firefox */
+                    column-count: 1;
+                }
+            }
+            .gallery-image {
+                border: 1px solid lightgray;
+                margin-bottom: 7px;
+                border-radius: 5px;
+                width: 100%;
+                height: auto;
+                display: inline-block;
+            }
+            .gallery-image > h5 {
+                color: #777;
+                padding: 7px 5px 0px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                border-bottom: 1px solid lightgray;
+            }
+        </style>
         <div class="container">
         <div class="jumbotron">
-<h1>Chute Test Report</h1>
+<h1>Chute Difference Report</h1>
 <div>
 <p>Project: ChuteExample.xcodeproj</p>
 <p>Origin Branch: </p>
@@ -27,57 +83,267 @@
 </div>
 </div>
 <div class="jumbotron">
-<h3>Test Summary</h3>
-<div class="table-responsive">
-<table class="table table-striped">
-<tbody>
-<tr>
-<td class="info">New Tests: 2</td>
-<td class="success">Changed Tests: 3</td>
-<td class="danger">Removed Tests: 1</td>
-</tr>
-</tbody>
-</table>
-</div>
+<h3>Summary</h3>
 <div>
-<a href="test_details_difference.html">Test Difference Details</a>
+<div class="summary">
+    <div class="summary-item alert alert-success">
+        <div class="summary-item-text"><h1>2</h1></div>
+        <div class="summary-item-text"><h3>New Tests</h3></div>
+    </div>
+
+    <div class="summary-item alert alert-info">
+        <div class="summary-item-text"><h1>1</h1></div>
+        <div class="summary-item-text"><h3>Changed Tests</h3></div>
+    </div>
+
+    <div class="summary-item alert alert-danger">
+        <div class="summary-item-text"><h1>1</h1></div>
+        <div class="summary-item-text"><h3>Removed Tests</h3></div>
+    </div>
+</div>
+ <div class="summary">
+    <div class="summary-item alert alert-info">
+        <div class="summary-item-text"><h1>92 %</h1><span class="badge badge-danger">-8%</span></div>
+        <div class="summary-item-text"><h3>Avg Coverage</h3></div>
+    </div>
+
+    <div class="summary-item alert alert-info">
+        <div class="summary-item-text"><h1>1</h1><span class="badge badge-success">0</span></div>
+        <div class="summary-item-text"><h3>Above 90% Coverage</h3></div>
+    </div>
+
+    <div class="summary-item alert alert-info">
+        <div class="summary-item-text"><h1>0</h1><span class="badge badge-success">0</span></div>
+        <div class="summary-item-text"><h3>No Coverage</h3></div>
+    </div>
+</div>
+<div class="summary-2-column">
+    <div class="summary-item alert alert-info">
+        <div class="summary-item-text"><h1>2</h1></div>
+        <div class="summary-item-text"><h3>New Views Captured</h3></div>
+    </div>
+
+    <div class="summary-item alert alert-info">
+        <div class="summary-item-text"><h1>2</h1></div>
+        <div class="summary-item-text"><h3>Changed Views</h3></div>
+    </div>
+</div>
+<div class="summary-2-column">
+    <div class="summary-item alert alert-info">
+        <div class="summary-item-text"><h1>1</h1></div>
+        <div class="summary-item-text"><h3>New Colors</h3></div>
+    </div>
+
+    <div class="summary-item alert alert-success">
+        <div class="summary-item-text"><h1>1</h1></div>
+        <div class="summary-item-text"><h3>Removed Colors</h3></div>
+    </div>
+</div>
+
+<div class="summary-2-column">
+    <div class="summary-item alert alert-info">
+        <div class="summary-item-text"><h1>1</h1></div>
+        <div class="summary-item-text"><h3>New Fonts</h3></div>
+    </div>
+
+    <div class="summary-item alert alert-success">
+        <div class="summary-item-text"><h1>0</h1></div>
+        <div class="summary-item-text"><h3>Removed Fonts</h3></div>
+    </div>
+</div>
 </div>
 </div>
 <div class="jumbotron">
-<h3>Code Coverage</h3>
+<h3>New Tests</h3>
 <div class="table-responsive">
-<table class="table table-striped">
+<table class="table">
 <tbody>
-<tr>
-<td class="info">Average Coverage: 92% <span class="badge badge-danger">-8%</span></td>
-<td class="info">Total Files Above 90%: 1 <span class="badge badge-success">0%</span></td>
-<td class="info">Total Files With No Coverage: 0 <span class="badge badge-success">0%</span></td>
-</tr>
+<tr><td><strong>ViewControllerTests</strong></td></tr>
+<tr class="table-success"><td>testOneMoreAdditionalTest</td></tr><tr class="table-success"><td>testViewControllerWithNewDetailsTest</td></tr>
 </tbody>
 </table>
-</div>
-<div>
-<a href="code_coverage_difference.html">Code Coverage Details</a>
 </div>
 </div>
 <div class="jumbotron">
-<h3>Style Sheet</h3>
-<div>
+<h3>Changed Tests</h3>
 <div class="table-responsive">
-<table class="table table-striped">
+<table class="table">
 <tbody>
-<tr>
-<td class="info">Colors Added: 1</td>
-<td class="info">Colors Removed: 1</td>
-<td class="info">Fonts Added: 0</td>
-<td class="info">Fonts Removed: 0</td>
-</tr>
+<tr><td><strong>ViewControllerTests</strong></td></tr>
+<tr class="table-success"><td>testOneTestFailsForReporting</td></tr>
 </tbody>
 </table>
 </div>
-<a href="style_sheet_difference.html">Style Sheet Details</a>
+</div>
+<div class="jumbotron">
+<h3>Removed Tests</h3>
+<div class="table-responsive">
+<table class="table">
+<tbody>
+<tr><td><strong>ViewControllerTests</strong></td></tr>
+<tr class="table-info"><td>testViewControllerWithTwoDetails</td></tr>
+</tbody>
+</table>
 </div>
 </div>
+    <div class="jumbotron">
+    <h3>Code Coverage Details</h3>
+    <div class="table-responsive">
+    <table class="table">
+    <thead>
+    <th>Target</th>
+    <th>File</th>
+    <th>Coverage</th>
+    </thead>
+    <tbody>
+        <tr class="table-success">
+    <td>ChuteExample.app</td>
+    <td>ViewController.swift</td>
+    <td>92% <span class="badge badge-danger">-8%</span></td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+<style>
+.gallery {
+     -webkit-column-count: 3; /* Chrome, Safari, Opera */
+     -moz-column-count: 3; /* Firefox */
+     column-count: 3;
+}
+.gallery img{ width: 100%; padding: 7px 0; margin-bottom: 7px; }
+@media (max-width: 500px) {
+    .gallery {
+        -webkit-column-count: 1; /* Chrome, Safari, Opera */
+        -moz-column-count: 1; /* Firefox */
+        column-count: 1;
+    }
+}
+.gallery-image {
+    border: 1px solid lightgray;
+    margin-bottom: 17px;
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+}
+.gallery-image > h5 {
+    color: #777;
+    padding: 7px 5px 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid lightgray;
+}
+.compare-gallery {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+.compare-gallery img{ width: 100%; padding: 7px 0; margin-bottom: 7px; }
+</style>
+<div class="jumbotron">
+<h1>View Difference Details</h1>
+
+<h3>New Views:</h3>
+<div class="gallery">
+<div class="gallery-image">
+    <h5>ViewControllerWithFullConfigureNewScreenshot</h5>
+    <img src="attachments/ViewControllerWithFullConfigureNewScreenshot_1_DCE21F39-50B8-4180-BD1D-31A6C1450C6A.png" alt="ViewControllerWithFullConfigureNewScreenshot">
+</div><div class="gallery-image">
+    <h5>ViewControllerWithNewDetails</h5>
+    <img src="attachments/ViewControllerWithNewDetails_1_EA5D132A-EEA3-4729-9E57-B1CB88508B1F.png" alt="ViewControllerWithNewDetails">
+</div>
+</div>
+
+<h3>Changed Views:</h3>
+<div class="compare-gallery">
+    <div class="gallery-image">
+        <h5>BEFORE ViewControllerWithFullConfigure</h5>
+        <img src="attachments/before_ViewControllerWithFullConfigure_1_218A9624-A5ED-4340-A9F8-B7C0EFFCC115.png" alt="ViewControllerWithFullConfigure">
+    </div>
+    <div class="gallery-image">
+        <h5>AFTER ViewControllerWithFullConfigure</h5>
+        <img src="attachments/ViewControllerWithFullConfigure_1_B4E4DBAD-5947-46E9-A20F-047760A6E9F5.png" alt="ViewControllerWithFullConfigure">
+    </div>
+</div><div class="compare-gallery">
+    <div class="gallery-image">
+        <h5>BEFORE ViewControllerWithFirstDetailOnly</h5>
+        <img src="attachments/before_ViewControllerWithFirstDetailOnly_1_F6423955-4EA8-4FD9-BAB9-EBFB7D5DA4A1.png" alt="ViewControllerWithFirstDetailOnly">
+    </div>
+    <div class="gallery-image">
+        <h5>AFTER ViewControllerWithFirstDetailOnly</h5>
+        <img src="attachments/ViewControllerWithFirstDetailOnly_1_3A72F6F5-AAA1-44A0-9A9B-EC567A5DACBD.png" alt="ViewControllerWithFirstDetailOnly">
+    </div>
+</div>
+</div>
+    <div class="jumbotron">
+    <h1>Chute Style Sheet Report</h1>
+    </div>
+    <div class="jumbotron">
+    <h3>Colors</h3>
+    <div class="table-responsive">
+    <table class="table">
+    <thead>
+    <th>Colors Added</th>
+    <th></th>
+    </thead>
+    <tbody>
+        <tr><td>
+    <div class="color-swatch" style="background-color:#00FF00;float: left;width: 60px;height: 60px;margin: 0 5px;border-radius: 3px">
+    </div></td><td>#00FF00</td>
+    </tr>
+    <tr><td colspan="2">
+    UIView:UIStackView:UIStackView
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <div class="table-responsive">
+    <table class="table">
+    <thead>
+    <th>Colors Removed</th>
+    <th></th>
+    </thead>
+    <tbody>
+        <tr><td>
+    <div class="color-swatch" style="background-color:#FF0000;float: left;width: 60px;height: 60px;margin: 0 5px;border-radius: 3px">
+    </div></td><td>#FF0000</td>
+    </tr>
+    <tr><td colspan="2">
+    UIView:UIStackView:UIStackView
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    <div class="jumbotron">
+    <h3>Fonts</h3>
+    <div class="table-responsive">
+    <table class="table">
+    <thead>
+    <th>Font Added</th>
+    <th></th>
+    </thead>
+    <tbody>
+        <tr><td>.SFUIText</td><td>19</td></tr>
+    </tbody>
+    </table>
+    </div>
+    <div class="table-responsive">
+    <table class="table">
+    <thead>
+    <th>Font Removed</th>
+    <th></th>
+    </thead>
+    <tbody>
+    
+    </tbody>
+    </table>
+    </div>
+    </div>
         </div>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
