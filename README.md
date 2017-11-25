@@ -44,6 +44,17 @@ Use `captureStyleSheetInfo(using:title:)` to capture the style sheet information
 
 Use `chuteCaptureViewController(viewController:title:)` to capture the screenshot and style sheet information for a view controller. It is a convenience for the above two methods.
 
+# Publishing chute reports to github pages
+
+Chute can publish reports to a repositories github pages branch, then use that link when generating github or slack notifications.
+
+|   |   |
+|---|---|
+| -githubRepository <repository> | Repository should be in the format <username>/<repository>. For example: davidahouse/ChuteExample |
+| -githubToken <token> | Personal access token [Github doc](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) |
+| -githubPagesFolder <folder> | The folder in github pages to use as a root for the chute generated reports. Chute will generate a sub-folder under this root for each test execution date found. |
+| -publishRootURL <url> | The URL to use as a base for the links in notifications. For github pages publishing, this root url can be found in the settings page of the repository. |
+
 # Generating github PR comments
 
 To create comments on a github pull request, just set the following parameters on the `chute` command line:
@@ -69,11 +80,12 @@ The github comment contains a summary of the chute execution.
 - [X] Implement comparison between saved capture and current capture
 - [X] Remove `xcov` dependency for code coverage stats
 - [X] Separate screenshots into their own report and show screens in a more easily digested format
-- [ ] Allow chute to update Pull Request with capture summary & link for full reports using github pages
-- [ ] Allow chute to use github pages saved data as source of comparison
-- [ ] Support Android testing and view capture
+- [X] Allow chute to update Pull Request with capture summary & link for full reports using github pages
+- [X] Allow chute to use github pages saved data as source of comparison
+- [ ] Improved helper library for capturing view controllers, views and windows
 - [ ] Make chute more generic by creating a plugin system that allows others to easily create new report types
 - [ ] Capture non-test related data such as lines of code, project settings, etc.
+- [ ] Support Android testing and view capture
 - [ ] Brew formula to make install easier
 - [ ] Fastlane action for executing chute easier
 - [ ] Danger.systems plugin for updating Pull Request with summary
