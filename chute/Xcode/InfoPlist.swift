@@ -21,7 +21,8 @@ struct InfoPlist: Codable {
 extension InfoPlist {
 
     static func from(file: URL) -> InfoPlist? {
-        if let data = try? Data(contentsOf: file) {
+        do {
+            let data = try Data(contentsOf: file)
             let decoder = PropertyListDecoder()
             do {
                 let plist = try decoder.decode(InfoPlist.self, from: data)
@@ -29,6 +30,8 @@ extension InfoPlist {
             } catch {
                 print(error)
             }
+        } catch {
+            print("Error reading plist file: \(error)")
         }
         return nil
     }

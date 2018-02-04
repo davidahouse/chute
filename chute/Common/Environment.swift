@@ -38,7 +38,7 @@ class Environment {
         let projectFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(project)
         self.projectFileURL = projectFileURL
 
-        self.derivedData = DerivedData(projectFileURL: projectFileURL)
+        self.derivedData = DerivedData(projectFileURL: projectFileURL, derivedDataFolder: arguments.derivedDataFolder)
     }
 }
 

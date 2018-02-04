@@ -15,7 +15,7 @@ class GithubNotifier {
         if let repository = environment.arguments.githubRepository, let pullRequestNumber = environment.arguments.pullRequestNumber, let token = environment.arguments.githubToken {
             
             let comment = GithubDetailComment(dataCapture: dataCapture, publishedURL: publishedURL)
-            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
+            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token, apiurl: environment.arguments.githubAPIURL)
         }
     }
 
@@ -24,14 +24,14 @@ class GithubNotifier {
         if let repository = environment.arguments.githubRepository, let pullRequestNumber = environment.arguments.pullRequestNumber, let token = environment.arguments.githubToken {
             
             let comment = GithubDetailDifferenceComment(difference: difference, publishedURL: publishedURL)
-            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token)
+            send(comment: comment.comment, to: repository, for: pullRequestNumber, using: token, apiurl: environment.arguments.githubAPIURL)
         }
     }
 
-    private func send(comment: String, to repository: String, for pullRequest: String, using token: String) {
+    private func send(comment: String, to repository: String, for pullRequest: String, using token: String, apiurl: String?) {
 
         // Create a URL for this request
-        let urlString = "https://api.github.com/repos/\(repository)/issues/\(pullRequest)/comments"
+        let urlString = "https://\(apiurl ?? "api.github.com")/repos/\(repository)/issues/\(pullRequest)/comments"
         guard let postURL = URL(string: urlString) else {
             print("--- Error creating URL for posting to github: \(urlString)")
             return
