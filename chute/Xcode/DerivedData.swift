@@ -15,10 +15,17 @@ class DerivedData {
     lazy var rootURL: URL? = {
         if let paths = try? FileManager.default.contentsOfDirectory(atPath: self.derivedDataURL.path) {
             
+            // First check root of derivedData for info.plist
+            let url = derivedDataURL.appendingPathComponent("info.plist")
+            if let plist = InfoPlist.from(file: url) {
+                if plist.workspacePath == projectFileURL.path {
+                    return derivedDataURL
+                }
+            }
+            
             for path in paths {
                 let url = derivedDataURL.appendingPathComponent(path).appendingPathComponent("info.plist")
                 if let plist = InfoPlist.from(file: url) {
-                    print(plist.workspacePath)
                     if plist.workspacePath == projectFileURL.path {
                         return derivedDataURL.appendingPathComponent(path)
                     }
@@ -40,30 +47,16 @@ class DerivedData {
         return nil
     }()
     
-    init(projectFileURL: URL) {
-        let userPath = NSHomeDirectory()
-        let userPathURL = URL(fileURLWithPath: userPath)
-        derivedDataURL = userPathURL.appendingPathComponents(["Library", "Developer", "Xcode", "DerivedData"])
-        self.projectFileURL = projectFileURL
-    }
-    
-    static func pathFor(project: String) -> URL? {
-
-        let userPath = NSHomeDirectory()
-        let userPathURL = URL(fileURLWithPath: userPath)
-        let rootURL = userPathURL.appendingPathComponents(["Library", "Developer", "Xcode", "DerivedData"])
-        if let paths = try? FileManager.default.contentsOfDirectory(atPath: rootURL.path) {
-
-            for path in paths {
-                let url = rootURL.appendingPathComponent(path).appendingPathComponent("info.plist")
-                if let plist = InfoPlist.from(file: url) {
-                    if plist.workspacePath == project {
-                        return rootURL.appendingPathComponent(path)
-                    }
-                }
-            }
+    init(projectFileURL: URL, derivedDataFolder: String?) {
+        
+        if let derivedDataFolder = derivedDataFolder {
+            derivedDataURL = URL(fileURLWithPath: derivedDataFolder)
+        } else {
+            let userPath = NSHomeDirectory()
+            let userPathURL = URL(fileURLWithPath: userPath)
+            derivedDataURL = userPathURL.appendingPathComponents(["Library", "Developer", "Xcode", "DerivedData"])
         }
-        return nil
+        self.projectFileURL = projectFileURL
     }
 
     static func recentTestSummary(projectFolder: URL) -> TestSummaryFolder? {
