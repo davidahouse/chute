@@ -21,7 +21,10 @@
 //      -githubPagesFolder      The root folder in Github Pages branch for publishing to
 //
 //      -publishRootURL         The root http url where the published files will be found
+//      -githubHost             The host name if using github enterprise
+//      -githubAPIURL           The API URL if using github enterprise
 
+//      -derivedDataFolder            Root folder for DerivedData
 import Foundation
 
 struct CommandLineArguments {
@@ -34,10 +37,14 @@ struct CommandLineArguments {
     let githubToken: String?
     let pullRequestNumber: String?
     let githubPagesFolder: String?
-
+    let githubHost: String?
+    let githubAPIURL: String?
+    
     let slackWebhook: String?
 
     let publishRootURL: String?
+    
+    let derivedDataFolder: String?
     
     var hasRequiredParameters: Bool {
         return project != nil
@@ -78,6 +85,11 @@ struct CommandLineArguments {
         slackWebhook = foundArguments["slackWebhook"] != nil ? foundArguments["slackWebhook"] : ProcessInfo.processInfo.environment["CHUTE_SLACK_WEBHOOK"]
         
         publishRootURL = foundArguments["publishRootURL"] != nil ? foundArguments["publishRootURL"] : ProcessInfo.processInfo.environment["CHUTE_PUBLISH_ROOT_URL"]
+        
+        githubHost = foundArguments["githubHost"] != nil ? foundArguments["githubHost"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_HOST"]
+        githubAPIURL = foundArguments["githubAPIURL"] != nil ? foundArguments["githubAPIURL"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_APIURL"]
+        
+        derivedDataFolder = foundArguments["derivedDataFolder"] != nil ? foundArguments["derivedDataFolder"] : ProcessInfo.processInfo.environment["CHUTE_DERIVED_DATA_FOLDER"];
     }
 
     func printInstructions() {
@@ -90,6 +102,9 @@ struct CommandLineArguments {
         instructions += " [-githubPagesFolder <githubPagesFolder>]"
         instructions += " [-slackWebhook <slackWebhook>]"
         instructions += " [-publishRootURL <publishRootURL>]"
+        instructions += " [-githubHost <githubHost>]"
+        instructions += " [-githubAPIURL <githubAPIURL>]"
+        instructions += " [-derivedDataFolder <derivedDataFolder>]"
         print(instructions)
     }
 }
@@ -106,5 +121,8 @@ extension CommandLineArguments: Printable {
         print("Github Pages Folder: \(githubPagesFolder ?? "")")
         print("Slack Webhook: \(slackWebhook ?? "")")
         print("Publish Root URL: \(publishRootURL ?? "")")
+        print("Github Host: \(githubHost ?? "")")
+        print("Github API URL: \(githubAPIURL ?? "")")
+        print("Derived Data Folder: \(derivedDataFolder ?? "")")
     }
 }
