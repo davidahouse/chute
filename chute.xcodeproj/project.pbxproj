@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C363C77A2037C1CA0051BB38 /* BuildFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C7792037C1CA0051BB38 /* BuildFolder.swift */; };
+		C363C77E2037CD090051BB38 /* XcodeDataCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C77D2037CD090051BB38 /* XcodeDataCapture.swift */; };
+		C363C7802037D0450051BB38 /* AndroidDataCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C77F2037D0450051BB38 /* AndroidDataCapture.swift */; };
+		C363C7832037D58A0051BB38 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C363C7822037D58A0051BB38 /* libxml2.tbd */; };
+		C363C785203861900051BB38 /* JUnitTestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C784203861900051BB38 /* JUnitTestDetails.swift */; };
 		DC0ADC3D1FC9B2A400502EA3 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0ADC3C1FC9B2A400502EA3 /* Notifier.swift */; };
 		DC0E13991F5CE25E00525E5B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E13981F5CE25E00525E5B /* main.swift */; };
 		DC0E13A01F5CE59500525E5B /* DerivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E139F1F5CE59500525E5B /* DerivedData.swift */; };
@@ -98,6 +103,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C363C7792037C1CA0051BB38 /* BuildFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildFolder.swift; sourceTree = "<group>"; };
+		C363C77D2037CD090051BB38 /* XcodeDataCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeDataCapture.swift; sourceTree = "<group>"; };
+		C363C77F2037D0450051BB38 /* AndroidDataCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AndroidDataCapture.swift; sourceTree = "<group>"; };
+		C363C7822037D58A0051BB38 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		C363C784203861900051BB38 /* JUnitTestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JUnitTestDetails.swift; sourceTree = "<group>"; };
 		DC0ADC3C1FC9B2A400502EA3 /* Notifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifier.swift; sourceTree = "<group>"; };
 		DC0E13951F5CE25E00525E5B /* chute */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = chute; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0E13981F5CE25E00525E5B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -170,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C363C7832037D58A0051BB38 /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,12 +194,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C363C7782037C1360051BB38 /* Android */ = {
+			isa = PBXGroup;
+			children = (
+				C363C7792037C1CA0051BB38 /* BuildFolder.swift */,
+			);
+			path = Android;
+			sourceTree = "<group>";
+		};
+		C363C77B2037CCC70051BB38 /* Xcode */ = {
+			isa = PBXGroup;
+			children = (
+				C363C77D2037CD090051BB38 /* XcodeDataCapture.swift */,
+			);
+			path = Xcode;
+			sourceTree = "<group>";
+		};
+		C363C77C2037CCD20051BB38 /* Android */ = {
+			isa = PBXGroup;
+			children = (
+				C363C77F2037D0450051BB38 /* AndroidDataCapture.swift */,
+			);
+			path = Android;
+			sourceTree = "<group>";
+		};
+		C363C7812037D5890051BB38 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C363C7822037D58A0051BB38 /* libxml2.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DC0E138C1F5CE25E00525E5B = {
 			isa = PBXGroup;
 			children = (
 				DC0E13971F5CE25E00525E5B /* chute */,
 				DC26B59F1F997F63002541C6 /* chuteTests */,
 				DC0E13961F5CE25E00525E5B /* Products */,
+				C363C7812037D5890051BB38 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -212,6 +256,7 @@
 				DC3062941FA9EF9A002332F6 /* Notifications */,
 				DC42CF251F922F7700279110 /* Output */,
 				DC662CF91FC86DF800F92B85 /* Publishing */,
+				C363C7782037C1360051BB38 /* Android */,
 				DC42CF291F926D4700279110 /* Xcode */,
 				DC0E13981F5CE25E00525E5B /* main.swift */,
 			);
@@ -270,6 +315,7 @@
 			children = (
 				DCE21A541F6A11C900E36E88 /* CodeCoverage.swift */,
 				DC0E13A31F5CEC7500525E5B /* TestSummary.swift */,
+				C363C784203861900051BB38 /* JUnitTestDetails.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -335,6 +381,8 @@
 		DCA7E1AB1FBD100D00E2ACEB /* DataCapture */ = {
 			isa = PBXGroup;
 			children = (
+				C363C77C2037CCD20051BB38 /* Android */,
+				C363C77B2037CCC70051BB38 /* Xcode */,
 				DCA7E1AC1FBD109C00E2ACEB /* DataCapture.swift */,
 				DCF058D51FBD319700D4C520 /* DataCaptureDifference.swift */,
 			);
@@ -520,6 +568,8 @@
 				DCA7E1AD1FBD109C00E2ACEB /* DataCapture.swift in Sources */,
 				DC83CD781FAD56CC0026092B /* SlackDetailMessage.swift in Sources */,
 				DCF058F81FBDFF8600D4C520 /* DifferenceReportSummaryTests.swift in Sources */,
+				C363C77E2037CD090051BB38 /* XcodeDataCapture.swift in Sources */,
+				C363C785203861900051BB38 /* JUnitTestDetails.swift in Sources */,
 				DCF555311F6610DB001567A5 /* CommandLine.swift in Sources */,
 				DC662CFD1FC8714400F92B85 /* GithubPagesPublisher.swift in Sources */,
 				DCF058FE1FBE010A00D4C520 /* DifferenceReportSummaryStyleSheet.swift in Sources */,
@@ -529,6 +579,7 @@
 				DCBB99C21FA8BA02007198BB /* ChuteStyleSheetDifference.swift in Sources */,
 				DC86EF801FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift in Sources */,
 				DC83CD7A1FADF4A50026092B /* SlackDetailDifferenceMessage.swift in Sources */,
+				C363C77A2037C1CA0051BB38 /* BuildFolder.swift in Sources */,
 				DCF058D91FBDD8CE00D4C520 /* CaptureReport.swift in Sources */,
 				DCF058D61FBD319700D4C520 /* DataCaptureDifference.swift in Sources */,
 				DCF058FA1FBE00EF00D4C520 /* DifferenceReportSummaryCodeCoverage.swift in Sources */,
@@ -540,6 +591,7 @@
 				DC42CF341F92A29C00279110 /* ChuteCodeCoverage.swift in Sources */,
 				DCF059001FBE011600D4C520 /* DifferenceReportDetail.swift in Sources */,
 				DC0ADC3D1FC9B2A400502EA3 /* Notifier.swift in Sources */,
+				C363C7802037D0450051BB38 /* AndroidDataCapture.swift in Sources */,
 				DCF059041FBE013300D4C520 /* DifferenceReportDetailCodeCoverage.swift in Sources */,
 				DCF059021FBE012200D4C520 /* DifferenceReportDetailTests.swift in Sources */,
 				DCACC6BE1FA6483600697691 /* ChuteTestResultDifference.swift in Sources */,
