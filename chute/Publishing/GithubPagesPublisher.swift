@@ -55,6 +55,7 @@ class GithubPagesPublisher {
             print("Erorr creating directory \(error)")
         }
         print("Publish root folder: \(publishRootURL)")
+        print("Publish execution url: \(publishExecutionRootURL)")
         
         // Do a git clone from the repo using gh-pages branch into /tmp/chute
         let output = Execute.shell(command: ["-l", "-c", "cd \(publishRootURL.path) && git clone -b gh-pages git@\(environment.arguments.githubHost ?? "github.com"):\(repository).git gh-pages"])
@@ -64,7 +65,7 @@ class GithubPagesPublisher {
         do {
             try FileManager.default.copyItem(at: outputFolder.outputFolderURL, to: publishExecutionRootURL)
         } catch {
-            print("Error copying output folder")
+            print("Error copying output folder: \(error.localizedDescription)")
         }
         print("Copied chute output folder to tmp folder")
         
