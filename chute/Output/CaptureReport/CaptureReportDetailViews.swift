@@ -32,7 +32,7 @@ struct CaptureReportDetailViews: ChuteOutputRenderable {
     func render(dataCapture: DataCapture) -> String {
         
         var screenshots = ""
-        for attachment in dataCapture.attachments {
+        for attachment in dataCapture.attachments.sortedByName() {
             let attachmentParameters: [String: CustomStringConvertible] = [
                 "attachment_name": attachment.attachmentName,
                 "attachment_file_name": attachment.attachmentFileName
