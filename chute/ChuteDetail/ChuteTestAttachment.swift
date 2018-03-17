@@ -71,3 +71,10 @@ extension ChuteTestAttachment {
         return results
     }
 }
+
+extension Array where Element == ChuteTestAttachment {
+    
+    func sortedByName() -> [ChuteTestAttachment] {
+        return self.sorted(by: { $0.attachmentName < $1.attachmentName })
+    }
+}
