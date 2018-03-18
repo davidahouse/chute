@@ -24,13 +24,6 @@ class GithubPagesPublisher {
         return self.publishRootURL.appendingPathComponent("gh-pages")
     }()
     
-    lazy var publishExecutionRootURL: URL = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMddHHmmss"
-        let folderName = formatter.string(from: testExecutionDate)
-        return self.publishClonedURL.appendingPathComponent(folderName)
-    }()
-    
     init(environment: Environment, outputFolder: ChuteOutputFolder, testExecutionDate: Date) {
         self.environment = environment
         self.outputFolder = outputFolder
@@ -55,15 +48,21 @@ class GithubPagesPublisher {
             print("Erorr creating directory \(error)")
         }
         print("Publish root folder: \(publishRootURL)")
-        print("Publish execution url: \(publishExecutionRootURL)")
+        print("Publish execution url: \(publishExecutionRootURL())")
         
         // Do a git clone from the repo using gh-pages branch into /tmp/chute
         let output = Execute.shell(command: ["-l", "-c", "cd \(publishRootURL.path) && git clone -b gh-pages git@\(environment.arguments.githubHost ?? "github.com"):\(repository).git gh-pages"])
         print(output ?? "")
         
+        // Erase any existing output at our publish url but ignore errors since this
+        // folder might not exist yet
+        do {
+            try FileManager.default.removeItem(at: publishExecutionRootURL())
+        } catch { }
+        
         // Copy the reports & attachments
         do {
-            try FileManager.default.copyItem(at: outputFolder.outputFolderURL, to: publishExecutionRootURL)
+            try FileManager.default.copyItem(at: outputFolder.outputFolderURL, to: publishExecutionRootURL())
         } catch {
             print("Error copying output folder: \(error.localizedDescription)")
         }
@@ -83,5 +82,21 @@ class GithubPagesPublisher {
         do {
             try FileManager.default.removeItem(at: publishRootURL)
         } catch { }
+    }
+    
+    private func publishExecutionRootURL() -> URL {
+
+        let folderName: String = {
+            
+            if let pullRequestNumber = arguments.pullRequestNumber {
+                return pullRequestNumber
+            } else if let branch = arguments.branch {
+                return branch
+            } else {
+                return "chute"
+            }
+        }()
+        
+        return self.publishClonedURL.appendingPathComponent(folderName)
     }
 }
