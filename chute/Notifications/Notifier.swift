@@ -19,9 +19,17 @@ class Notifier {
             return nil
         }
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMddHHmmss"
-        let folderName = formatter.string(from: self.dataCapture.testExecutionDate)
+        let folderName: String = {
+        
+            if let pullRequestNumber = arguments.pullRequestNumber {
+                return pullRequestNumber
+            } else if let branch = arguments.branch {
+                return branch
+            } else {
+                return "chute"
+            }
+        }()
+
         let captureURL = rootURL.appendingPathComponents([folderName, "chute.html"])
         return captureURL.description
     }()
@@ -31,9 +39,17 @@ class Notifier {
             return nil
         }
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMddHHmmss"
-        let folderName = formatter.string(from: self.dataCapture.testExecutionDate)
+        let folderName: String = {
+            
+            if let pullRequestNumber = arguments.pullRequestNumber {
+                return pullRequestNumber
+            } else if let branch = arguments.branch {
+                return branch
+            } else {
+                return "chute"
+            }
+        }()
+        
         let captureURL = rootURL.appendingPathComponents([folderName, "chute_difference.html"])
         return captureURL.description
     }()

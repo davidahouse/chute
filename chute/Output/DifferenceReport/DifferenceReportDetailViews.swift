@@ -95,7 +95,7 @@ struct DifferenceReportDetailViews: ChuteOutputDifferenceRenderable {
 
     private func newViews(difference: DataCaptureDifference) -> String {
         var views = ""
-        for attachment in difference.viewDifference.newViews {
+        for attachment in difference.viewDifference.newViews.sortedByName() {
             let attachmentParameters: [String: CustomStringConvertible] = [
                 "attachment_name": attachment.attachmentName,
                 "attachment_file_name": attachment.attachmentFileName
