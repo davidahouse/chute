@@ -22,6 +22,7 @@ struct JUnitTestCase {
     let name: String
     let classname: String
     let time: Double
+    let status: String
 }
 
 class JUnitTestDetails: NSObject {
@@ -30,6 +31,11 @@ class JUnitTestDetails: NSObject {
     private var parser: XMLParser?
     private var currentTestSuiteAttributes: [String: String]?
     private var currentTestCases: [JUnitTestCase]
+    
+    private var currentName: String?
+    private var currentClass: String?
+    private var currentTime: Double?
+    private var currentTestCaseFailure: Bool = false
     
     var testSuites: [JUnitTestSuite]
     
@@ -55,9 +61,13 @@ extension JUnitTestDetails: XMLParserDelegate {
         } else if elementName == "testcase" {
             
             if let name = attributeDict["name"], let classname = attributeDict["classname"], let time = Double(attributeDict["time"] ?? "0.0") {
-                let testCase = JUnitTestCase(name: name, classname: classname, time: time)
-                currentTestCases.append(testCase)
+                
+                currentName = name
+                currentClass = classname
+                currentTime = time
             }
+        } else if elementName == "failure" {
+            currentTestCaseFailure = true
         }
     }
     
@@ -73,7 +83,17 @@ extension JUnitTestDetails: XMLParserDelegate {
                 let testSuite = JUnitTestSuite(name: name, tests: tests, skipped: skipped, failures: failures, errors: errors, timestamp: timestamp, testCases: currentTestCases)
                 testSuites.append(testSuite)
             }
+        } else if elementName == "testcase" {
+            
+            if let name = currentName, let classname = currentClass, let time = currentTime {
+                let testCase = JUnitTestCase(name: name, classname: classname, time: time, status: currentTestCaseFailure ? "Failure" : "Success")
+                currentTestCases.append(testCase)
+            }
+            currentName = nil
+            currentClass = nil
+            currentTime = nil
+            currentTestCaseFailure = false
         }
-    }
+     }
 }
 

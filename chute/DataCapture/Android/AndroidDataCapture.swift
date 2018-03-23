@@ -42,7 +42,7 @@ struct AndroidDataCapture : DataCapture {
                         for testSuite in junitDetails.testSuites {
                         
                             for testCase in testSuite.testCases {
-                                let result = ChuteTestResult(identifier: testSuite.name + "/" + testCase.name, status: "Success")
+                                let result = ChuteTestResult(identifier: testSuite.name + "/" + testCase.name, status: testCase.status)
                                 foundTestResults.append(result)
                             }
                         }
