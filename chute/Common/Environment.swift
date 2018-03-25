@@ -48,7 +48,7 @@ class Environment {
             self.derivedData = DerivedData(projectFileURL: projectFileURL, derivedDataFolder: arguments.derivedDataFolder)
             self.buildFolder = nil
         } else {
-            self.buildFolder = BuildFolder(projectFileURL: projectFileURL)
+            self.buildFolder = BuildFolder(projectFileURL: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
             self.derivedData = nil
         }
     }
