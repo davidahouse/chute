@@ -63,6 +63,12 @@ struct AndroidDataCapture : DataCapture {
     
     init?(using environment: Environment, from compareToFolder: String?) {
         
+        guard let compareToFolder = compareToFolder else {
+            return nil
+        }
+        
+        // TODO: Actually load data from saved source data.
+        
         project = environment.arguments.project ?? ""
         branch = environment.arguments.branch ?? ""
         //        testExecutionDate = testSummaryFolder.createDate
