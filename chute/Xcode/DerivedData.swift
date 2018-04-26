@@ -10,33 +10,11 @@ import Foundation
 
 class DerivedData {
 
-    let derivedDataURL: URL
+    var derivedDataURL: URL?
     let projectFileURL: URL
-    lazy var rootURL: URL? = {
-        if let paths = try? FileManager.default.contentsOfDirectory(atPath: self.derivedDataURL.path) {
-            
-            // First check root of derivedData for info.plist
-            let url = derivedDataURL.appendingPathComponent("info.plist")
-            if let plist = InfoPlist.from(file: url) {
-                if plist.workspacePath == projectFileURL.path {
-                    return derivedDataURL
-                }
-            }
-            
-            for path in paths {
-                let url = derivedDataURL.appendingPathComponent(path).appendingPathComponent("info.plist")
-                if let plist = InfoPlist.from(file: url) {
-                    if plist.workspacePath == projectFileURL.path {
-                        return derivedDataURL.appendingPathComponent(path)
-                    }
-                }
-            }
-        }
-        return nil
-    }()
     
     lazy var mostRecentTestSummary: TestSummaryFolder? = {
-        guard let rootURL = self.rootURL else {
+        guard let rootURL = derivedDataURL else {
             return nil
         }
         
@@ -54,7 +32,20 @@ class DerivedData {
         } else {
             let userPath = NSHomeDirectory()
             let userPathURL = URL(fileURLWithPath: userPath)
-            derivedDataURL = userPathURL.appendingPathComponents(["Library", "Developer", "Xcode", "DerivedData"])
+            let rootURL = userPathURL.appendingPathComponents(["Library", "Developer", "Xcode", "DerivedData"])
+            
+            if let paths = try? FileManager.default.contentsOfDirectory(atPath: rootURL.path) {
+                for path in paths {
+                    let url = rootURL.appendingPathComponent(path).appendingPathComponent("info.plist")
+                    if let plist = InfoPlist.from(file: url) {
+                        if plist.workspacePath == projectFileURL.path  {
+                            derivedDataURL = rootURL.appendingPathComponent(path)
+                        } else {
+                            print("Found info.plist but workspacePath was \(plist.workspacePath)")
+                        }
+                    }
+                }
+            }
         }
         self.projectFileURL = projectFileURL
     }
@@ -72,8 +63,7 @@ class DerivedData {
 extension DerivedData: Printable {
     
     func printOut() {
-        print("Derived Data URL: \(derivedDataURL.path)")
-        print("Derived Data Project URL: \(rootURL?.path ?? "")")
+        print("Derived Data URL: \(derivedDataURL?.path ?? "")")
         if let testSummaryFolder = mostRecentTestSummary {
             print("Test Summary:")
             testSummaryFolder.printOut()
