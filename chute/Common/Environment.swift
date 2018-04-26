@@ -12,7 +12,12 @@ class Environment {
     
     let arguments: CommandLineArguments
     let projectFileURL: URL?
+    
+    // for iOS
     let derivedData: DerivedData?
+    
+    // for Android
+    let buildFolder: BuildFolder?
     
     lazy var hasValidEnvironment: Bool = {
         
@@ -20,7 +25,7 @@ class Environment {
             return false
         }
         
-        guard derivedData != nil else {
+        if derivedData == nil && buildFolder == nil {
             return false
         }
         
@@ -33,12 +38,35 @@ class Environment {
         guard let project = arguments.project else  {
             self.projectFileURL = nil
             self.derivedData = nil
+            self.buildFolder = nil
             return
         }
         let projectFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(project)
         self.projectFileURL = projectFileURL
 
-        self.derivedData = DerivedData(projectFileURL: projectFileURL, derivedDataFolder: arguments.derivedDataFolder)
+        if arguments.platform == "iOS" {
+            self.derivedData = DerivedData(projectFileURL: projectFileURL, derivedDataFolder: arguments.derivedDataFolder)
+            self.buildFolder = nil
+        } else {
+            self.buildFolder = BuildFolder(projectFileURL: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
+            self.derivedData = nil
+        }
+    }
+    
+    func dataCapture() -> DataCapture? {
+        if arguments.platform == "iOS" {
+            return XcodeDataCapture(using: self)
+        } else {
+            return AndroidDataCapture(using: self)
+        }
+    }
+    
+    func dataCapture(from compareToFolder: String?) -> DataCapture? {
+        if arguments.platform == "iOS" {
+            return XcodeDataCapture(using: self, from: compareToFolder)
+        } else {
+            return AndroidDataCapture(using: self, from: compareToFolder)
+        }
     }
 }
 
@@ -50,6 +78,11 @@ extension Environment: Printable {
             derivedData.printOut()
         } else {
             print("Derived Data: not found")
+        }
+        if let buildFolder = buildFolder {
+            buildFolder.printOut()
+        } else {
+            print("Build Folder: not found")
         }
     }
 }

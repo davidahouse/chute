@@ -16,7 +16,7 @@ func printOut(_ message: String, with: Printable? = nil) {
     print("")
 }
 
-printOut("chute: 1.0.1")
+printOut("chute: 1.1.4")
 
 let arguments = CommandLineArguments()
 printOut("Arguments:", with: arguments)
@@ -36,13 +36,13 @@ guard environment.hasValidEnvironment else {
 
 // Capture data using the environment
 printOut("Capturing data")
-guard let dataCapture = DataCapture(using: environment) else {
+guard let dataCapture = environment.dataCapture() else {
     print("Error capturing data")
     exit(1)
 }
 
 // Capture saved data from compareTo folder (if specified)
-let comparedToDataCapture = DataCapture(using: environment, from: arguments.compareFolder)
+let comparedToDataCapture = environment.dataCapture(from: arguments.compareFolder)
 var difference: DataCaptureDifference?
 if let comparedTo = comparedToDataCapture {
     printOut("Comparing data captures")

@@ -32,9 +32,8 @@ struct CaptureReportSummaryCodeCoverage: ChuteOutputRenderable {
         """
         
         static let NoCodeCoverageTemplate = """
-        <div class="summary">
+        <div class="summary-1-column">
             <div class="summary-item alert alert-info">
-                <div class="summary-item-text"><h1>{{average_coverage}} %</h1></div>
                 <div class="summary-item-text"><h3>No coverage found</h3></div>
             </div>
         </div>

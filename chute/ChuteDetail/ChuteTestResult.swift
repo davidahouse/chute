@@ -13,6 +13,11 @@ struct ChuteTestResult: Encodable {
     let testIdentifier: String
     let testStatus: String
 
+    init(identifier: String, status: String) {
+        testIdentifier = identifier
+        testStatus = status
+    }
+    
     init?(detail: TestDetails) {
 
         guard let testIdentifier = detail.testIdentifier,

@@ -21,6 +21,11 @@ struct InfoPlist: Codable {
 extension InfoPlist {
 
     static func from(file: URL) -> InfoPlist? {
+        
+        guard FileManager.default.fileExists(atPath: file.path) else {
+            return nil
+        }
+        
         do {
             let data = try Data(contentsOf: file)
             let decoder = PropertyListDecoder()

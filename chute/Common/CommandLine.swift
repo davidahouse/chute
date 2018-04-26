@@ -9,6 +9,7 @@
 //  Chute Command Line Reference:
 //
 //  chute
+//      -platform               iOS or Android
 //      -project                The Xcode project to use when creating the Chute report
 //      -branch                 The branch that resprents the captured test results
 //      -compareFolder          The folder to compare the results with
@@ -29,6 +30,7 @@ import Foundation
 
 struct CommandLineArguments {
 
+    let platform: String?
     let project: String?
     let branch: String?
     let compareFolder: String?
@@ -47,7 +49,7 @@ struct CommandLineArguments {
     let derivedDataFolder: String?
     
     var hasRequiredParameters: Bool {
-        return project != nil
+        return project != nil && platform != nil
     }
 
     var hasParametersForGithubNotification: Bool {
@@ -73,6 +75,7 @@ struct CommandLineArguments {
             }
         }
 
+        platform = foundArguments["platform"]
         project = foundArguments["project"]
         branch = foundArguments["branch"] != nil ? foundArguments["branch"] : ProcessInfo.processInfo.environment["CHUTE_BRANCH"]
         compareFolder = foundArguments["compareFolder"] != nil ? foundArguments["compareFolder"] : ProcessInfo.processInfo.environment["CHUTE_COMPARE_FOLDER"]
@@ -93,7 +96,7 @@ struct CommandLineArguments {
     }
 
     func printInstructions() {
-        var instructions = "Usage: chute -project <project>"
+        var instructions = "Usage: chute -platform <platform> -project <project>"
         instructions += " [-branch <branch>]"
         instructions += " [-compareFolder <compareFolder>]"
         instructions += " [-githubRepository <githubRepository>]"
@@ -112,6 +115,7 @@ struct CommandLineArguments {
 extension CommandLineArguments: Printable {
 
     func printOut() {
+        print("Platform: \(platform ?? "")")
         print("Project: \(project ?? "")")
         print("Branch: \(branch ?? "")")
         print("Compare Folder: \(compareFolder ?? "")")
