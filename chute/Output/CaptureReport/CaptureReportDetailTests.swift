@@ -70,7 +70,7 @@ struct CaptureReportDetailTests: ChuteOutputRenderable {
         for result in dataCapture.testResults {
             if result.testIdentifier.starts(with: testClass) {
                 let parts = result.testIdentifier.components(separatedBy: "/")
-                let identifier = parts[1].replacingOccurrences(of: "()", with: "")
+                let identifier = parts[1].replacingOccurrences(of: "()", with: "").replacingOccurrences(of: "__", with: " ").replacingOccurrences(of: "_", with: " ")
                 let trClass = result.testStatus == "Success" ? "table-success" : "table-danger"
                 let parameters: [String: CustomStringConvertible] = [
                     "row_class": trClass,

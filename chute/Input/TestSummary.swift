@@ -49,8 +49,8 @@ struct ActivitySummary: Decodable {
 }
 
 struct TestableSummary: Decodable {
-    let projectPath: String
-    let targetName: String
+    let projectPath: String?
+    let targetName: String?
     let testName: String
     let testObjectClass: String
     let tests: [TestDetails]
