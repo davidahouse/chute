@@ -42,7 +42,7 @@ struct CaptureReportSummaryCodeCoverage: ChuteOutputRenderable {
     
     func render(dataCapture: DataCapture) -> String {
 
-        if dataCapture.codeCoverage.count > 0 {
+        if dataCapture.codeCoverage.coveredLines > 0 {
             let parameters: [String: CustomStringConvertible] = [
                 "average_coverage": Int(round(dataCapture.codeCoverageSummary.averageCoverage * 100)),
                 "total_above_90": dataCapture.codeCoverageSummary.filesAdequatelyCovered,

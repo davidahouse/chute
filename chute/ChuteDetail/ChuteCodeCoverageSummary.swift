@@ -13,15 +13,9 @@ struct ChuteCodeCoverageSummary: Encodable {
     let filesAdequatelyCovered: Int
     let filesWithNoCoverage: Int
 
-    init(coverages: [ChuteCodeCoverage]) {
-        let coverageList = coverages.map { $0.coverage }
-        let coverage = coverageList.reduce(0.0, +)
-        if coverage > 0 && coverageList.count > 0 {
-            averageCoverage = coverage/Double(coverageList.count)
-        } else {
-            averageCoverage = 0.0
-        }
-        filesAdequatelyCovered = coverages.filter { $0.coverage >= 0.90 }.count
-        filesWithNoCoverage = coverages.filter { $0.coverage == 0.0 }.count
+    init(coverages: ChuteCodeCoverage) {
+        averageCoverage = coverages.lineCoverage
+        filesAdequatelyCovered = coverages.filesCoveredAdequately().count
+        filesWithNoCoverage = coverages.filesWithNoCoverage().count
     }
 }

@@ -42,12 +42,12 @@ struct DifferenceReportSummaryCodeCoverage: ChuteOutputDifferenceRenderable {
     
     func render(difference: DataCaptureDifference) -> String {
         
-        if difference.comparedTo.codeCoverage.count > 0 {
-            
+        if difference.comparedTo.codeCoverage.lineCoverage > 0 {
+
             let average_coverage_change = difference.comparedTo.codeCoverageSummary.averageCoverage - difference.detail.codeCoverageSummary.averageCoverage
             let total_above_90_change = difference.comparedTo.codeCoverageSummary.filesAdequatelyCovered - difference.detail.codeCoverageSummary.filesAdequatelyCovered
             let total_no_coverage_change = difference.comparedTo.codeCoverageSummary.filesWithNoCoverage - difference.detail.codeCoverageSummary.filesWithNoCoverage
-            
+
             let average_coverage_change_badge: String = {
                 if average_coverage_change < 0.0 {
                     return "badge-danger"
@@ -55,7 +55,7 @@ struct DifferenceReportSummaryCodeCoverage: ChuteOutputDifferenceRenderable {
                     return "badge-success"
                 }
             }()
-            
+
             let total_above_90_change_badge: String = {
                 if total_above_90_change < 0 {
                     return "badge-danger"
@@ -63,7 +63,7 @@ struct DifferenceReportSummaryCodeCoverage: ChuteOutputDifferenceRenderable {
                     return "badge-success"
                 }
             }()
-            
+
             let total_no_coverage_change_badge: String = {
                 if total_no_coverage_change < 0 {
                     return "badge-danger"
@@ -71,7 +71,7 @@ struct DifferenceReportSummaryCodeCoverage: ChuteOutputDifferenceRenderable {
                     return "badge-success"
                 }
             }()
-            
+
             let parameters: [String: CustomStringConvertible] = [
                 "average_coverage": Int(round(difference.comparedTo.codeCoverageSummary.averageCoverage * 100)),
                 "average_coverage_change": Int(round(average_coverage_change * 100)),
