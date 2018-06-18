@@ -12,23 +12,25 @@ struct ChuteCodeCoverageDifference {
 
     let originSummary: ChuteCodeCoverageSummary
     let comparedToSummary: ChuteCodeCoverageSummary
-    let codeCoverageChanges: [(ChuteCodeCoverage, Double)]
+    let codeCoverageChanges: [(String, ChuteCodeCoverageFile, Double)]
 
     init(detail: DataCapture, comparedTo: DataCapture) {
 
         originSummary = detail.codeCoverageSummary
         comparedToSummary = comparedTo.codeCoverageSummary
 
-        var changes = [(ChuteCodeCoverage, Double)]()
-        for codeCoverage in comparedTo.codeCoverage {
-
-            let found = detail.codeCoverage.filter { $0.target == codeCoverage.target && $0.file == codeCoverage.file }
-            if found.count > 0, let first = found.first {
-                if first.coverage != codeCoverage.coverage {
-                    changes.append((codeCoverage, codeCoverage.coverage - first.coverage))
+        var changes = [(String, ChuteCodeCoverageFile, Double)]()
+        for target in comparedTo.codeCoverage.targets {
+            
+            for file in target.files {
+                
+                if let foundFile = detail.codeCoverage.fileMatching(target: target.name, name: file.name) {
+                    if foundFile.lineCoverage != file.lineCoverage {
+                        changes.append((target.name, file, file.lineCoverage - foundFile.lineCoverage))
+                    }
+                } else {
+                    changes.append((target.name, file, file.lineCoverage))
                 }
-            } else {
-                changes.append((codeCoverage, codeCoverage.coverage))
             }
         }
         codeCoverageChanges = changes

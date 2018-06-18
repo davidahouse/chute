@@ -51,9 +51,9 @@ struct DifferenceReportDetailCodeCoverage: ChuteOutputDifferenceRenderable {
         var output = ""
         for coverage in difference.codeCoverageDifference.codeCoverageChanges {
             let trClass: String = {
-                if coverage.0.coverage <= 0.70 {
+                if coverage.1.lineCoverage <= 0.70 {
                     return "table-danger"
-                } else if coverage.0.coverage >= 0.90 {
+                } else if coverage.1.lineCoverage >= 0.90 {
                     return "table-success"
                 } else {
                     return "table-warning"
@@ -61,7 +61,7 @@ struct DifferenceReportDetailCodeCoverage: ChuteOutputDifferenceRenderable {
             }()
 
             let changeBadge: String = {
-                if coverage.1 <= 0.0 {
+                if coverage.2 <= 0.0 {
                     return "badge-danger"
                 } else {
                     return "badge-success"
@@ -70,11 +70,11 @@ struct DifferenceReportDetailCodeCoverage: ChuteOutputDifferenceRenderable {
 
             let parameters: [String: CustomStringConvertible] = [
                 "row_class": trClass,
-                "target": coverage.0.target,
-                "file": coverage.0.file,
-                "coverage": Int(round(coverage.0.coverage * 100)),
+                "target": coverage.0,
+                "file": coverage.1.name,
+                "coverage": Int(round(coverage.1.lineCoverage * 100)),
                 "change_badge": changeBadge,
-                "change": Int(round(coverage.1 * 100))
+                "change": Int(round(coverage.2 * 100))
             ]
             output += Constants.CoverageTemplate.render(parameters: parameters)
         }

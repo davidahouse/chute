@@ -48,7 +48,7 @@ class ChuteOutputFolder {
         
         saveAttachments(rootPath: testExecutionFolder.attachmentRootURL, attachments: dataCapture.attachments)
         saveSourceFile(from: testExecutionFolder.summaryFileURL, to: "TestSummaries.plist")
-        saveSourceFile(from: ChuteCodeCoverage.codeCoverageURL(testSummaryURL: testExecutionFolder.summaryFileURL), to: "codeCoverage.xccoverage")
+        saveSourceFile(from: ChuteCodeCoverage.codeCoverageURL(testSummaryURL: testExecutionFolder.summaryFileURL), to: "codeCoverage.xccovreport")
         if let styleSheetData = ChuteStyleSheet.encodedStyleSheets(from: dataCapture.styleSheets) {
             saveSourceFile(fileName: "stylesheets.data", data: styleSheetData)
         }

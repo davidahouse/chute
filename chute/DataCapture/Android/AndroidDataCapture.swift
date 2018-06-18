@@ -15,7 +15,7 @@ struct AndroidDataCapture : DataCapture {
     let testExecutionDate: Date
     
     let testResults: [ChuteTestResult]
-    let codeCoverage: [ChuteCodeCoverage]
+    let codeCoverage: ChuteCodeCoverage
     let codeCoverageSummary: ChuteCodeCoverageSummary
     let attachments: [ChuteTestAttachment]
     let styleSheets: [ChuteStyleSheet]
@@ -52,8 +52,8 @@ struct AndroidDataCapture : DataCapture {
         }
         testResults = foundTestResults
         
-        codeCoverage = []
-        codeCoverageSummary = ChuteCodeCoverageSummary(coverages: [])
+        codeCoverage = ChuteCodeCoverage()
+        codeCoverageSummary = ChuteCodeCoverageSummary(coverages: ChuteCodeCoverage())
         attachments = []
         styleSheets  = []
         let userPath = NSHomeDirectory()
@@ -74,8 +74,8 @@ struct AndroidDataCapture : DataCapture {
         //        testExecutionDate = testSummaryFolder.createDate
         testExecutionDate = Date()
         testResults = []
-        codeCoverage = []
-        codeCoverageSummary = ChuteCodeCoverageSummary(coverages: [])
+        codeCoverage = ChuteCodeCoverage()
+        codeCoverageSummary = ChuteCodeCoverageSummary(coverages: ChuteCodeCoverage())
         attachments = []
         styleSheets  = []
         let userPath = NSHomeDirectory()

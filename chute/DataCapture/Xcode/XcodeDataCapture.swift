@@ -15,7 +15,7 @@ struct XcodeDataCapture : DataCapture {
     let testExecutionDate: Date
     
     let testResults: [ChuteTestResult]
-    let codeCoverage: [ChuteCodeCoverage]
+    let codeCoverage: ChuteCodeCoverage
     let codeCoverageSummary: ChuteCodeCoverageSummary
     let attachments: [ChuteTestAttachment]
     let styleSheets: [ChuteStyleSheet]
@@ -59,7 +59,7 @@ struct XcodeDataCapture : DataCapture {
         testResults = ChuteTestResult.findResults(testSummary: beforeTestSummary)
         attachments = ChuteTestAttachment.findAttachments(testSummary: beforeTestSummary)
         styleSheets = ChuteStyleSheet.decodedStyleSheets(path: URL(fileURLWithPath: compareToFolder).appendingPathComponents(["source", "stylesheets.data"]))
-        codeCoverage = ChuteCodeCoverage.findCodeCoverage(testSummaryURL: URL(fileURLWithPath: compareToFolder).appendingPathComponents(["source", "codeCoverage.xccoverage"]))
+        codeCoverage = ChuteCodeCoverage.findCodeCoverage(testSummaryURL: URL(fileURLWithPath: compareToFolder).appendingPathComponents(["source", "codeCoverage.xccovreport"]))
         codeCoverageSummary = ChuteCodeCoverageSummary(coverages: codeCoverage)
         attachmentRootURL = URL(fileURLWithPath: compareToFolder).appendingPathComponent("attachments")
     }

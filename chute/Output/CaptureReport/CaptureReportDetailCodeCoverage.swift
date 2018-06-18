@@ -49,24 +49,26 @@ struct CaptureReportDetailCodeCoverage: ChuteOutputRenderable {
     
     func reportDetails(dataCapture: DataCapture) -> String {
         var output = ""
-        for coverage in dataCapture.codeCoverage.sorted(by: { $0.coverage < $1.coverage }) {
-            let trClass: String = {
-                if coverage.coverage <= 0.70 {
-                    return "table-danger"
-                } else if coverage.coverage >= 0.90 {
-                    return "table-success"
-                } else {
-                    return "table-warning"
-                }
-            }()
-
-            let parameters: [String: CustomStringConvertible] = [
-                "row_class": trClass,
-                "target": coverage.target,
-                "file": coverage.file,
-                "coverage": Int(round(coverage.coverage * 100))
-            ]
-            output += Constants.CoverageTemplate.render(parameters: parameters)
+        for target in dataCapture.codeCoverage.targets {
+            for file in target.files {
+                let trClass: String = {
+                    if file.lineCoverage <= 0.70 {
+                        return "table-danger"
+                    } else if file.lineCoverage >= 0.90 {
+                        return "table-success"
+                    } else {
+                        return "table-warning"
+                    }
+                }()
+    
+                let parameters: [String: CustomStringConvertible] = [
+                    "row_class": trClass,
+                    "target": target.name,
+                    "file": file.name,
+                    "coverage": Int(round(file.lineCoverage * 100))
+                ]
+                output += Constants.CoverageTemplate.render(parameters: parameters)
+            }
         }
         return output
     }

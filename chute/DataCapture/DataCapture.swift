@@ -13,7 +13,7 @@ protocol DataCapture {
     var branch: String {get}
     var testExecutionDate: Date {get}
     var testResults: [ChuteTestResult] {get}
-    var codeCoverage: [ChuteCodeCoverage] {get}
+    var codeCoverage: ChuteCodeCoverage {get}
     var codeCoverageSummary: ChuteCodeCoverageSummary {get}
     var attachments: [ChuteTestAttachment] {get}
     var styleSheets: [ChuteStyleSheet] {get}
