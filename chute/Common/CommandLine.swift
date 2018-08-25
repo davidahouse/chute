@@ -25,7 +25,9 @@
 //      -githubHost             The host name if using github enterprise
 //      -githubAPIURL           The API URL if using github enterprise
 
-//      -derivedDataFolder            Root folder for DerivedData
+//      -derivedDataFolder      Root folder for DerivedData
+//      -buildFolder            Root folder for Android builds
+//      -logLevel               Determines if additional logs will be written
 import Foundation
 
 struct CommandLineArguments {
@@ -47,6 +49,8 @@ struct CommandLineArguments {
     let publishRootURL: String?
     
     let derivedDataFolder: String?
+    let buildFolder: String?
+    let logLevel: String?
     
     var hasRequiredParameters: Bool {
         return project != nil && platform != nil
@@ -93,6 +97,8 @@ struct CommandLineArguments {
         githubAPIURL = foundArguments["githubAPIURL"] != nil ? foundArguments["githubAPIURL"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_APIURL"]
         
         derivedDataFolder = foundArguments["derivedDataFolder"] != nil ? foundArguments["derivedDataFolder"] : ProcessInfo.processInfo.environment["CHUTE_DERIVED_DATA_FOLDER"];
+        buildFolder = foundArguments["buildFolder"] != nil ? foundArguments["buildFolder"] : ProcessInfo.processInfo.environment["CHUTE_BUILD_FOLDER"];
+        logLevel = foundArguments["logLevel"] != nil ? foundArguments["logLevel"] : ProcessInfo.processInfo.environment["CHUTE_LOG_LEVEL"];
     }
 
     func printInstructions() {
@@ -108,6 +114,8 @@ struct CommandLineArguments {
         instructions += " [-githubHost <githubHost>]"
         instructions += " [-githubAPIURL <githubAPIURL>]"
         instructions += " [-derivedDataFolder <derivedDataFolder>]"
+        instructions += " [-buildFolder <buildFolder>]"
+        instructions += " [-logLevel <logLevel>]"
         print(instructions)
     }
 }
@@ -128,5 +136,7 @@ extension CommandLineArguments: Printable {
         print("Github Host: \(githubHost ?? "")")
         print("Github API URL: \(githubAPIURL ?? "")")
         print("Derived Data Folder: \(derivedDataFolder ?? "")")
+        print("Build Folder: \(buildFolder ?? "")")
+        print("Log Level: \(logLevel ?? "")")
     }
 }

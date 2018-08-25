@@ -79,5 +79,9 @@ class Notifier {
                 notifier.notify(using: environment, including: difference, publishedURL: publishDifferenceLink)
             }
         }
+        
+        // TODO: Add in the ES parameter checking here
+        // let esNotifier = ElasticSearchNotifier()
+        // esNotifier.notify(using: environment, including: dataCapture, publishedURL: publishCaptureLink)
     }
 }

@@ -12,6 +12,7 @@
 		C363C7802037D0450051BB38 /* AndroidDataCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C77F2037D0450051BB38 /* AndroidDataCapture.swift */; };
 		C363C7832037D58A0051BB38 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C363C7822037D58A0051BB38 /* libxml2.tbd */; };
 		C363C785203861900051BB38 /* JUnitTestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C784203861900051BB38 /* JUnitTestDetails.swift */; };
+		C382EAF820DB3D4A003153EE /* ElasticSearchNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C382EAF720DB3D4A003153EE /* ElasticSearchNotifier.swift */; };
 		DC0ADC3D1FC9B2A400502EA3 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0ADC3C1FC9B2A400502EA3 /* Notifier.swift */; };
 		DC0E13991F5CE25E00525E5B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E13981F5CE25E00525E5B /* main.swift */; };
 		DC0E13A01F5CE59500525E5B /* DerivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E139F1F5CE59500525E5B /* DerivedData.swift */; };
@@ -108,6 +109,7 @@
 		C363C77F2037D0450051BB38 /* AndroidDataCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AndroidDataCapture.swift; sourceTree = "<group>"; };
 		C363C7822037D58A0051BB38 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		C363C784203861900051BB38 /* JUnitTestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JUnitTestDetails.swift; sourceTree = "<group>"; };
+		C382EAF720DB3D4A003153EE /* ElasticSearchNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticSearchNotifier.swift; sourceTree = "<group>"; };
 		DC0ADC3C1FC9B2A400502EA3 /* Notifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifier.swift; sourceTree = "<group>"; };
 		DC0E13951F5CE25E00525E5B /* chute */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = chute; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0E13981F5CE25E00525E5B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				DC83CD771FAD56CC0026092B /* SlackDetailMessage.swift */,
 				DC83CD791FADF4A50026092B /* SlackDetailDifferenceMessage.swift */,
 				DC0ADC3C1FC9B2A400502EA3 /* Notifier.swift */,
+				C382EAF720DB3D4A003153EE /* ElasticSearchNotifier.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				DCF058DF1FBDE10A00D4C520 /* CaptureReportSummaryTests.swift in Sources */,
 				DC0E13991F5CE25E00525E5B /* main.swift in Sources */,
 				DC42CF361F92A43700279110 /* ChuteStyleSheet.swift in Sources */,
+				C382EAF820DB3D4A003153EE /* ElasticSearchNotifier.swift in Sources */,
 				DC662CFB1FC86E2300F92B85 /* Publisher.swift in Sources */,
 				DCA7E1AD1FBD109C00E2ACEB /* DataCapture.swift in Sources */,
 				DC83CD781FAD56CC0026092B /* SlackDetailMessage.swift in Sources */,

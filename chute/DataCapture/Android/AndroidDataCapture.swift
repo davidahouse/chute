@@ -30,14 +30,16 @@ struct AndroidDataCapture : DataCapture {
         
         var foundTestResults = [ChuteTestResult]()
         if let buildFolder = environment.buildFolder {
+            
+            if environment.hasVerboseLogging {
+                buildFolder.rootURL.printOutFileTree()
+            }
             let testResultsFolder = buildFolder.rootURL.appendingPathComponents(["test-results", "testDebugUnitTest"])
             if let paths = try? FileManager.default.contentsOfDirectory(at: testResultsFolder, includingPropertiesForKeys: nil, options: .skipsSubdirectoryDescendants) {
                 
                 for path in paths {
                     
                     if path.lastPathComponent.hasSuffix(".xml") {
-                        print("test: \(path)")
-                        
                         let junitDetails = JUnitTestDetails(path: path)
                         for testSuite in junitDetails.testSuites {
                         
@@ -49,11 +51,15 @@ struct AndroidDataCapture : DataCapture {
                     }
                 }
             }
+
+            let codeCoverageOutput = buildFolder.rootURL.appendingPathComponents(["reports", "jacocoTestReport.csv"])
+            codeCoverage = ChuteCodeCoverage.jacocoCoverageCSV(csvFile: codeCoverageOutput)
+        } else {
+            codeCoverage = ChuteCodeCoverage()
         }
         testResults = foundTestResults
         
-        codeCoverage = ChuteCodeCoverage()
-        codeCoverageSummary = ChuteCodeCoverageSummary(coverages: ChuteCodeCoverage())
+        codeCoverageSummary = ChuteCodeCoverageSummary(coverages: codeCoverage)
         attachments = []
         styleSheets  = []
         let userPath = NSHomeDirectory()

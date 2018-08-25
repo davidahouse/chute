@@ -32,6 +32,14 @@ class Environment {
         return true
     }()
     
+    lazy var hasVerboseLogging: Bool = {
+        
+        guard let logLevel = arguments.logLevel else {
+            return false
+        }
+        return logLevel.lowercased() == "verbose"
+    }()
+    
     init(arguments: CommandLineArguments) {
 
         self.arguments = arguments
@@ -48,7 +56,7 @@ class Environment {
             self.derivedData = DerivedData(projectFileURL: projectFileURL, derivedDataFolder: arguments.derivedDataFolder)
             self.buildFolder = nil
         } else {
-            self.buildFolder = BuildFolder(projectFileURL: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
+            self.buildFolder = BuildFolder(projectFileURL: URL(fileURLWithPath: arguments.buildFolder ?? FileManager.default.currentDirectoryPath))
             self.derivedData = nil
         }
     }

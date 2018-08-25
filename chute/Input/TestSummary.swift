@@ -49,8 +49,8 @@ struct ActivitySummary: Decodable {
 }
 
 struct TestableSummary: Decodable {
-    let projectPath: String
-    let targetName: String
+    let projectPath: String?
+    let targetName: String?
     let testName: String
     let testObjectClass: String
     let tests: [TestDetails]
@@ -123,6 +123,7 @@ extension TestSummary {
 
             for path in paths {
                 if path.lastPathComponent.hasSuffix("plist") {
+                    print("Attempting to load test summary from: \(path)")
                     if let summary = TestSummary.from(file: testsFolder.appendingPathComponent(path.lastPathComponent)) {
 
                         let createDateResource: Set<URLResourceKey> = [URLResourceKey.creationDateKey]
@@ -148,7 +149,10 @@ extension TestSummary {
                 let plist = try decoder.decode(TestSummary.self, from: data)
                 return plist
             } catch {
-                print(error)
+                print("Error attempting to decode test summary file \(file.path): \(error)")
+                print("Full contents of the file:")
+                let dataString = String(data: data, encoding: .utf8)
+                print("\(dataString ?? "")")
             }
         }
         return nil

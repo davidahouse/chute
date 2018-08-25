@@ -16,7 +16,7 @@ func printOut(_ message: String, with: Printable? = nil) {
     print("")
 }
 
-printOut("chute: 1.1.4")
+printOut("chute: 1.1.15")
 
 let arguments = CommandLineArguments()
 printOut("Arguments:", with: arguments)
@@ -31,6 +31,7 @@ guard arguments.hasRequiredParameters, let project = arguments.project else {
 let environment = Environment(arguments: arguments)
 printOut("Environment:", with: environment)
 guard environment.hasValidEnvironment else {
+    print("Valid environment not found, exiting")
     exit(1)
 }
 

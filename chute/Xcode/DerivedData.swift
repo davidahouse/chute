@@ -64,6 +64,12 @@ extension DerivedData: Printable {
     
     func printOut() {
         print("Derived Data URL: \(derivedDataURL?.path ?? "")")
+        
+        if let derivedDataURL = derivedDataURL {
+            let logsURL = derivedDataURL.appendingPathComponent("Logs").appendingPathComponent("Test")
+            logsURL.printOutFileTree()
+        }
+        
         if let testSummaryFolder = mostRecentTestSummary {
             print("Test Summary:")
             testSummaryFolder.printOut()
