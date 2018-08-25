@@ -87,8 +87,6 @@ The github comment contains a summary of the chute execution.
 - [ ] Capture non-test related data such as lines of code, project settings, etc.
 - [ ] Support Android testing and view capture
 - [ ] Brew formula to make install easier
-- [ ] Fastlane action for executing chute easier
-- [ ] Danger.systems plugin for updating Pull Request with summary
 
 ## License
 
