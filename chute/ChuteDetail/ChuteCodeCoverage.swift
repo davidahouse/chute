@@ -22,10 +22,17 @@ struct ChuteCodeCoverage: Codable {
     }
     
     init(target: String, files: [ChuteCodeCoverageFile]) {
-        coveredLines = files.reduce(0) {$0 + $1.coveredLines}
-        executableLines = files.reduce(0) {$0 + $1.executableLines}
-        lineCoverage = Double(coveredLines) / Double(executableLines)
-        targets = [ChuteCodeCoverageTarget(coveredLines: coveredLines, lineCoverage: lineCoverage, name: target, executableLines: executableLines, buildProductPath: "", files: files)]
+        if files.count > 0 {
+            coveredLines = files.reduce(0) {$0 + $1.coveredLines}
+            executableLines = files.reduce(0) {$0 + $1.executableLines}
+            lineCoverage = Double(coveredLines) / Double(executableLines)
+            targets = [ChuteCodeCoverageTarget(coveredLines: coveredLines, lineCoverage: lineCoverage, name: target, executableLines: executableLines, buildProductPath: "", files: files)]
+        } else {
+            coveredLines = 0
+            lineCoverage = 0.0
+            executableLines = 0
+            targets = []
+        }
     }
     
     func filesCoveredAdequately() -> [ChuteCodeCoverageFile] {
