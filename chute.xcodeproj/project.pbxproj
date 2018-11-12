@@ -13,6 +13,7 @@
 		C363C7832037D58A0051BB38 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C363C7822037D58A0051BB38 /* libxml2.tbd */; };
 		C363C785203861900051BB38 /* JUnitTestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C784203861900051BB38 /* JUnitTestDetails.swift */; };
 		C382EAF820DB3D4A003153EE /* ElasticSearchNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C382EAF720DB3D4A003153EE /* ElasticSearchNotifier.swift */; };
+		C3BD04BF218D222200BB9135 /* TestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD04BE218D222200BB9135 /* TestInfo.swift */; };
 		DC0ADC3D1FC9B2A400502EA3 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0ADC3C1FC9B2A400502EA3 /* Notifier.swift */; };
 		DC0E13991F5CE25E00525E5B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E13981F5CE25E00525E5B /* main.swift */; };
 		DC0E13A01F5CE59500525E5B /* DerivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E139F1F5CE59500525E5B /* DerivedData.swift */; };
@@ -110,6 +111,7 @@
 		C363C7822037D58A0051BB38 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		C363C784203861900051BB38 /* JUnitTestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JUnitTestDetails.swift; sourceTree = "<group>"; };
 		C382EAF720DB3D4A003153EE /* ElasticSearchNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticSearchNotifier.swift; sourceTree = "<group>"; };
+		C3BD04BE218D222200BB9135 /* TestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInfo.swift; sourceTree = "<group>"; };
 		DC0ADC3C1FC9B2A400502EA3 /* Notifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifier.swift; sourceTree = "<group>"; };
 		DC0E13951F5CE25E00525E5B /* chute */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = chute; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0E13981F5CE25E00525E5B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				DCE21A541F6A11C900E36E88 /* CodeCoverage.swift */,
 				DC0E13A31F5CEC7500525E5B /* TestSummary.swift */,
 				C363C784203861900051BB38 /* JUnitTestDetails.swift */,
+				C3BD04BE218D222200BB9135 /* TestInfo.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				DC662CFD1FC8714400F92B85 /* GithubPagesPublisher.swift in Sources */,
 				DCF058FE1FBE010A00D4C520 /* DifferenceReportSummaryStyleSheet.swift in Sources */,
 				DC42CF301F92A25D00279110 /* ChuteTestResult.swift in Sources */,
+				C3BD04BF218D222200BB9135 /* TestInfo.swift in Sources */,
 				DCF058ED1FBDF95E00D4C520 /* CaptureReportDetailViews.swift in Sources */,
 				DCF058E91FBDF7AF00D4C520 /* CaptureReportDetailTests.swift in Sources */,
 				DCBB99C21FA8BA02007198BB /* ChuteStyleSheetDifference.swift in Sources */,

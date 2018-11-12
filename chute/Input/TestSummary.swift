@@ -119,21 +119,26 @@ extension TestSummary {
 
         var found = [TestSummaryFolder]()
         let testsFolder = folder.appendingPathComponent("Logs").appendingPathComponent("Test")
-        if let paths = try? FileManager.default.contentsOfDirectory(at: testsFolder, includingPropertiesForKeys: nil, options: .skipsSubdirectoryDescendants) {
+        let enumerator = FileManager.default.enumerator(atPath: testsFolder.path)
 
-            for path in paths {
-                if path.lastPathComponent.hasSuffix("plist") {
-                    print("Attempting to load test summary from: \(path)")
-                    if let summary = TestSummary.from(file: testsFolder.appendingPathComponent(path.lastPathComponent)) {
+        while let fileName = enumerator?.nextObject() as? String {
+            if fileName.hasSuffix("Info.plist") {
+                let path = testsFolder.appendingPathComponent(fileName)
+                print("Attempting to load test info from: \(path)")
+                if let info = TestInfo.from(file: path) {
+                    let createDateResource: Set<URLResourceKey> = [URLResourceKey.creationDateKey]
+                    let createDate = try? path.resourceValues(forKeys: createDateResource)
+                    if let createDate = createDate?.creationDate {
 
-                        let createDateResource: Set<URLResourceKey> = [URLResourceKey.creationDateKey]
-                        let createDate = try? path.resourceValues(forKeys: createDateResource)
+                        for action in info.actions {
 
-                        if let createDate = createDate?.creationDate {
-                            let foundFolderURL = testsFolder.appendingPathComponent(path.lastPathComponent)
-                            let attachmentRootURL = foundFolderURL.deletingLastPathComponent().appendingPathComponent("Attachments")
-                            let foundFolder = TestSummaryFolder(createDate: createDate, folderURL: foundFolderURL, summaryFileURL: testsFolder.appendingPathComponent(path.lastPathComponent), summary: summary, attachmentRootURL: attachmentRootURL)
-                            found.append(foundFolder)
+                            let summaryPath = path.deletingLastPathComponent().appendingPathComponent(action.result.testSummaryPath)
+                            if let summary = TestSummary.from(file: summaryPath) {
+                                let foundFolderURL = path.deletingLastPathComponent()
+                                let attachmentRootURL = foundFolderURL.deletingLastPathComponent().appendingPathComponent("Attachments")
+                                let foundFolder = TestSummaryFolder(createDate: createDate, folderURL: foundFolderURL, summaryFileURL: summaryPath, summary: summary, attachmentRootURL: attachmentRootURL)
+                                found.append(foundFolder)
+                            }
                         }
                     }
                 }
