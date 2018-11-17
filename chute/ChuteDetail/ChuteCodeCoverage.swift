@@ -108,7 +108,9 @@ extension ChuteCodeCoverage {
         }
         
         let outputString = String(data: outputData, encoding: .utf8)
-        print("xccov output: \(outputString ?? "")")
+        if environment.hasVerboseLogging {
+            print("xccov output: \(outputString ?? "")")
+        }
         
         do {
             let decoded = try JSONDecoder().decode(ChuteCodeCoverage.self, from: outputData)

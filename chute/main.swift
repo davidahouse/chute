@@ -16,7 +16,7 @@ func printOut(_ message: String, with: Printable? = nil) {
     print("")
 }
 
-printOut("chute: 1.1.18")
+printOut("chute: 1.1.19")
 
 let arguments = CommandLineArguments()
 printOut("Arguments:", with: arguments)
