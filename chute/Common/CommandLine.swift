@@ -28,6 +28,9 @@
 //      -derivedDataFolder      Root folder for DerivedData
 //      -buildFolder            Root folder for Android builds
 //      -logLevel               Determines if additional logs will be written
+//      -buildLogFile           The specific path to the build log where we can find warnings and compiler errors
+//      -swiftLintLog           The path to the swift lint log file
+//      -inferReport            The path to the infer report file
 import Foundation
 
 struct CommandLineArguments {
@@ -51,6 +54,9 @@ struct CommandLineArguments {
     let derivedDataFolder: String?
     let buildFolder: String?
     let logLevel: String?
+    let buildLogFile: String?
+    let swiftLintLog: String?
+    let inferReport: String?
     
     var hasRequiredParameters: Bool {
         return project != nil && platform != nil
@@ -96,9 +102,14 @@ struct CommandLineArguments {
         githubHost = foundArguments["githubHost"] != nil ? foundArguments["githubHost"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_HOST"]
         githubAPIURL = foundArguments["githubAPIURL"] != nil ? foundArguments["githubAPIURL"] : ProcessInfo.processInfo.environment["CHUTE_GITHUB_APIURL"]
         
-        derivedDataFolder = foundArguments["derivedDataFolder"] != nil ? foundArguments["derivedDataFolder"] : ProcessInfo.processInfo.environment["CHUTE_DERIVED_DATA_FOLDER"];
-        buildFolder = foundArguments["buildFolder"] != nil ? foundArguments["buildFolder"] : ProcessInfo.processInfo.environment["CHUTE_BUILD_FOLDER"];
-        logLevel = foundArguments["logLevel"] != nil ? foundArguments["logLevel"] : ProcessInfo.processInfo.environment["CHUTE_LOG_LEVEL"];
+        derivedDataFolder = foundArguments["derivedDataFolder"] != nil ? foundArguments["derivedDataFolder"] : ProcessInfo.processInfo.environment["CHUTE_DERIVED_DATA_FOLDER"]
+        buildFolder = foundArguments["buildFolder"] != nil ? foundArguments["buildFolder"] : ProcessInfo.processInfo.environment["CHUTE_BUILD_FOLDER"]
+        logLevel = foundArguments["logLevel"] != nil ? foundArguments["logLevel"] : ProcessInfo.processInfo.environment["CHUTE_LOG_LEVEL"]
+        buildLogFile = foundArguments["buildLogFile"] != nil ? foundArguments["buildLogFile"] :
+            ProcessInfo.processInfo.environment["CHUTE_BUILD_LOG_FILE"]
+        swiftLintLog = foundArguments["swiftLintLog"] != nil ? foundArguments["swiftLintLog"] :
+            ProcessInfo.processInfo.environment["CHUTE_SWIFT_LINT_LOG"]
+        inferReport = foundArguments["inferReport"] != nil ? foundArguments["inferReport"] : ProcessInfo.processInfo.environment["CHUTE_INFER_REPORT"]
     }
 
     func printInstructions() {
@@ -116,6 +127,9 @@ struct CommandLineArguments {
         instructions += " [-derivedDataFolder <derivedDataFolder>]"
         instructions += " [-buildFolder <buildFolder>]"
         instructions += " [-logLevel <logLevel>]"
+        instructions += " [-buildLogFile <buildLogFile>]"
+        instructions += " [-swiftLintLog <swiftLintLog>]"
+        instructions += " [-inferReport <inferReport>"
         print(instructions)
     }
 }
@@ -138,5 +152,8 @@ extension CommandLineArguments: Printable {
         print("Derived Data Folder: \(derivedDataFolder ?? "")")
         print("Build Folder: \(buildFolder ?? "")")
         print("Log Level: \(logLevel ?? "")")
+        print("Build Log File: \(buildLogFile ?? "")")
+        print("Swift Lint Log: \(swiftLintLog ?? "")")
+        print("Infer Report: \(inferReport ?? "")")
     }
 }

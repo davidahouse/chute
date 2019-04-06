@@ -81,7 +81,7 @@ class Notifier {
         }
         
         // TODO: Add in the ES parameter checking here
-        // let esNotifier = ElasticSearchNotifier()
-        // esNotifier.notify(using: environment, including: dataCapture, publishedURL: publishCaptureLink)
+//         let esNotifier = ElasticSearchNotifier()
+//         esNotifier.notify(using: environment, including: dataCapture, publishedURL: publishCaptureLink)
     }
 }

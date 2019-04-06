@@ -34,7 +34,15 @@ class ChuteOutput {
         let mainReport = CaptureReport()
         print("Creating chute.html")
         outputFolder.saveOutputFile(fileName: "chute.html", contents: mainReport.render(dataCapture: dataCapture))
-        
+
+        let jsonReport = CaptureJSONReport()
+        print("Creating chute.json")
+        outputFolder.saveOutputFile(fileName: "chute.json", contents: jsonReport.render(dataCapture: dataCapture))
+
+        let cqReport = CaptureCQReport()
+        print("Creating cq.json")
+        outputFolder.saveOutputFile(fileName: "cq.json", contents: cqReport.render(dataCapture: dataCapture))
+
         if let difference = difference {
             let differenceReport = DifferenceReport()
             print("Creating chute_difference.html")

@@ -20,6 +20,8 @@ struct XcodeDataCapture : DataCapture {
     let attachments: [ChuteTestAttachment]
     let styleSheets: [ChuteStyleSheet]
     let attachmentRootURL: URL
+    let compilerWarnings: [String]
+    let lintWarnings: [ChuteLintWarning]
     
     init?(using environment: Environment) {
         
@@ -36,6 +38,20 @@ struct XcodeDataCapture : DataCapture {
         codeCoverage = ChuteCodeCoverage.findCodeCoverage(testSummaryURL: testSummaryFolder.summaryFileURL)
         codeCoverageSummary = ChuteCodeCoverageSummary(coverages: codeCoverage)
         attachmentRootURL = testSummaryFolder.attachmentRootURL
+        if let buildLogFile = environment.arguments.buildLogFile {
+            compilerWarnings = XcodeCompilerWarnings.find(path: buildLogFile)
+        } else {
+            compilerWarnings = []
+        }
+
+        var allLintWarnings = [ChuteLintWarning]()
+        if let swiftLintLog = environment.arguments.swiftLintLog {
+            allLintWarnings += XcodeSwiftLint.find(path: swiftLintLog)
+        }
+        if let inferReport = environment.arguments.inferReport {
+            allLintWarnings += XcodeInfer.find(path: inferReport)
+        }
+        lintWarnings = allLintWarnings
     }
     
     init?(using environment: Environment, from compareToFolder: String?) {
@@ -62,5 +78,8 @@ struct XcodeDataCapture : DataCapture {
         codeCoverage = ChuteCodeCoverage.findCodeCoverage(testSummaryURL: URL(fileURLWithPath: compareToFolder).appendingPathComponents(["source", "codeCoverage.xccovreport"]))
         codeCoverageSummary = ChuteCodeCoverageSummary(coverages: codeCoverage)
         attachmentRootURL = URL(fileURLWithPath: compareToFolder).appendingPathComponent("attachments")
+        // TODO: figure this out
+        compilerWarnings = []
+        lintWarnings = []
     }
 }

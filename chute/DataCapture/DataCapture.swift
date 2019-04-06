@@ -18,6 +18,8 @@ protocol DataCapture {
     var attachments: [ChuteTestAttachment] {get}
     var styleSheets: [ChuteStyleSheet] {get}
     var attachmentRootURL: URL {get}
+    var compilerWarnings: [String] {get}
+    var lintWarnings: [ChuteLintWarning] {get}
 
     init?(using environment: Environment)
     init?(using environment: Environment, from compareToFolder: String?)

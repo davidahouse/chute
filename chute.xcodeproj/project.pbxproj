@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C32EE7612252915C003FAA45 /* XcodeCompilerWarnings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32EE7602252915C003FAA45 /* XcodeCompilerWarnings.swift */; };
+		C32EE76322529405003FAA45 /* CaptureCQReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32EE76222529405003FAA45 /* CaptureCQReport.swift */; };
+		C32EE76522538CF1003FAA45 /* XcodeSwiftLint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32EE76422538CF1003FAA45 /* XcodeSwiftLint.swift */; };
+		C32EE76722538D3B003FAA45 /* ChuteLintWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32EE76622538D3B003FAA45 /* ChuteLintWarning.swift */; };
+		C32EE769225391B1003FAA45 /* XcodeInfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32EE768225391B1003FAA45 /* XcodeInfer.swift */; };
 		C363C77A2037C1CA0051BB38 /* BuildFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C7792037C1CA0051BB38 /* BuildFolder.swift */; };
 		C363C77E2037CD090051BB38 /* XcodeDataCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C77D2037CD090051BB38 /* XcodeDataCapture.swift */; };
 		C363C7802037D0450051BB38 /* AndroidDataCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C77F2037D0450051BB38 /* AndroidDataCapture.swift */; };
@@ -14,6 +19,7 @@
 		C363C785203861900051BB38 /* JUnitTestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363C784203861900051BB38 /* JUnitTestDetails.swift */; };
 		C382EAF820DB3D4A003153EE /* ElasticSearchNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C382EAF720DB3D4A003153EE /* ElasticSearchNotifier.swift */; };
 		C3BD04BF218D222200BB9135 /* TestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD04BE218D222200BB9135 /* TestInfo.swift */; };
+		C3F3021D224EEE8A00DCBF85 /* CaptureJSONReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3021C224EEE8A00DCBF85 /* CaptureJSONReport.swift */; };
 		DC0ADC3D1FC9B2A400502EA3 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0ADC3C1FC9B2A400502EA3 /* Notifier.swift */; };
 		DC0E13991F5CE25E00525E5B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E13981F5CE25E00525E5B /* main.swift */; };
 		DC0E13A01F5CE59500525E5B /* DerivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E139F1F5CE59500525E5B /* DerivedData.swift */; };
@@ -105,6 +111,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C32EE7602252915C003FAA45 /* XcodeCompilerWarnings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeCompilerWarnings.swift; sourceTree = "<group>"; };
+		C32EE76222529405003FAA45 /* CaptureCQReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureCQReport.swift; sourceTree = "<group>"; };
+		C32EE76422538CF1003FAA45 /* XcodeSwiftLint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeSwiftLint.swift; sourceTree = "<group>"; };
+		C32EE76622538D3B003FAA45 /* ChuteLintWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuteLintWarning.swift; sourceTree = "<group>"; };
+		C32EE768225391B1003FAA45 /* XcodeInfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeInfer.swift; sourceTree = "<group>"; };
 		C363C7792037C1CA0051BB38 /* BuildFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildFolder.swift; sourceTree = "<group>"; };
 		C363C77D2037CD090051BB38 /* XcodeDataCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeDataCapture.swift; sourceTree = "<group>"; };
 		C363C77F2037D0450051BB38 /* AndroidDataCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AndroidDataCapture.swift; sourceTree = "<group>"; };
@@ -112,6 +123,7 @@
 		C363C784203861900051BB38 /* JUnitTestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JUnitTestDetails.swift; sourceTree = "<group>"; };
 		C382EAF720DB3D4A003153EE /* ElasticSearchNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticSearchNotifier.swift; sourceTree = "<group>"; };
 		C3BD04BE218D222200BB9135 /* TestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInfo.swift; sourceTree = "<group>"; };
+		C3F3021C224EEE8A00DCBF85 /* CaptureJSONReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureJSONReport.swift; sourceTree = "<group>"; };
 		DC0ADC3C1FC9B2A400502EA3 /* Notifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifier.swift; sourceTree = "<group>"; };
 		DC0E13951F5CE25E00525E5B /* chute */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = chute; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0E13981F5CE25E00525E5B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -210,6 +222,9 @@
 			isa = PBXGroup;
 			children = (
 				C363C77D2037CD090051BB38 /* XcodeDataCapture.swift */,
+				C32EE7602252915C003FAA45 /* XcodeCompilerWarnings.swift */,
+				C32EE76422538CF1003FAA45 /* XcodeSwiftLint.swift */,
+				C32EE768225391B1003FAA45 /* XcodeInfer.swift */,
 			);
 			path = Xcode;
 			sourceTree = "<group>";
@@ -228,6 +243,15 @@
 				C363C7822037D58A0051BB38 /* libxml2.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C3F3021B224EEE5E00DCBF85 /* CaptureJSONReport */ = {
+			isa = PBXGroup;
+			children = (
+				C3F3021C224EEE8A00DCBF85 /* CaptureJSONReport.swift */,
+				C32EE76222529405003FAA45 /* CaptureCQReport.swift */,
+			);
+			path = CaptureJSONReport;
 			sourceTree = "<group>";
 		};
 		DC0E138C1F5CE25E00525E5B = {
@@ -297,6 +321,7 @@
 		DC42CF251F922F7700279110 /* Output */ = {
 			isa = PBXGroup;
 			children = (
+				C3F3021B224EEE5E00DCBF85 /* CaptureJSONReport */,
 				DCF058D71FBDD8BF00D4C520 /* CaptureReport */,
 				DCF058F01FBDFE1400D4C520 /* DifferenceReport */,
 				DC8019CF1F9ABB600013CD20 /* ChuteOutput.swift */,
@@ -371,6 +396,7 @@
 				DC42CF331F92A29C00279110 /* ChuteCodeCoverage.swift */,
 				DC86EF7F1FA679C600F9DB5A /* ChuteCodeCoverageSummary.swift */,
 				DC42CF351F92A43700279110 /* ChuteStyleSheet.swift */,
+				C32EE76622538D3B003FAA45 /* ChuteLintWarning.swift */,
 			);
 			path = ChuteDetail;
 			sourceTree = "<group>";
@@ -564,7 +590,9 @@
 				DCF058FC1FBE00FB00D4C520 /* DifferenceReportSummaryViews.swift in Sources */,
 				DC3062961FA9EFD6002332F6 /* GithubNotifier.swift in Sources */,
 				DC1977331FB89BA700C78DA2 /* ViewDifference.swift in Sources */,
+				C32EE76322529405003FAA45 /* CaptureCQReport.swift in Sources */,
 				DCF058F21FBDFE2B00D4C520 /* DifferenceReport.swift in Sources */,
+				C3F3021D224EEE8A00DCBF85 /* CaptureJSONReport.swift in Sources */,
 				DCF058DD1FBDDE1A00D4C520 /* CaptureReportSummary.swift in Sources */,
 				DC0E13A21F5CE89300525E5B /* InfoPlist.swift in Sources */,
 				DCF058DF1FBDE10A00D4C520 /* CaptureReportSummaryTests.swift in Sources */,
@@ -600,6 +628,7 @@
 				DCF059001FBE011600D4C520 /* DifferenceReportDetail.swift in Sources */,
 				DC0ADC3D1FC9B2A400502EA3 /* Notifier.swift in Sources */,
 				C363C7802037D0450051BB38 /* AndroidDataCapture.swift in Sources */,
+				C32EE76522538CF1003FAA45 /* XcodeSwiftLint.swift in Sources */,
 				DCF059041FBE013300D4C520 /* DifferenceReportDetailCodeCoverage.swift in Sources */,
 				DCF059021FBE012200D4C520 /* DifferenceReportDetailTests.swift in Sources */,
 				DCACC6BE1FA6483600697691 /* ChuteTestResultDifference.swift in Sources */,
@@ -610,13 +639,16 @@
 				DCF059081FBE014A00D4C520 /* DifferenceReportDetailStyleSheet.swift in Sources */,
 				DCF058DB1FBDD91C00D4C520 /* CaptureReportHeader.swift in Sources */,
 				DC0E13A41F5CEC7500525E5B /* TestSummary.swift in Sources */,
+				C32EE7612252915C003FAA45 /* XcodeCompilerWarnings.swift in Sources */,
 				DCF058E11FBDE18A00D4C520 /* CaptureReportSummaryCodeCoverage.swift in Sources */,
 				DCF058E31FBDEA1000D4C520 /* CaptureReportSummaryViews.swift in Sources */,
 				DCF058EB1FBDF94E00D4C520 /* CaptureReportDetailCodeCoverage.swift in Sources */,
 				DCF058F61FBDFF3200D4C520 /* DifferenceReportSummary.swift in Sources */,
 				DC8019D01F9ABB600013CD20 /* ChuteOutput.swift in Sources */,
 				DCF058F41FBDFF2300D4C520 /* DifferenceReportHeader.swift in Sources */,
+				C32EE769225391B1003FAA45 /* XcodeInfer.swift in Sources */,
 				DCDC1B3A1F9D06FF0068170F /* ChuteOutputFolder.swift in Sources */,
+				C32EE76722538D3B003FAA45 /* ChuteLintWarning.swift in Sources */,
 				DC0E13A01F5CE59500525E5B /* DerivedData.swift in Sources */,
 				DCA7E1A21FBC816400E2ACEB /* Environment.swift in Sources */,
 				DC4ADE1C1F9AC697007C36C1 /* ChuteHTMLOutputTemplate.swift in Sources */,

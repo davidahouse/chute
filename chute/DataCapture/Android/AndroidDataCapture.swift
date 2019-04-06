@@ -20,7 +20,9 @@ struct AndroidDataCapture : DataCapture {
     let attachments: [ChuteTestAttachment]
     let styleSheets: [ChuteStyleSheet]
     let attachmentRootURL: URL
-    
+    let compilerWarnings: [String]
+    let lintWarnings: [ChuteLintWarning]
+
     init?(using environment: Environment) {
         
         project = environment.arguments.project ?? ""
@@ -65,6 +67,9 @@ struct AndroidDataCapture : DataCapture {
         let userPath = NSHomeDirectory()
         let userPathURL = URL(fileURLWithPath: userPath)
         attachmentRootURL = userPathURL
+        // TODO: get these for Android
+        compilerWarnings = []
+        lintWarnings = []
     }
     
     init?(using environment: Environment, from compareToFolder: String?) {
@@ -87,5 +92,7 @@ struct AndroidDataCapture : DataCapture {
         let userPath = NSHomeDirectory()
         let userPathURL = URL(fileURLWithPath: userPath)
         attachmentRootURL = userPathURL
+        compilerWarnings = []
+        lintWarnings = []
     }
 }

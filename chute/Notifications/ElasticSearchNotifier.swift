@@ -31,9 +31,9 @@ class ElasticSearchNotifier {
         }
         
         // Create a URL for this request
-        let esurl = "localhost:9200"
+        let esurl = "https://admin:JREQCNRPBGALKPTA@kp1-sjc01-c00-5.compose.direct:18343/"
         let index = "\(platform)_\(repository)"
-        let urlString = "http://\(esurl)/\(index.lowercased())/chute"
+        let urlString = "\(esurl)/\(index.lowercased())/chute"
         guard let postURL = URL(string: urlString) else {
             print("--- Error creating URL for posting to elastic search: \(urlString)")
             return

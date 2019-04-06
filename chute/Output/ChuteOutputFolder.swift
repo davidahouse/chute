@@ -81,7 +81,8 @@ class ChuteOutputFolder {
 
             let filePath = rootPath.appendingPathComponent(attachment.attachmentFileName)
             guard let imageData = try? Data(contentsOf: filePath) else {
-                preconditionFailure("Unable to load image data from \(filePath)")
+                print("Unable to load image data from \(filePath)")
+                continue
             }
 
             let outputPath = attachmentFolderURL.appendingPathComponent(attachment.attachmentFileName)
